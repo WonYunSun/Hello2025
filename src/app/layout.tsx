@@ -27,7 +27,9 @@ export default function RootLayout({
             {/* tanstack query provier */}
             <Providers>
                 <body className={pretendard.className}>
-                    <Suspense fallback={<GlobalLoading />}>{children}</Suspense>
+                    <div className="w-full h-full bg-background">
+                        <Suspense fallback={<GlobalLoading />}>{children}</Suspense>
+                    </div>
                 </body>
             </Providers>
         </html>
