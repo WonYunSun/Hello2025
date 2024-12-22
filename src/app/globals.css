@@ -5,7 +5,7 @@
 @layer base {
     body {
         /* 기본 화면 사이즈 */
-        @apply max-w-2xl h-screen mx-auto;
+        @apply max-w-[600px] h-screen mx-auto;
 
         /* 기본 컬러 */
         @apply text-textDark;
