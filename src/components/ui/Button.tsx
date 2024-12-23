@@ -1,15 +1,22 @@
 import React from "react";
 
 type ButtonProps = {
-    type?: "submit" | "button" | "reset";
-    color?: "blue" | "white" | "red";
+    type: "submit" | "button" | "reset";
+    color: "btn-blue" | "btn-white" | "btn-red";
+    full: boolean;
     label: string;
     handleClick?: () => void;
 };
 
-const Button: React.FC<ButtonProps> = ({ type = "button", color = "blue", label, handleClick }) => {
+const Button: React.FC<ButtonProps> = ({ type = "button", color = "btn-blue", full, label, handleClick }) => {
     return (
-        <button type={type} className={`btn-${color}`} onClick={handleClick}>
+        <button
+            type={type}
+            className={`${
+                full ? "w-full" : ""
+            } min-w-[100px] px-8 h-[60px] font-bold text-lg border-[1px] rounded-[10px] ${color}`}
+            onClick={handleClick}
+        >
             {label}
         </button>
     );
