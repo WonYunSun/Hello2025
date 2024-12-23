@@ -24,7 +24,7 @@ const InputForm: React.FC<InputProps> = ({
                 onChange={handleChange}
                 className={`${full ? "w-full" : ""} h-[50px] px-5 border-[1px] border-beigeLight rounded-[5px] text-lg`}
                 maxLength={maxLength}
-            />{" "}
+            />
             {maxLength && (
                 <span className="text-gray-400 absolute top-1/2 transform -translate-y-1/2 right-[20px]">
                     {value.length}/{maxLength}
