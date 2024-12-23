@@ -3,18 +3,20 @@ import React from "react";
 import { DecorationData } from "./DecorationForms";
 import Image from "next/image";
 import Link from "next/link";
+import snake from "@/assets/images/snake.png";
+import redEnvelope from "@/assets/images/red-envelope.png";
 
 type EnvelopeProps = {
     onNext: (data: Pick<DecorationData, "envelope">) => void;
 };
 
-export default function Envelope({ onNext }: EnvelopeProps) {
+const Envelope = ({ onNext }: EnvelopeProps) => {
     const handleNext = () => {
         onNext({ envelope: "test-envelope" });
     };
 
     return (
-        <section className="w-full h-full flex flex-col justify-around">
+        <section className="w-full h-full flex flex-col justify-between">
             <header className="relative">
                 <h1 className="title">
                     <span className="text-primary">김철수</span>님 에게 보낼
@@ -22,12 +24,12 @@ export default function Envelope({ onNext }: EnvelopeProps) {
                     <span className="mt-1 inline-block">편지 봉투를 골라주세요</span>
                 </h1>
                 <div className="absolute top-16 right-0">
-                    <Image src="/assets/snake.png" width={65} height={70} alt="snake" />
+                    <Image src={snake} width={65} height={70} alt="snake" />
                 </div>
             </header>
 
             <div className="flex flex-col justify-center items-center">
-                <Image src="/assets/red-envelope.png" width={325} height={200} alt="envelope" />
+                <Image src={redEnvelope} width={325} height={200} alt="envelope" />
                 {/* NOTO : 편지봉투 이미지 리스트들 만들기*/}
             </div>
 
@@ -49,4 +51,6 @@ export default function Envelope({ onNext }: EnvelopeProps) {
             </div>
         </section>
     );
-}
+};
+
+export default Envelope;
