@@ -1,5 +1,5 @@
 "use client";
-import InputForm from "@/components/ui/InputForm";
+import InputForm from "@/components/common/InputForm";
 import React, { useState } from "react";
 
 const page = () => {
