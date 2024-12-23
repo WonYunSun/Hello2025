@@ -9,7 +9,7 @@
     }
 
     .title {
-        @apply font-bold text-3xl leading-none tracking-tight;
+        @apply font-bold text-3xl tracking-tight;
     }
 
     .bg-container {
