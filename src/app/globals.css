@@ -21,6 +21,9 @@
     }
 }
 
+@layer utilities {
+}
+
 @layer components {
     .btn-blue {
         @apply bg-primary text-white border-primary;

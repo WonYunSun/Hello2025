@@ -1,5 +1,5 @@
 "use client";
-import InputForm from "@/components/common/InputForm";
+import { Button, InputForm } from "@/components/common";
 import React, { useState } from "react";
 
 const page = () => {
@@ -10,6 +10,8 @@ const page = () => {
 
     return (
         <>
+            <p className="title">가나다라</p>
+            <Button type="button" color="btn-blue" full={true} label="다음으로" />
             <InputForm
                 type="text"
                 full={true}
