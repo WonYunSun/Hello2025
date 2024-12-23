@@ -16,7 +16,7 @@ export default function Envelope({ onNext }: EnvelopeProps) {
     return (
         <section className="w-full h-full flex flex-col justify-around">
             <header className="relative">
-                <h1 className="font-bold text-3xl leading-none tracking-tight">
+                <h1 className="title">
                     <span className="text-primary">김철수</span>님 에게 보낼
                     <br />
                     <span className="mt-1 inline-block">편지 봉투를 골라주세요</span>
