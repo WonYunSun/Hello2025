@@ -10,7 +10,7 @@ const page = () => {
     };
 
     return (
-        <>
+        <div className="inner">
             <SmallButton icon="icon-user.svg" />
             <SmallButton icon="icon-back.svg" />
             <p className="title">가나다라</p>
@@ -23,7 +23,7 @@ const page = () => {
                 handleChange={handleInputChange}
                 maxLength={8}
             />
-        </>
+        </div>
     );
 };
 

@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import GlobalLoading from "../components/GlobalLoading";
 import localFont from "next/font/local";
 import Providers from "@/components/providers/TQProvider";
+import useBgDecoVisibility from "@/lib/hooks/useBgDecoVisibility";
+import BgDeco from "@/components/ui/BgDeco";
 
 const pretendard = localFont({
     src: "../assets/fonts/PretendardVariable.woff2",
@@ -22,15 +24,16 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const shouldHideBgDeco = useBgDecoVisibility();
+
     return (
         <html lang="ko">
             {/* tanstack query provier */}
             <Providers>
                 <body className={pretendard.className}>
-                    <div className="bg-container">
-                        <div className="inner">
-                            <Suspense fallback={<GlobalLoading />}>{children}</Suspense>
-                        </div>
+                    <div className="bg-container relative">
+                        {!shouldHideBgDeco && <BgDeco />}
+                        <Suspense fallback={<GlobalLoading />}>{children}</Suspense>
                     </div>
                 </body>
             </Providers>
