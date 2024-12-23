@@ -10,11 +10,11 @@ type CarouselProps = {
 
 const Carousel = ({ children }: CarouselProps) => {
     const settings: Settings = {
-        infinite: false,
+        infinite: true,
         speed: 500,
         focusOnSelect: true,
-        slidesToShow: 5,
-        slidesToScroll: 3
+        slidesToShow: 4,
+        slidesToScroll: 1
     };
 
     return <Slider {...settings}>{children}</Slider>;

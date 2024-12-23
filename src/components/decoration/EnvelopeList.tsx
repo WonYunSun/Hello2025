@@ -1,12 +1,12 @@
 "use client";
-import Image from "next/image";
-import redEnvelope from "@/assets/images/red-envelope.svg";
 import blueEnvelope from "@/assets/images/blue-envelope.svg";
 import greenEnvelope from "@/assets/images/green-envelope.svg";
-import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import navyEnvelope from "@/assets/images/navy-envelope.svg";
-import Carousel from "../ui/Carousel";
+import pinkEnvelope from "@/assets/images/pink-envelope.svg";
+import redEnvelope from "@/assets/images/red-envelope.svg";
+import Image from "next/image";
 import { useState } from "react";
+import Carousel from "../ui/Carousel";
 
 // 편지 봉투들
 const envelopeItems = [
@@ -25,13 +25,13 @@ const EnvelopeList = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center relative ">
+        <div className="w-full flex flex-col justify-center items-center gap-[90px]">
             <Image src={selectedEnvelope} width={325} height={200} alt="envelope" />
 
-            <div className="w-[800px] mt-[90px] absolute left-0 top-[160px] overflow-auto">
+            <div className="w-[650px] ml-40">
                 <Carousel>
-                    {envelopeItems.map((envelope) => (
-                        <button type="button" onClick={() => handleClick(envelope.src)} className="px-1">
+                    {envelopeItems.map((envelope, i) => (
+                        <button key={i} type="button" onClick={() => handleClick(envelope.src)} className="px-1">
                             <Image src={envelope.src} alt={envelope.alt} width={156} height={97} />
                         </button>
                     ))}
