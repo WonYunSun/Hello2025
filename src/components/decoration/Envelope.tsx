@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import snake from "@/assets/images/snake.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
+import Button from "../ui/Button";
 
 type EnvelopeProps = {
     onNext: (data: Pick<DecorationData, "envelope">) => void;
@@ -33,21 +34,11 @@ const Envelope = ({ onNext }: EnvelopeProps) => {
                 {/* NOTO : 편지봉투 이미지 리스트들 만들기*/}
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex gap-5">
                 <Link href="/">
-                    <button
-                        type="button"
-                        className="px-8 h-[60px] bg-white font-bold text-lg border-[1px] rounded-[10px] border-beige"
-                    >
-                        이전
-                    </button>
+                    <Button type="button" color="btn-white" full={false} label="이전" />
                 </Link>
-                <button
-                    onClick={handleNext}
-                    className="px-40 h-[60px] text-white bg-primary font-bold text-lg rounded-[10px]"
-                >
-                    다음으로
-                </button>
+                <Button type="button" color="btn-blue" full={true} label="다음으로" handleClick={handleNext} />
             </div>
         </section>
     );
