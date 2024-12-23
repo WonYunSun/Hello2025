@@ -4,10 +4,19 @@
 
 @layer base {
     body {
-        /* 기본 화면 사이즈 */
-        @apply max-w-[600px] h-screen mx-auto;
-
         /* 기본 컬러 */
         @apply text-textDark;
+    }
+
+    .title {
+        @apply font-bold text-3xl leading-none tracking-tight;
+    }
+
+    .bg-container {
+        @apply max-w-[600px] h-screen mx-auto bg-background flex flex-col justify-center;
+    }
+
+    .inner {
+        @apply w-[500px] mx-auto  pt-[75px] pb-[60px] max-h-[958px];
     }
 }
