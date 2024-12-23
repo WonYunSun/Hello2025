@@ -20,3 +20,15 @@
         @apply w-[500px] h-full mx-auto  pt-[75px] pb-[60px] max-h-[958px];
     }
 }
+
+@layer components {
+    .btn-blue {
+        @apply bg-primary text-white border-primary;
+    }
+    .btn-white {
+        @apply bg-white text-textDark border-beige;
+    }
+    .btn-red {
+        @apply bg-warning text-white border-warning;
+    }
+}
