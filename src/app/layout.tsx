@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import GlobalLoading from "../components/GlobalLoading";
 import localFont from "next/font/local";
 import Providers from "@/components/providers/TQProvider";
+import BgDeco from "@/components/ui/BgDeco";
 
 const pretendard = localFont({
     src: "../assets/fonts/PretendardVariable.woff2",
@@ -27,7 +28,8 @@ export default function RootLayout({
             {/* tanstack query provier */}
             <Providers>
                 <body className={pretendard.className}>
-                    <div className="bg-container">
+                    <div className="bg-container relative">
+                        <BgDeco />
                         <Suspense fallback={<GlobalLoading />}>{children}</Suspense>
                     </div>
                 </body>
