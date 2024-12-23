@@ -27,7 +27,7 @@ const EnvelopeList = ({ selectedEnvelope, onEnvelopeSelect }: EnvelopeListProps)
     };
 
     return (
-        <div className="w-full flex flex-col justify-center items-center gap-[90px]">
+        <div className="w-full flex flex-col justify-center items-center gap-16">
             <Image src={selectedEnvelope || redEnvelope} width={325} height={200} alt="envelope" />
 
             <div className="w-[650px] ml-40">
