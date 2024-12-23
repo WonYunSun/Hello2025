@@ -16,7 +16,7 @@ const config: Config = {
                 beige: "#d4c4b3",
                 beigeLight: "#E5D8CA"
             }
-        }
+        },
     },
     plugins: []
 };
