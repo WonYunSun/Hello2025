@@ -4,8 +4,8 @@ import { DecorationData } from "./DecorationForms";
 import Image from "next/image";
 import Link from "next/link";
 import snake from "@/assets/images/snake.svg";
-import redEnvelope from "@/assets/images/red-envelope.svg";
 import Button from "../ui/Button";
+import EnvelopeSection from "./EnvelopeSection";
 
 type EnvelopeProps = {
     onNext: (data: Pick<DecorationData, "envelope">) => void;
@@ -28,12 +28,7 @@ const Envelope = ({ onNext }: EnvelopeProps) => {
                     <Image src={snake} width={65} height={70} alt="snake" />
                 </div>
             </header>
-
-            <div className="flex flex-col justify-center items-center">
-                <Image src={redEnvelope} width={325} height={200} alt="envelope" />
-                {/* NOTO : 편지봉투 이미지 리스트들 만들기*/}
-            </div>
-
+            <EnvelopeSection />
             <div className="flex gap-5">
                 <Link href="/">
                     <Button type="button" color="btn-white" full={false} label="이전" />
