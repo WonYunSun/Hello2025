@@ -12,6 +12,7 @@ declare module "react-slick" {
         slidesToScroll?: number;
         arrows?: boolean;
         autoplay?: boolean;
+        centerPadding?: number;
     };
 
     export default class Slider extends Component<Settings> {}

@@ -25,13 +25,13 @@ const EnvelopeList = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center relative ">
             <Image src={selectedEnvelope} width={325} height={200} alt="envelope" />
 
-            <div className="w-full max-w-lg mt-[90px]">
+            <div className="w-[800px] mt-[90px] absolute left-0 top-[160px] overflow-auto">
                 <Carousel>
                     {envelopeItems.map((envelope) => (
-                        <button type="button" onClick={() => handleClick(envelope.src)}>
+                        <button type="button" onClick={() => handleClick(envelope.src)} className="px-1">
                             <Image src={envelope.src} alt={envelope.alt} width={156} height={97} />
                         </button>
                     ))}

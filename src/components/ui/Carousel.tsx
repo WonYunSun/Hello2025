@@ -13,7 +13,7 @@ const Carousel = ({ children }: CarouselProps) => {
         infinite: false,
         speed: 500,
         focusOnSelect: true,
-        slidesToShow: 3,
+        slidesToShow: 5,
         slidesToScroll: 3
     };
 
