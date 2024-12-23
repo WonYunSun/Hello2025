@@ -28,9 +28,7 @@ export default function RootLayout({
             <Providers>
                 <body className={pretendard.className}>
                     <div className="bg-container">
-                        <div className="inner">
-                            <Suspense fallback={<GlobalLoading />}>{children}</Suspense>
-                        </div>
+                        <Suspense fallback={<GlobalLoading />}>{children}</Suspense>
                     </div>
                 </body>
             </Providers>
