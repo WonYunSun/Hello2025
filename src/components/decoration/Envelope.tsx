@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { DecorationData } from "./DecorationForms";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,8 +12,12 @@ type EnvelopeProps = {
 };
 
 const Envelope = ({ onNext }: EnvelopeProps) => {
+    const [selectedEnvelope, setSelectedEnvelope] = useState<string>("");
+
     const handleNext = () => {
-        onNext({ envelope: "test-envelope" });
+        if (selectedEnvelope) {
+            onNext({ envelope: selectedEnvelope });
+        }
     };
 
     return (
@@ -29,7 +33,7 @@ const Envelope = ({ onNext }: EnvelopeProps) => {
                     <Image src={snake} width={65} height={70} alt="snake" />
                 </div>
             </header>
-            <EnvelopeList />
+            <EnvelopeList selectedEnvelope={selectedEnvelope} onEnvelopeSelect={setSelectedEnvelope} />
             <div className="flex gap-5">
                 <Link href="/">
                     <Button type="button" color="btn-white" full={false} label="이전" />

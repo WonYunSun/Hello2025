@@ -5,8 +5,12 @@ import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import Image from "next/image";
-import { useState } from "react";
 import Carousel from "../ui/Carousel";
+
+type EnvelopeListProps = {
+    selectedEnvelope: string;
+    onEnvelopeSelect: (envelope: string) => void;
+};
 
 // 편지 봉투들
 const envelopeItems = [
@@ -17,16 +21,14 @@ const envelopeItems = [
     { src: navyEnvelope, alt: "navy-envelope" }
 ];
 
-const EnvelopeList = () => {
-    const [selectedEnvelope, setSelectedEnvelope] = useState<string>(redEnvelope);
-
+const EnvelopeList = ({ selectedEnvelope, onEnvelopeSelect }: EnvelopeListProps) => {
     const handleClick = (envelope: string) => {
-        setSelectedEnvelope(envelope);
+        onEnvelopeSelect(envelope);
     };
 
     return (
         <div className="w-full flex flex-col justify-center items-center gap-[90px]">
-            <Image src={selectedEnvelope} width={325} height={200} alt="envelope" />
+            <Image src={selectedEnvelope || redEnvelope} width={325} height={200} alt="envelope" />
 
             <div className="w-[650px] ml-40">
                 <Carousel>
