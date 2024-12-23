@@ -3,8 +3,8 @@ import React from "react";
 import { DecorationData } from "./DecorationForms";
 import Image from "next/image";
 import Link from "next/link";
-import snake from "@/assets/images/snake.png";
-import redEnvelope from "@/assets/images/red-envelope.png";
+import snake from "@/assets/images/snake.svg";
+import redEnvelope from "@/assets/images/red-envelope.svg";
 
 type EnvelopeProps = {
     onNext: (data: Pick<DecorationData, "envelope">) => void;
