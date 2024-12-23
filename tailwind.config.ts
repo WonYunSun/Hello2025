@@ -12,7 +12,8 @@ const config: Config = {
                 primary: "#3B61B9", //기본 파랑
                 background: "#FFFAF5", //기본 배경 색상
                 warning: "#ef6f7e",
-                textDark: "#1F2328"
+                textDark: "#544A40",
+                beige: "#d4c4b3"
             }
         }
     },
