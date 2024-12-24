@@ -17,7 +17,7 @@
     }
 
     .inner {
-        @apply w-[500px] h-full mx-auto  pt-[75px] pb-[60px] max-h-[958px];
+        @apply w-[500px] h-full mx-auto  pt-[75px] pb-[60px] max-h-[958px] relative;
     }
 }
 
