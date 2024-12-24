@@ -8,6 +8,8 @@ import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import Image from "next/image";
+import iconForward from "@/assets/images/icon-forward.svg";
 
 // 더미 데이터
 const envelopeItems = [
@@ -124,13 +126,16 @@ const LetterList = () => {
             </div>
 
             {/* 페이지네이션 UI */}
-            <div className="pb-[34px] pt-[34px] text-center">
-                <button onClick={goToPreviousPage}>이전</button>
+            <div className="pb-[34px] pt-[34px] flex justify-center item-center">
+                <button onClick={goToPreviousPage}>
+                    <Image src={iconForward} alt="이전" className="rotate-180"></Image>
+                </button>
                 <span className="ml-[10px] mr-[10px] ">
-                    {" "}
-                    {currentPage}/{data.pages[0].totalPage}
+                    {currentPage} / {data.pages[0].totalPage}
                 </span>
-                <button onClick={goToNextPage}>다음</button>
+                <button onClick={goToNextPage}>
+                    <Image src={iconForward} alt="이전"></Image>
+                </button>
             </div>
         </div>
     );
