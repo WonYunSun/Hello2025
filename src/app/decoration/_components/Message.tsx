@@ -18,6 +18,6 @@ const Message = ({ decorationData, onPrev }: MessageProps) => {
             <button onClick={onPrev}>이전</button>
         </>
     );
-}
+};
 
 export default Message;

@@ -8,15 +8,16 @@ import EnvelopeList from "./EnvelopeList";
 import { Button } from "@/components/common";
 
 type EnvelopeProps = {
+    selectedEnvelope: string;
     onNext: (data: Pick<DecorationData, "envelope">) => void;
 };
 
-const Envelope = ({ onNext }: EnvelopeProps) => {
-    const [selectedEnvelope, setSelectedEnvelope] = useState<string>("");
+const Envelope = ({ selectedEnvelope, onNext }: EnvelopeProps) => {
+    const [localEnvelope, setLocalEnvelope] = useState<string>(selectedEnvelope);
 
     const handleNext = () => {
-        if (selectedEnvelope) {
-            onNext({ envelope: selectedEnvelope });
+        if (localEnvelope) {
+            onNext({ envelope: localEnvelope });
         }
     };
 
@@ -32,7 +33,7 @@ const Envelope = ({ onNext }: EnvelopeProps) => {
                     <Image src={snake} width={65} height={70} alt="snake" />
                 </div>
             </header>
-            <EnvelopeList selectedEnvelope={selectedEnvelope} onEnvelopeSelect={setSelectedEnvelope} />
+            <EnvelopeList selectedEnvelope={localEnvelope} onEnvelopeSelect={setLocalEnvelope} />
             <div className="flex gap-5">
                 <Link href="/">
                     <Button type="button" color="btn-white" full={false} label="이전" />

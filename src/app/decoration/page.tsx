@@ -1,4 +1,4 @@
-import DecorationForms from "@/components/decoration/DecorationForms";
+import DecorationForms from "@/app/decoration/_components/DecorationForms";
 
 const DecorationPage = () => {
     return (
