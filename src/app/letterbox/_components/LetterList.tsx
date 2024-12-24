@@ -10,6 +10,7 @@ import redEnvelope from "@/assets/images/red-envelope.svg";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import iconForward from "@/assets/images/icon-forward.svg";
+import LetterModal from "./LetterModal";
 
 // 더미 데이터
 const envelopeItems = [
@@ -84,9 +85,8 @@ type FetchLettersResponse = {
 
 const LetterList = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    useEffect(() => {
-        console.log(currentPage);
-    }, [currentPage]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const { data, fetchNextPage, fetchPreviousPage, hasNextPage, isFetchingNextPage, isPending, isError } =
         useInfiniteQuery<FetchLettersResponse>({
             queryKey: ["letters"],
@@ -113,6 +113,13 @@ const LetterList = () => {
         if (data.pages[currentPage - 1].prevPage) setCurrentPage((prev) => Math.max(prev - 1, 1));
     };
 
+    const handleClick = () => {
+        setIsModalOpen(true); // 모달 열기
+    };
+    const closeModal = () => {
+        setIsModalOpen(false); // 모달 닫기
+    };
+
     return (
         <div>
             <div className="grid grid-cols-3 grid-rows-4 pt-[56px]  gap-4">
@@ -121,6 +128,7 @@ const LetterList = () => {
                         key={letter.id}
                         sender_id={letter.sender_id}
                         selectedEnvelope={envelopeItems[letter.envelope_type - 1]?.src || redEnvelope}
+                        onclick={handleClick}
                     />
                 ))}
             </div>
@@ -137,6 +145,8 @@ const LetterList = () => {
                     <Image src={iconForward} alt="이전"></Image>
                 </button>
             </div>
+            {/* 모달 컴포넌트 */}
+            <LetterModal isOpen={isModalOpen} onClose={closeModal} senderId={"김철수"} />
         </div>
     );
 };
