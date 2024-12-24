@@ -4,8 +4,8 @@ import { DecorationData } from "./DecorationForms";
 import Image from "next/image";
 import Link from "next/link";
 import snake from "@/assets/images/snake.svg";
-import Button from "../ui/Button";
 import EnvelopeList from "./EnvelopeList";
+import { Button } from "@/components/common";
 
 type EnvelopeProps = {
     onNext: (data: Pick<DecorationData, "envelope">) => void;
