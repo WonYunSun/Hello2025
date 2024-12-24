@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import snake from "@/assets/images/snake.svg";
 import { Button } from "@/components/common";
-import { DecorationData } from "@/lib/hooks/useDecorationData";
+import { DecorationData } from "./DecorationForms";
 
 type LetterProps = {
     onNext: (data: Pick<DecorationData, "letter">) => void;
