@@ -38,7 +38,9 @@ const SettingsPage = () => {
                     <Image src={iconForward} alt="" width={9} height={16} />
                 </Link>
 
-                <Link href="/unregister">회원 탈퇴</Link>
+                <Link href="/unregister" className="text-warning">
+                    회원 탈퇴
+                </Link>
             </div>
         </>
     );
