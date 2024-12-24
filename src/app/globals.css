@@ -8,6 +8,23 @@
         @apply text-textDark;
     }
 
+    button:focus,
+    button:active,
+    input:focus,
+    input:active,
+    select:focus,
+    select:active,
+    textarea:focus,
+    textarea:active {
+        @apply outline-none shadow-none;
+    }
+
+    a,
+    button,
+    input[type="checkbox"] {
+        @apply cursor-pointer;
+    }
+
     .title {
         @apply font-bold text-3xl tracking-tight;
     }
