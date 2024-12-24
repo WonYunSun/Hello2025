@@ -1,7 +1,7 @@
 import SmallButton from "@/components/ui/SmallButton";
 import React from "react";
-import NicknameEditSection from "../_component/NicknameEditSection";
-import MailboxSettingSection from "../_component/MailboxSettingSection";
+import UserInfoSection from "../_components/UserInfoSection";
+import MailboxSettingSection from "../_components/MailboxSettingSection";
 import Link from "next/link";
 import iconForward from "@/assets/images/icon-forward.svg";
 import Image from "next/image";
@@ -15,19 +15,7 @@ const SettingsPage = () => {
                     <SmallButton icon="icon-back.svg" to={"/"} />
                 </section>
 
-                <section className="mt-10 pb-5 border-b-[1px] border-textDark">
-                    <div className="flex justify-between">
-                        <p className="text-[28px] font-bold tracking-tight">
-                            <span className="text-primary">홍길동</span>님 안녕하세요
-                        </p>
-                        <button type="button" className="font-bold">
-                            로그아웃
-                        </button>
-                    </div>
-                    <p>구글로 로그인중</p>
-                </section>
-
-                <NicknameEditSection />
+                <UserInfoSection />
                 <MailboxSettingSection />
 
                 <Link
