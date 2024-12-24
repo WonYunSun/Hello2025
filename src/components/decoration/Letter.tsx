@@ -7,7 +7,7 @@ type LetterProps = {
     onPrev: () => void;
 };
 
-export default function Letter({ onNext, onPrev }: LetterProps) {
+const Letter = ({ onNext, onPrev }: LetterProps) => {
     const handleClick = () => {
         onNext({ letter: "letter-envelope" });
     };
@@ -19,3 +19,5 @@ export default function Letter({ onNext, onPrev }: LetterProps) {
         </>
     );
 }
+
+export default Letter;

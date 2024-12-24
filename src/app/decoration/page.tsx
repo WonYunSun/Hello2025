@@ -1,5 +1,7 @@
 import DecorationForms from "@/components/decoration/DecorationForms";
 
-export default function DecorationPage() {
-    return <DecorationForms /> ;
-}
+const DecorationPage = () => {
+    return <DecorationForms />;
+};
+
+export default DecorationPage;
