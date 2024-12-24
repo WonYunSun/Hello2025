@@ -26,8 +26,7 @@ const Envelope = ({ onNext }: EnvelopeProps) => {
                 <h1 className="title">
                     <span className="text-primary">김철수</span>님 에게 보낼
                     <br />
-                    {/* TODO : mt 없애기 */}
-                    <span className="mt-1 inline-block">편지 봉투를 골라주세요</span>
+                    편지 봉투를 골라주세요
                 </h1>
                 <div className="absolute top-16 right-0">
                     <Image src={snake} width={65} height={70} alt="snake" />
