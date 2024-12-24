@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+
+import Image from "next/image";
+
+import snake from "@/assets/images/snake.svg";
 import { SignupData } from "./SignupForm";
 import ProgressBar from "../../../components/common/ProgressBar";
-import Image from "next/image";
 import { Button } from "../../../components/common";
-import snake from "@/assets/images/snake.svg";
 import Radiobtns from "./Radiobtns";
 
 type WriterProps = {
@@ -22,7 +23,7 @@ const Writer = ({ onNext, onPrev }: WriterProps) => {
             <ProgressBar />
             <div className="inner">
                 <section className="flex flex-col justify-between h-full">
-                    <main className="flex flex-col justify-between h-[400px]">
+                    <main className="flex flex-col justify-between h-[460px]">
                         <div className="grid gap-[10px] pt-[40px] relative">
                             <h1 className="title">
                                 내 편지함에
