@@ -1,10 +1,10 @@
 "use client";
+import Image from "next/image";
 import blueEnvelope from "@/assets/images/blue-envelope.svg";
 import greenEnvelope from "@/assets/images/green-envelope.svg";
 import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
-import Image from "next/image";
 import { Carousel } from "@/components/common";
 
 type EnvelopeListProps = {

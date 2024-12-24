@@ -1,6 +1,6 @@
 "use client";
-import { useFunnel } from "@/lib/hooks/useFunnel";
 import { useState } from "react";
+import { useFunnel } from "@/lib/hooks/useFunnel";
 import Envelope from "./Envelope";
 import Letter from "./Letter";
 import Message from "./Message";

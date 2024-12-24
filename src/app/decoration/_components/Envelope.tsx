@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { DecorationData } from "./DecorationForms";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import snake from "@/assets/images/snake.svg";
-import EnvelopeList from "./EnvelopeList";
 import { Button } from "@/components/common";
+import { DecorationData } from "./DecorationForms";
+import EnvelopeList from "./EnvelopeList";
 
 type EnvelopeProps = {
     selectedEnvelope: string;
