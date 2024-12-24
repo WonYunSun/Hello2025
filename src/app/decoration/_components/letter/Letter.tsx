@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { DecorationData } from "./DecorationForms";
+import { DecorationData } from "../DecorationForms";
 import LetterList from "./LetterList";
-import Layout from "./Layout";
+import Layout from "../layout/Layout";
 
 type LetterProps = {
     prevSelectedLetter: string;

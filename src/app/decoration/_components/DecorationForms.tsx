@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useFunnel } from "@/lib/hooks/useFunnel";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import colorLetter from "@/assets/images/color-letter.svg";
-import Envelope from "./Envelope";
-import Letter from "./Letter";
-import Message from "./Message";
+import Envelope from "./envelope/Envelope";
+import Letter from "./letter/Letter";
+import Message from "./message/Message";
 
 export type DecorationData = {
     envelope: string;

@@ -1,7 +1,7 @@
 "use client";
-import { DecorationData } from "./DecorationForms";
+import { DecorationData } from "../DecorationForms";
 import MessageList from "./MessageList";
-import Layout from "./Layout";
+import Layout from "../layout/Layout";
 
 type MessageProps = {
     decorationData: DecorationData;
