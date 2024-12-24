@@ -6,20 +6,25 @@ import { ChangeEvent, useState } from "react";
 type MessageListProps = {
     name: string;
     message: string;
-    isPublic: boolean;
+    isPrivate: boolean;
 };
 
 const MessageList = () => {
     const [messageData, setMessageData] = useState<MessageListProps>({
         name: "",
         message: "",
-        isPublic: true
+        isPrivate: false
     });
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setMessageData((prev) => ({ ...prev, [name]: value }));
     };
+
+    const handleCheckboxChange = () => {
+        setMessageData((prev) => ({ ...prev, isPrivate: !prev.isPrivate }));
+    };
+
     return (
         <section>
             <div className="flex flex-col gap-3 mb-[18px]">
@@ -49,7 +54,11 @@ const MessageList = () => {
                 />
                 <span className="text-gray-400 absolute right-5 bottom-5">{messageData.message.length}/850</span>
             </div>
-            <CheckboxInput label="편지함 주인에게만 공개할래요" />
+            <CheckboxInput
+                label="편지함 주인에게만 공개할래요"
+                checked={messageData.isPrivate}
+                onChange={handleCheckboxChange}
+            />
         </section>
     );
 };
