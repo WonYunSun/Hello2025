@@ -5,7 +5,7 @@ import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import Image from "next/image";
-import Carousel from "../ui/Carousel";
+import { Carousel } from "@/components/common";
 
 type EnvelopeListProps = {
     selectedEnvelope: string;
