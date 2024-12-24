@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+
+import Image from "next/image";
+
+import snake from "@/assets/images/snake.svg";
 import { SignupData } from "./SignupForm";
 import ProgressBar from "../../../components/common/ProgressBar";
-import Image from "next/image";
 import { Button } from "../../../components/common";
-import snake from "@/assets/images/snake.svg";
 import Radiobtns from "./Radiobtns";
 
 type WriterProps = {

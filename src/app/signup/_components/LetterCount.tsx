@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import { SignupData } from "./SignupForm";
 
 type LetterCountProps = {
