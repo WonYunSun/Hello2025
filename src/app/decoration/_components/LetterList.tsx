@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import colorLetter from "@/assets/images/color-letter.svg";
 import patternLetter from "@/assets/images/pattern-letter.svg";
