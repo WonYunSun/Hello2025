@@ -1,6 +1,6 @@
 "use client";
-import CheckboxInput from "@/app/signup/_components/CheckboxInput";
 import { InputForm } from "@/components/common";
+import CheckboxInput from "@/components/common/CheckboxInput";
 import { ChangeEvent, useState } from "react";
 
 type MessageListProps = {
@@ -45,7 +45,7 @@ const MessageList = () => {
                     placeholder="따듯한 메세지를 적어주세요!"
                     value={messageData.message}
                     onChange={handleInputChange}
-                    className="resize-none w-full p-5 border-[1px] border-beigeLight rounded-[5px] text-lg"
+                    className="resize-none w-full p-5 border-[1px] border-beigeLight rounded-[5px] text-lg scroll-custom"
                 />
                 <span className="text-gray-400 absolute right-5 bottom-5">{messageData.message.length}/850</span>
             </div>
