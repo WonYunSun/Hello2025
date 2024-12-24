@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useFunnel } from "@/lib/hooks/useFunnel";
+import redEnvelope from "@/assets/images/red-envelope.svg";
 import Envelope from "./Envelope";
 import Letter from "./Letter";
 import Message from "./Message";
@@ -16,7 +17,7 @@ const steps = ["편지봉투", "편지지", "메세지"];
 export default function DecorationForms() {
     const { Funnel, Step, next, prev, currentStep } = useFunnel(steps[0]);
     const [decorationData, setDecorationData] = useState<DecorationData>({
-        envelope: "",
+        envelope: redEnvelope,
         letter: "",
         message: ""
     });

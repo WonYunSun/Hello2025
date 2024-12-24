@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/common";
-import redEnvelope from "@/assets/images/red-envelope.svg";
 import snake from "@/assets/images/snake.svg";
 import { DecorationData } from "./DecorationForms";
 import EnvelopeList from "./EnvelopeList";
@@ -17,9 +16,7 @@ const Envelope = ({ prevSelectedEnvelope, onNext }: EnvelopeProps) => {
     const [selectedEnvelope, setSelectedEnvelope] = useState<string>(prevSelectedEnvelope);
 
     const handleNext = () => {
-        onNext({
-            envelope: selectedEnvelope || redEnvelope
-        });
+        onNext({ envelope: selectedEnvelope });
     };
 
     return (
