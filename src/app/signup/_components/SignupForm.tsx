@@ -1,10 +1,13 @@
 "use client";
-import { useFunnel } from "@/lib/hooks/useFunnel";
+
 import { useState } from "react";
+
+import { useFunnel } from "@/lib/hooks/useFunnel";
 import Nickname from "./Nickname";
 import Writer from "./Writer";
 import Viewer from "./Viewer";
 import LetterCount from "./LetterCount";
+import Complete from "./Complete";
 
 export type SignupData = {
     nickname: string;
@@ -43,7 +46,10 @@ const SignupForms = () => {
                 <Viewer onNext={(data) => handleNext(data, "편지개수")} onPrev={() => handlePrev("작성자")} />
             </Step>
             <Step name="편지개수">
-                <LetterCount signupData={signupData} onPrev={() => handlePrev("뷰어")} />
+                <LetterCount onNext={(data) => handleNext(data, "가입성공")} onPrev={() => handlePrev("뷰어")} />
+            </Step>
+            <Step name="가입성공">
+                <Complete signupData={signupData} />
             </Step>
         </Funnel>
     );
