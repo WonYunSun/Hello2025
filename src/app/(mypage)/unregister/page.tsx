@@ -2,7 +2,7 @@ import SmallButton from "@/components/ui/SmallButton";
 import Image from "next/image";
 import cryingSnake from "@/assets/images/crying-snake.svg";
 import React from "react";
-import { Button } from "@/components/common";
+import { Button, CheckboxInput } from "@/components/common";
 
 const Unregister = () => {
     return (
@@ -20,7 +20,12 @@ const Unregister = () => {
                 <Image src={cryingSnake} alt="" width={140} height={150} />
             </div>
 
-            <Button type="button" color="btn-red" full={true} label="회원 탈퇴" />
+            <div className="mt-10">
+                <CheckboxInput label="모든 데이터를 삭제하고 탈퇴하는 것에 동의합니다." />
+            </div>
+            <div className="mt-20">
+                <Button type="button" color="btn-red" full={true} label="회원 탈퇴" />
+            </div>
         </div>
     );
 };
