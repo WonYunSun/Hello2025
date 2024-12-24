@@ -3,11 +3,14 @@
 import { useState } from "react";
 
 import { useFunnel } from "@/lib/hooks/useFunnel";
+import ProgressBar from "@/components/common/ProgressBar";
+
 import Nickname from "./Nickname";
 import Writer from "./Writer";
 import Viewer from "./Viewer";
 import LetterCount from "./LetterCount";
 import Complete from "./Complete";
+import { createClient } from "@/lib/utils/supabase/client";
 
 export type SignupData = {
     nickname: string;
@@ -34,24 +37,73 @@ const SignupForms = () => {
         prev(prevStep);
     };
 
+    const [start, setStart] = useState(0);
+    const [end, setEnd] = useState(120);
+
+    const supabase = createClient();
+    const session = supabase.auth.getSession();
+    console.log("session", session);
+
     return (
-        <Funnel>
-            <Step name="닉네임">
-                <Nickname onNext={(data) => handleNext(data, "작성자")} />
-            </Step>
-            <Step name="작성자">
-                <Writer onNext={(data) => handleNext(data, "뷰어")} onPrev={() => handlePrev("닉네임")} />
-            </Step>
-            <Step name="뷰어">
-                <Viewer onNext={(data) => handleNext(data, "편지개수")} onPrev={() => handlePrev("작성자")} />
-            </Step>
-            <Step name="편지개수">
-                <LetterCount onNext={(data) => handleNext(data, "가입성공")} onPrev={() => handlePrev("뷰어")} />
-            </Step>
-            <Step name="가입성공">
-                <Complete signupData={signupData} />
-            </Step>
-        </Funnel>
+        <>
+            <ProgressBar start={start} end={end} />
+            <Funnel>
+                <Step name="닉네임">
+                    <Nickname
+                        onNext={(data) => {
+                            handleNext(data, "작성자");
+                            setStart(end);
+                            setEnd(240);
+                        }}
+                    />
+                </Step>
+                <Step name="작성자">
+                    <Writer
+                        onNext={(data) => {
+                            handleNext(data, "뷰어");
+                            setStart(end);
+                            setEnd(360);
+                        }}
+                        onPrev={() => {
+                            handlePrev("닉네임");
+                            setStart(end);
+                            setEnd(120);
+                        }}
+                    />
+                </Step>
+                <Step name="뷰어">
+                    <Viewer
+                        onNext={(data) => {
+                            handleNext(data, "편지개수");
+                            setStart(end);
+                            setEnd(480);
+                        }}
+                        onPrev={() => {
+                            handlePrev("작성자");
+                            setStart(end);
+                            setEnd(240);
+                        }}
+                    />
+                </Step>
+                <Step name="편지개수">
+                    <LetterCount
+                        onNext={(data) => {
+                            handleNext(data, "가입성공");
+                            setStart(end);
+                            setEnd(600);
+                        }}
+                        onPrev={() => {
+                            handlePrev("뷰어");
+                            setStart(end);
+                            setEnd(360);
+                        }}
+                    />
+                </Step>
+                <Step name="가입성공">
+                    <Complete signupData={signupData} />
+                </Step>
+            </Funnel>
+        </>
     );
 };
 
