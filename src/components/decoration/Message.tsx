@@ -7,7 +7,7 @@ type MessageProps = {
     onPrev: () => void;
 };
 
-export default function Message({ decorationData, onPrev }: MessageProps) {
+const Message = ({ decorationData, onPrev }: MessageProps) => {
     const handleClick = () => {
         const finalData = { ...decorationData, message: "test-message" };
         console.log(finalData);
@@ -19,3 +19,5 @@ export default function Message({ decorationData, onPrev }: MessageProps) {
         </>
     );
 }
+
+export default Message;
