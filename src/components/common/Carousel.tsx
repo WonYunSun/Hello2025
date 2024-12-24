@@ -1,3 +1,4 @@
+"use client";
 import { ReactNode } from "react";
 import Slider from "react-slick";
 import { Settings } from "react-slick";
@@ -9,7 +10,7 @@ type CarouselProps = {
 };
 
 const Carousel = ({ children }: CarouselProps) => {
-    const  settings: Settings = {
+    const settings: Settings = {
         infinite: true,
         speed: 500,
         focusOnSelect: true,
