@@ -1,4 +1,4 @@
-import SignupForms from "@/components/signup/SignupForm";
+import SignupForms from "./_components/SignupForm";
 
 const NewPostbox = () => {
     return <SignupForms />;
