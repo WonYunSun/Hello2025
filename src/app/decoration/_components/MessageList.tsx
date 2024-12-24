@@ -1,0 +1,57 @@
+"use client";
+import CheckboxInput from "@/app/signup/_components/CheckboxInput";
+import { InputForm } from "@/components/common";
+import { ChangeEvent, useState } from "react";
+
+type MessageListProps = {
+    name: string;
+    message: string;
+    isPublic: boolean;
+};
+
+const MessageList = () => {
+    const [messageData, setMessageData] = useState<MessageListProps>({
+        name: "",
+        message: "",
+        isPublic: true
+    });
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setMessageData((prev) => ({ ...prev, [name]: value }));
+    };
+    return (
+        <section>
+            <div className="flex flex-col gap-3 mb-[18px]">
+                <label htmlFor="name" className="font-semibold text-xl leading-none tracking-tight text-textDark">
+                    보내는 사람
+                </label>
+                <InputForm
+                    id="name"
+                    type="text"
+                    name="name"
+                    placeholder="이름"
+                    full={true}
+                    maxLength={8}
+                    value={messageData.name}
+                    handleChange={handleInputChange}
+                />
+            </div>
+            <div className="relative mb-6">
+                <textarea
+                    rows={11}
+                    name="message"
+                    maxLength={850}
+                    placeholder="따듯한 메세지를 적어주세요!"
+                    value={messageData.message}
+                    onChange={handleInputChange}
+                    className="resize-none w-full p-5 border-[1px] border-beigeLight rounded-[5px] text-lg"
+                />
+                <span className="text-gray-400 absolute right-5 bottom-5">{messageData.message.length}/850</span>
+            </div>
+            <CheckboxInput label="편지함 주인에게만 공개할래요" />
+        </section>
+    );
+};
+
+export default MessageList;
