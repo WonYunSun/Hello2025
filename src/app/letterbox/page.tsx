@@ -1,5 +1,7 @@
+"use client";
+
 import { Button } from "@/components/common";
-import React from "react";
+import LetterList from "./_components/LetterList";
 
 const LetterBox = () => {
     return (
@@ -10,7 +12,21 @@ const LetterBox = () => {
                     총 <span className="text-primary font-semibold">5</span>개의 편지가 도착했습니다.
                 </h3>
             </div>
-            <Button type="button" color="btn-blue" full label="내 편지함 가기" handleClick={() => {}} />
+            <LetterList></LetterList>
+            <Button
+                type="button"
+                color="btn-blue"
+                full
+                label="편지 남기기"
+                handleClick={() => {
+                    console.log("Button clicked");
+                }}
+            />
+            <div className="min-w-[100px] pt-[24px] text-center">
+                <button className="font-bold text-lg" onClick={() => {}}>
+                    내 편지함으로 돌아가기
+                </button>
+            </div>
         </div>
     );
 };
