@@ -2,6 +2,7 @@ declare module "react-slick" {
     import { Component, ReactNode } from "react";
 
     export type Settings = {
+        initialSlide?: number;
         className?: string;
         centerMode?: boolean;
         dots?: boolean;

@@ -1,3 +1,4 @@
+"use client";
 import { ReactNode } from "react";
 import Slider from "react-slick";
 import { Settings } from "react-slick";
@@ -6,10 +7,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 type CarouselProps = {
     children: ReactNode;
+    initialSlideIndex: number;
 };
 
-const Carousel = ({ children }: CarouselProps) => {
-    const  settings: Settings = {
+const Carousel = ({ children, initialSlideIndex = 0 }: CarouselProps) => {
+    const settings: Settings = {
+        initialSlide: initialSlideIndex,
         infinite: true,
         speed: 500,
         focusOnSelect: true,
