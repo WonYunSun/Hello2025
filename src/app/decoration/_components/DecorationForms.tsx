@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useFunnel } from "@/lib/hooks/useFunnel";
 import redEnvelope from "@/assets/images/red-envelope.svg";
+import colorLetter from "@/assets/images/color-letter.svg";
 import Envelope from "./Envelope";
 import Letter from "./Letter";
 import Message from "./Message";
@@ -18,7 +19,7 @@ export default function DecorationForms() {
     const { Funnel, Step, next, prev, currentStep } = useFunnel(steps[0]);
     const [decorationData, setDecorationData] = useState<DecorationData>({
         envelope: redEnvelope,
-        letter: "",
+        letter: colorLetter,
         message: ""
     });
 
@@ -40,7 +41,11 @@ export default function DecorationForms() {
                 />
             </Step>
             <Step name={steps[1]}>
-                <Letter onNext={(data) => handleNext(data, steps[2])} onPrev={() => handlePrev(steps[0])} />
+                <Letter
+                    prevSelectedLetter={decorationData.letter}
+                    onNext={(data) => handleNext(data, steps[2])}
+                    onPrev={() => handlePrev(steps[0])}
+                />
             </Step>
             <Step name={steps[2]}>
                 <Message decorationData={decorationData} onPrev={() => handlePrev(steps[1])} />
