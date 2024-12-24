@@ -52,6 +52,10 @@
         @apply bg-warning text-white border-warning;
     }
 
+    .scroll-invisible::-webkit-scrollbar {
+        display: none;
+    }
+
     .scroll-custom::-webkit-scrollbar {
         @apply w-[5px];
     }

@@ -37,15 +37,15 @@ const MessageList = () => {
                     handleChange={handleInputChange}
                 />
             </div>
-            <div className="relative mb-6">
+            <div className="relative mb-6 p-5 pb-10 border-[1px] bg-white border-beigeLight rounded-[5px]">
                 <textarea
-                    rows={11}
+                    rows={10}
                     name="message"
                     maxLength={850}
                     placeholder="따듯한 메세지를 적어주세요!"
                     value={messageData.message}
                     onChange={handleInputChange}
-                    className="resize-none w-full p-5 border-[1px] border-beigeLight rounded-[5px] text-lg scroll-custom"
+                    className="resize-none w-full text-lg scroll-invisible"
                 />
                 <span className="text-gray-400 absolute right-5 bottom-5">{messageData.message.length}/850</span>
             </div>
