@@ -33,7 +33,10 @@ export default function DecorationForms() {
     return (
         <Funnel>
             <Step name={steps[0]}>
-                <Envelope selectedEnvelope={decorationData.envelope} onNext={(data) => handleNext(data, steps[1])} />
+                <Envelope
+                    prevSelectedEnvelope={decorationData.envelope}
+                    onNext={(data) => handleNext(data, steps[1])}
+                />
             </Step>
             <Step name={steps[1]}>
                 <Letter onNext={(data) => handleNext(data, steps[2])} onPrev={() => handlePrev(steps[0])} />

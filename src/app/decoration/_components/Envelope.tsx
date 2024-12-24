@@ -9,16 +9,16 @@ import { DecorationData } from "./DecorationForms";
 import EnvelopeList from "./EnvelopeList";
 
 type EnvelopeProps = {
-    selectedEnvelope: string;
+    prevSelectedEnvelope: string;
     onNext: (data: Pick<DecorationData, "envelope">) => void;
 };
 
-const Envelope = ({ selectedEnvelope, onNext }: EnvelopeProps) => {
-    const [localEnvelope, setLocalEnvelope] = useState<string>(selectedEnvelope);
+const Envelope = ({ prevSelectedEnvelope, onNext }: EnvelopeProps) => {
+    const [selectedEnvelope, setSelectedEnvelope] = useState<string>(prevSelectedEnvelope);
 
     const handleNext = () => {
         onNext({
-            envelope: localEnvelope || redEnvelope
+            envelope: selectedEnvelope || redEnvelope
         });
     };
 
@@ -34,7 +34,11 @@ const Envelope = ({ selectedEnvelope, onNext }: EnvelopeProps) => {
                     <Image src={snake} width={65} height={70} alt="snake" />
                 </div>
             </header>
-            <EnvelopeList selectedEnvelope={localEnvelope} onEnvelopeSelect={setLocalEnvelope} />
+            <EnvelopeList
+                prevSelectedEnvelope={prevSelectedEnvelope}
+                selectedEnvelope={selectedEnvelope}
+                onEnvelopeSelect={setSelectedEnvelope}
+            />
             <div className="flex gap-5">
                 <Link href="/">
                     <Button type="button" color="btn-white" full={false} label="이전" />
