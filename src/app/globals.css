@@ -34,7 +34,7 @@
     }
 
     .inner {
-        @apply w-[500px] h-full mx-auto  pt-[75px] pb-[60px] max-h-[958px];
+        @apply w-[500px] h-full mx-auto  pt-[75px] pb-[60px] max-h-[958px] relative;
     }
 }
 
@@ -50,5 +50,24 @@
     }
     .btn-red {
         @apply bg-warning text-white border-warning;
+    }
+
+    .scroll-custom::-webkit-scrollbar {
+        @apply w-[5px];
+    }
+
+    /* 스크롤바 트랙 꾸미기 */
+    .scroll-custom::-webkit-scrollbar-track {
+        @apply bg-beige rounded-[5px];
+    }
+
+    /* 스크롤바 손잡이 꾸미기 */
+    .scroll-custom::-webkit-scrollbar-thumb {
+        @apply bg-textDark rounded-[5px];
+    }
+
+    /* 스크롤바 손잡이 호버 시 색 */
+    .scroll-custom::-webkit-scrollbar-thumb:hover {
+        background: #555;
     }
 }

@@ -1,3 +1,4 @@
+"use client";
 import { ReactNode } from "react";
 import Slider from "react-slick";
 import { Settings } from "react-slick";

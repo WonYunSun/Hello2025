@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import ProgressBar from "../../../components/common/ProgressBar";
-import { SignupData } from "./SignupForm";
-import { Button, InputForm } from "../../../components/common";
+
 import snake from "@/assets/images/snake.svg";
-import CheckboxInput from "./CheckboxInput";
+import { SignupData } from "./SignupForm";
+import CheckboxInput from "../../../components/common/CheckboxInput";
+import ProgressBar from "../../../components/common/ProgressBar";
+import { Button, InputForm } from "../../../components/common";
 
 type NicknameProps = {
     onNext: (data: Pick<SignupData, "nickname">) => void;
@@ -56,9 +57,7 @@ const Nickname = ({ onNext }: NicknameProps) => {
                         </div>
                     </main>
 
-                    <div className="flex gap-[20px]">
-                        <Button type="button" color="btn-blue" full label="다음으로" handleClick={() => handleNext()} />
-                    </div>
+                    <Button type="button" color="btn-blue" full label="다음으로" handleClick={() => handleNext()} />
                 </section>
             </div>
         </>
