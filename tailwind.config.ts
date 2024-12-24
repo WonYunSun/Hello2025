@@ -13,9 +13,10 @@ const config: Config = {
                 background: "#FFFAF5", //기본 배경 색상
                 warning: "#ef6f7e",
                 textDark: "#544A40",
-                beige: "#d4c4b3"
+                beige: "#d4c4b3",
+                beigeLight: "#E5D8CA"
             }
-        }
+        },
     },
     plugins: []
 };

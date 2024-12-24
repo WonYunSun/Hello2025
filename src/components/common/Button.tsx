@@ -1,5 +1,3 @@
-import React from "react";
-
 type ButtonProps = {
     type: "submit" | "button" | "reset";
     color: "btn-blue" | "btn-white" | "btn-red";
@@ -8,7 +6,7 @@ type ButtonProps = {
     handleClick?: () => void;
 };
 
-const Button: React.FC<ButtonProps> = ({ type = "button", color = "btn-blue", full, label, handleClick }) => {
+const Button: React.FC<ButtonProps> = ({ type = "button", color = "btn-blue", full = true, label, handleClick }) => {
     return (
         <button
             type={type}
