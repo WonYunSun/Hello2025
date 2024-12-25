@@ -1,29 +1,25 @@
 "use client";
 import { useState } from "react";
 import { useFunnel } from "@/lib/hooks/useFunnel";
+import { Decoration } from "@/lib/types/decoration";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import colorLetter from "@/assets/images/color-letter.svg";
 import Envelope from "./envelope/Envelope";
 import Letter from "./letter/Letter";
 import Message from "./message/Message";
+import Complete from "./Complete";
 
-export type DecorationData = {
-    envelope: string;
-    letter: string;
-    message: string;
-};
-
-const steps = ["편지봉투", "편지지", "메세지"];
+const steps = ["편지봉투", "편지지", "메세지", "작성성공"];
 
 export default function DecorationForms() {
     const { Funnel, Step, next, prev, currentStep } = useFunnel(steps[0]);
-    const [decorationData, setDecorationData] = useState<DecorationData>({
+    const [decorationData, setDecorationData] = useState<Decoration>({
         envelope: redEnvelope,
         letter: colorLetter,
-        message: ""
+        message: { name: "", text: "", isPrivate: false }
     });
 
-    const handleNext = (data: Partial<DecorationData>, nextStep: string): void => {
+    const handleNext = (data: Partial<Decoration>, nextStep: string): void => {
         setDecorationData((prev) => ({ ...prev, ...data }));
         next(nextStep);
     };
@@ -48,7 +44,14 @@ export default function DecorationForms() {
                 />
             </Step>
             <Step name={steps[2]}>
-                <Message decorationData={decorationData} onPrev={() => handlePrev(steps[1])} />
+                <Message
+                    previousMessage={decorationData.message}
+                    onNext={(data) => handleNext(data, steps[3])}
+                    onPrev={() => handlePrev(steps[1])}
+                />
+            </Step>
+            <Step name={steps[3]}>
+                <Complete decorationData={decorationData} />
             </Step>
         </Funnel>
     );

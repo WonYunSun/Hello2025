@@ -1,28 +1,22 @@
 "use client";
+import { ChangeEvent } from "react";
 import { InputForm } from "@/components/common";
 import CheckboxInput from "@/components/common/CheckboxInput";
-import { ChangeEvent, useState } from "react";
+import { Decoration } from "@/lib/types/decoration";
 
 type MessageListProps = {
-    name: string;
-    message: string;
-    isPrivate: boolean;
+    message: Decoration["message"];
+    onMessage: (message: Decoration["message"]) => void;
 };
 
-const MessageList = () => {
-    const [messageData, setMessageData] = useState<MessageListProps>({
-        name: "",
-        message: "",
-        isPrivate: false
-    });
-
+const MessageList = ({ message, onMessage }: MessageListProps) => {
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setMessageData((prev) => ({ ...prev, [name]: value }));
+        onMessage({ ...message, [name]: value });
     };
 
     const handleCheckboxChange = () => {
-        setMessageData((prev) => ({ ...prev, isPrivate: !prev.isPrivate }));
+        onMessage({ ...message, isPrivate: !message.isPrivate });
     };
 
     return (
@@ -38,25 +32,25 @@ const MessageList = () => {
                     placeholder="이름"
                     full={true}
                     maxLength={8}
-                    value={messageData.name}
+                    value={message.name}
                     handleChange={handleInputChange}
                 />
             </div>
             <div className="relative mb-6 p-5 pb-10 border-[1px] bg-white border-beigeLight rounded-[5px]">
                 <textarea
                     rows={10}
-                    name="message"
+                    name="text"
                     maxLength={850}
                     placeholder="따듯한 메세지를 적어주세요!"
-                    value={messageData.message}
+                    value={message.text}
                     onChange={handleInputChange}
                     className="resize-none w-full text-lg scroll-invisible"
                 />
-                <span className="text-gray-400 absolute right-5 bottom-5">{messageData.message.length}/850</span>
+                <span className="text-gray-400 absolute right-5 bottom-5">{message.text.length}/850</span>
             </div>
             <CheckboxInput
                 label="편지함 주인에게만 공개할래요"
-                checked={messageData.isPrivate}
+                checked={message.isPrivate}
                 onChange={handleCheckboxChange}
             />
         </section>
