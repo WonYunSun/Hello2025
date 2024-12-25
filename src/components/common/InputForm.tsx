@@ -2,7 +2,9 @@ type InputProps = {
     type: "text" | "password" | "email";
     placeholder?: string;
     full: boolean;
+    id?: string;
     value: string;
+    name?: string;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     maxLength?: number;
 };
@@ -11,7 +13,9 @@ const InputForm: React.FC<InputProps> = ({
     type = "text",
     placeholder,
     full = true,
+    id,
     value,
+    name,
     handleChange,
     maxLength
 }) => {
@@ -21,8 +25,12 @@ const InputForm: React.FC<InputProps> = ({
                 type={type}
                 placeholder={placeholder}
                 value={value}
+                id={id}
+                name={name}
                 onChange={handleChange}
-                className={`${full ? "w-full" : ""} h-[50px] px-5 border-[1px] border-beigeLight rounded-[5px] text-lg`}
+                className={`${
+                    full ? "w-full" : ""
+                } h-[50px] pl-5 pr-20 border-[1px] border-beigeLight rounded-[5px] text-lg`}
                 maxLength={maxLength}
             />
             {maxLength && (

@@ -1,6 +1,6 @@
 type ButtonProps = {
     type: "submit" | "button" | "reset";
-    color: "btn-blue" | "btn-white" | "btn-red";
+    color: "btn-blue" | "btn-white" | "btn-red" | "transparent";
     full: boolean;
     label: string;
     handleClick?: () => void;

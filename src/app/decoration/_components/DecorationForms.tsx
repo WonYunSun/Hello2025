@@ -1,6 +1,8 @@
 "use client";
-import { useFunnel } from "@/lib/hooks/useFunnel";
 import { useState } from "react";
+import { useFunnel } from "@/lib/hooks/useFunnel";
+import redEnvelope from "@/assets/images/red-envelope.svg";
+import colorLetter from "@/assets/images/color-letter.svg";
 import Envelope from "./Envelope";
 import Letter from "./Letter";
 import Message from "./Message";
@@ -11,11 +13,13 @@ export type DecorationData = {
     message: string;
 };
 
+const steps = ["편지봉투", "편지지", "메세지"];
+
 export default function DecorationForms() {
-    const { Funnel, Step, next, prev, currentStep } = useFunnel("편지봉투");
+    const { Funnel, Step, next, prev, currentStep } = useFunnel(steps[0]);
     const [decorationData, setDecorationData] = useState<DecorationData>({
-        envelope: "",
-        letter: "",
+        envelope: redEnvelope,
+        letter: colorLetter,
         message: ""
     });
 
@@ -30,14 +34,21 @@ export default function DecorationForms() {
 
     return (
         <Funnel>
-            <Step name="편지봉투">
-                <Envelope selectedEnvelope={decorationData.envelope} onNext={(data) => handleNext(data, "편지지")} />
+            <Step name={steps[0]}>
+                <Envelope
+                    prevSelectedEnvelope={decorationData.envelope}
+                    onNext={(data) => handleNext(data, steps[1])}
+                />
             </Step>
-            <Step name="편지지">
-                <Letter onNext={(data) => handleNext(data, "메세지")} onPrev={() => handlePrev("편지봉투")} />
+            <Step name={steps[1]}>
+                <Letter
+                    prevSelectedLetter={decorationData.letter}
+                    onNext={(data) => handleNext(data, steps[2])}
+                    onPrev={() => handlePrev(steps[0])}
+                />
             </Step>
-            <Step name="메세지">
-                <Message decorationData={decorationData} onPrev={() => handlePrev("편지지")} />
+            <Step name={steps[2]}>
+                <Message decorationData={decorationData} onPrev={() => handlePrev(steps[1])} />
             </Step>
         </Funnel>
     );

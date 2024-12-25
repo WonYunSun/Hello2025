@@ -1,24 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import { DecorationData } from "./DecorationForms";
-import Image from "next/image";
 import Link from "next/link";
-import snake from "@/assets/images/snake.svg";
-import EnvelopeList from "./EnvelopeList";
+import Image from "next/image";
 import { Button } from "@/components/common";
+import snake from "@/assets/images/snake.svg";
+import { DecorationData } from "./DecorationForms";
+import EnvelopeList from "./EnvelopeList";
 
 type EnvelopeProps = {
-    selectedEnvelope: string;
+    prevSelectedEnvelope: string;
     onNext: (data: Pick<DecorationData, "envelope">) => void;
 };
 
-const Envelope = ({ selectedEnvelope, onNext }: EnvelopeProps) => {
-    const [localEnvelope, setLocalEnvelope] = useState<string>(selectedEnvelope);
+const Envelope = ({ prevSelectedEnvelope, onNext }: EnvelopeProps) => {
+    const [selectedEnvelope, setSelectedEnvelope] = useState<string>(prevSelectedEnvelope);
 
     const handleNext = () => {
-        if (localEnvelope) {
-            onNext({ envelope: localEnvelope });
-        }
+        onNext({ envelope: selectedEnvelope });
     };
 
     return (
@@ -33,7 +31,11 @@ const Envelope = ({ selectedEnvelope, onNext }: EnvelopeProps) => {
                     <Image src={snake} width={65} height={70} alt="snake" />
                 </div>
             </header>
-            <EnvelopeList selectedEnvelope={localEnvelope} onEnvelopeSelect={setLocalEnvelope} />
+            <EnvelopeList
+                prevSelectedEnvelope={prevSelectedEnvelope}
+                selectedEnvelope={selectedEnvelope}
+                onEnvelopeSelect={setSelectedEnvelope}
+            />
             <div className="flex gap-5">
                 <Link href="/">
                     <Button type="button" color="btn-white" full={false} label="이전" />

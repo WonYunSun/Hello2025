@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useRef, useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
 import { SignupData } from "./SignupForm";
 import CheckboxInput from "../../../components/common/CheckboxInput";
-import ProgressBar from "../../../components/common/ProgressBar";
 import { Button, InputForm } from "../../../components/common";
+import TermsModal from "./TermsModal";
 
 type NicknameProps = {
     onNext: (data: Pick<SignupData, "nickname">) => void;
@@ -17,9 +18,12 @@ const Nickname = ({ onNext }: NicknameProps) => {
         onNext({ nickname: "test-nickname" });
     };
 
+    const [nickname, setNickname] = useState("");
+    const [modalOpen, setModalOpen] = useState(false);
+    const modalBackground = useRef();
+
     return (
         <>
-            <ProgressBar />
             <div className="inner">
                 <section className="flex flex-col justify-between h-full">
                     <main className="flex flex-col justify-between h-[500px]">
@@ -40,8 +44,8 @@ const Nickname = ({ onNext }: NicknameProps) => {
                                 <InputForm
                                     type="text"
                                     full={true}
-                                    value=""
-                                    handleChange={() => console.log("Input Changed!")}
+                                    value={nickname}
+                                    handleChange={(e) => setNickname(e.target.value)}
                                     maxLength={8}
                                 />
                             </div>
@@ -51,7 +55,13 @@ const Nickname = ({ onNext }: NicknameProps) => {
                                 <hr className="border-1 border-textDark" />
                                 <div className="grid gap-[16px]">
                                     <CheckboxInput blueLabel="(필수)" label="만 14세 이상이에요" />
-                                    <CheckboxInput blueLabel="(필수)" label="이용약관 및 개인정보수집이용 동의" />
+                                    <button
+                                        onClick={() => {
+                                            setModalOpen(true);
+                                        }}
+                                    >
+                                        <CheckboxInput blueLabel="(필수)" label="이용약관 및 개인정보수집이용 동의" />
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -59,6 +69,8 @@ const Nickname = ({ onNext }: NicknameProps) => {
 
                     <Button type="button" color="btn-blue" full label="다음으로" handleClick={() => handleNext()} />
                 </section>
+
+                {modalOpen && <TermsModal modalBackground={modalBackground} setModalOpen={setModalOpen} />}
             </div>
         </>
     );
