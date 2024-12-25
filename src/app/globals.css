@@ -8,6 +8,23 @@
         @apply text-textDark;
     }
 
+    button:focus,
+    button:active,
+    input:focus,
+    input:active,
+    select:focus,
+    select:active,
+    textarea:focus,
+    textarea:active {
+        @apply outline-none shadow-none;
+    }
+
+    a,
+    button,
+    input[type="checkbox"] {
+        @apply cursor-pointer;
+    }
+
     .title {
         @apply font-bold text-3xl tracking-tight;
     }
@@ -33,6 +50,10 @@
     }
     .btn-red {
         @apply bg-warning text-white border-warning;
+    }
+
+    .scroll-invisible::-webkit-scrollbar {
+        display: none;
     }
 
     .scroll-custom::-webkit-scrollbar {
