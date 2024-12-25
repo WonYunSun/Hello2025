@@ -24,7 +24,7 @@ const envelopeItems = [
 ];
 
 const EnvelopeList = ({ prevSelectedEnvelope, selectedEnvelope, onEnvelopeSelect }: EnvelopeListProps) => {
-    const slideIndex = envelopeItems.findIndex((item) => item.src === prevSelectedEnvelope);
+    const slideIndex = envelopeItems.findIndex((item) => item.src === prevSelectedEnvelope); // 이전에 선택된 봉투를 기반으로 현재 슬라이드 인덱스 결정
 
     const handleClick = (envelope: Decoration["envelope"]) => {
         onEnvelopeSelect(envelope);
