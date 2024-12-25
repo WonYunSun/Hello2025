@@ -6,11 +6,12 @@ import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import { Carousel } from "@/components/common";
+import { DecorationData } from "../DecorationForms";
 
 type EnvelopeListProps = {
-    prevSelectedEnvelope: string;
-    selectedEnvelope: string;
-    onEnvelopeSelect: (envelope: string) => void;
+    prevSelectedEnvelope: DecorationData["envelope"];
+    selectedEnvelope: DecorationData["envelope"];
+    onEnvelopeSelect: (envelope: DecorationData["envelope"]) => void;
 };
 
 // 편지 봉투들
@@ -25,7 +26,7 @@ const envelopeItems = [
 const EnvelopeList = ({ prevSelectedEnvelope, selectedEnvelope, onEnvelopeSelect }: EnvelopeListProps) => {
     const slideIndex = envelopeItems.findIndex((item) => item.src === prevSelectedEnvelope);
 
-    const handleClick = (envelope: string) => {
+    const handleClick = (envelope: DecorationData["envelope"]) => {
         onEnvelopeSelect(envelope);
     };
 

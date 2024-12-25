@@ -1,17 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { DecorationData } from "../DecorationForms";
-import LetterList from "./LetterList";
 import Layout from "../layout/Layout";
+import LetterList from "./LetterList";
 
 type LetterProps = {
-    prevSelectedLetter: string;
+    prevSelectedLetter: DecorationData["letter"];
     onNext: (data: Pick<DecorationData, "letter">) => void;
     onPrev: () => void;
 };
 
 const Letter = ({ prevSelectedLetter, onNext, onPrev }: LetterProps) => {
-    const [selectedLetter, setSelectedLetter] = useState<string>(prevSelectedLetter);
+    const [selectedLetter, setSelectedLetter] = useState<DecorationData["letter"]>(prevSelectedLetter);
 
     const handleNext = () => {
         onNext({ letter: selectedLetter });

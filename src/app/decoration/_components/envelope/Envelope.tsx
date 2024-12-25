@@ -1,16 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import { DecorationData } from "../DecorationForms";
-import EnvelopeList from "./EnvelopeList";
 import Layout from "../layout/Layout";
+import EnvelopeList from "./EnvelopeList";
 
 type EnvelopeProps = {
-    prevSelectedEnvelope: string;
+    prevSelectedEnvelope: DecorationData["envelope"];
     onNext: (data: Pick<DecorationData, "envelope">) => void;
 };
 
 const Envelope = ({ prevSelectedEnvelope, onNext }: EnvelopeProps) => {
-    const [selectedEnvelope, setSelectedEnvelope] = useState<string>(prevSelectedEnvelope);
+    const [selectedEnvelope, setSelectedEnvelope] = useState<DecorationData["envelope"]>(prevSelectedEnvelope);
 
     const handleNext = () => {
         onNext({ envelope: selectedEnvelope });
