@@ -4,7 +4,6 @@ import Image from "next/image";
 
 import snake from "@/assets/images/snake.svg";
 import { SignupData } from "./SignupForm";
-import ProgressBar from "../../../components/common/ProgressBar";
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
 
@@ -19,7 +18,6 @@ const LetterCount = ({ onNext, onPrev }: LetterCountProps) => {
     };
     return (
         <>
-            <ProgressBar />
             <div className="inner">
                 <section className="flex flex-col justify-between h-full">
                     <main className="flex flex-col justify-between h-[460px]">
