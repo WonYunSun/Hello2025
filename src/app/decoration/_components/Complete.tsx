@@ -23,7 +23,7 @@ const Complete = ({ decorationData }: CompleteProps) => {
             </main>
 
             <Link href="/">
-                <Button type="button" color="btn-blue" full={true} label="내 편지함 가기" />
+                <Button type="button" color="btn-blue" full={true} label="편지함 가기" />
             </Link>
         </section>
     );
