@@ -19,12 +19,15 @@ export default function DecorationForms() {
         message: { name: "", text: "", isPrivate: false }
     });
 
-    const handleNext = (data: Partial<Decoration>, nextStep: string): void => {
+    const handleNext = (data: Partial<Decoration>, nextStep: string) => {
         setDecorationData((prev) => ({ ...prev, ...data }));
         next(nextStep);
     };
 
-    const handlePrev = (prevStep: string): void => {
+    const handlePrev = (prevStep: string, message?: Decoration["message"]) => {
+        if (message) {
+            setDecorationData((prev) => ({ ...prev, message }));
+        }
         prev(prevStep);
     };
 
@@ -47,7 +50,7 @@ export default function DecorationForms() {
                 <Message
                     previousMessage={decorationData.message}
                     onNext={(data) => handleNext(data, steps[3])}
-                    onPrev={() => handlePrev(steps[1])}
+                    onPrev={(message) => handlePrev(steps[1], message)}
                 />
             </Step>
             <Step name={steps[3]}>

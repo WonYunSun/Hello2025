@@ -7,7 +7,7 @@ import Layout from "../layout/Layout";
 type MessageProps = {
     previousMessage: Decoration["message"];
     onNext: (data: Pick<Decoration, "message">) => void;
-    onPrev: () => void;
+    onPrev: (message: Decoration["message"]) => void;
 };
 
 const Message = ({ previousMessage, onNext, onPrev }: MessageProps) => {
@@ -17,8 +17,17 @@ const Message = ({ previousMessage, onNext, onPrev }: MessageProps) => {
         onNext({ message: messageData });
     };
 
+    const handlePrev = () => {
+        onPrev(messageData);
+    };
+
     return (
-        <Layout title="메세지를 작성해주세요" nextButtonLabel="편지 남기기" onPrev={onPrev} handleClick={handleNext}>
+        <Layout
+            title="메세지를 작성해주세요"
+            nextButtonLabel="편지 남기기"
+            onPrev={handlePrev}
+            handleClick={handleNext}
+        >
             <MessageList message={messageData} onMessage={setMessageData} />
         </Layout>
     );
