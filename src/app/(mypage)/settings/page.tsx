@@ -1,12 +1,31 @@
+"use client";
+
 import SmallButton from "@/components/ui/SmallButton";
-import React from "react";
+import React, { useEffect } from "react";
 import NicknameEditSection from "../_component/NicknameEditSection";
 import MailboxSettingSection from "../_component/MailboxSettingSection";
 import Link from "next/link";
 import iconForward from "@/assets/images/icon-forward.svg";
 import Image from "next/image";
+import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "next/navigation";
 
 const SettingsPage = () => {
+    const { user, isLogin, fetchUser, signOut } = useUserStore();
+    const router = useRouter();
+
+    useEffect(() => {
+        fetchUser();
+    }, [])
+
+    console.log(user)
+    console.log(isLogin)
+    
+    const handleSignOut = async () => {
+        await signOut();
+        router.push("/");
+    };
+
     return (
         <>
             <div className="inner">
@@ -20,7 +39,7 @@ const SettingsPage = () => {
                         <p className="text-[28px] font-bold tracking-tight">
                             <span className="text-primary">홍길동</span>님 안녕하세요
                         </p>
-                        <button type="button" className="font-bold">
+                        <button type="button" className="font-bold" onClick={handleSignOut}>
                             로그아웃
                         </button>
                     </div>
