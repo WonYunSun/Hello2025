@@ -51,16 +51,30 @@ const Nickname = ({ onNext }: NicknameProps) => {
                             </div>
 
                             <div className="grid gap-[24px]">
-                                <CheckboxInput label="전체 동의" />
+                                <CheckboxInput
+                                    label="전체 동의"
+                                    checked={false}
+                                    onChange={() => console.log("clicked")}
+                                />
                                 <hr className="border-1 border-textDark" />
                                 <div className="grid gap-[16px]">
-                                    <CheckboxInput blueLabel="(필수)" label="만 14세 이상이에요" />
+                                    <CheckboxInput
+                                        blueLabel="(필수)"
+                                        label="만 14세 이상이에요"
+                                        checked={false}
+                                        onChange={() => console.log("clicked")}
+                                    />
                                     <button
                                         onClick={() => {
                                             setModalOpen(true);
                                         }}
                                     >
-                                        <CheckboxInput blueLabel="(필수)" label="이용약관 및 개인정보수집이용 동의" />
+                                        <CheckboxInput
+                                            blueLabel="(필수)"
+                                            label="이용약관 및 개인정보수집이용 동의"
+                                            checked={false}
+                                            onChange={() => console.log("clicked")}
+                                        />
                                     </button>
                                 </div>
                             </div>
