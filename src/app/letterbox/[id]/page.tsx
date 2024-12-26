@@ -3,6 +3,7 @@
 import { Button } from "@/components/common";
 import LetterList from "../_components/LetterList";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type Props = {
     params: {
@@ -32,6 +33,7 @@ const fetchLetters = async (id: string): Promise<LettersType> => {
     }
     return res.json();
 };
+
 const LetterBox = ({ params }: Props) => {
     const [letters, setLetters] = useState<LettersType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -86,16 +88,9 @@ const LetterBox = ({ params }: Props) => {
                 <LetterList letters={letters.letters} />
             )}
             <button onClick={copyLetterboxLink}>내 편지함 공유하기</button>
-            <Button
-                type="button"
-                color="btn-blue"
-                full
-                label="편지 남기기"
-                handleClick={() => {
-                    console.log("Button clicked");
-                }}
-            />
-
+            <Link href={`/decoration/${params.id}`}>
+                <Button type="button" color="btn-blue" full label="편지 남기기" />
+            </Link>
             {/* 알림 모달 */}
             {showAlert && (
                 <div
