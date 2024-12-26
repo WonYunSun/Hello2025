@@ -2,9 +2,9 @@ import { v4 as uuidv4 } from "uuid";
 import { createClient } from "@/lib/utils/supabase/client";
 import { Decoration } from "@/lib/types/decoration";
 
-export const getUsername = async () => {
+export const getUsername = async (): Promise<string> => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/decoration`);
+        const res = await fetch("/api/decoration");
         if (!res.ok) {
             throw new Error("Failed to get data");
         }
@@ -15,7 +15,7 @@ export const getUsername = async () => {
     }
 };
 
-export const sendMessage = async (decorationData: Decoration, messageData: Decoration["message"]) => {
+export const sendMessage = async (decorationData: Decoration, messageData: Decoration["message"]): Promise<void> => {
     try {
         const supabase = await createClient();
         const session = await supabase.auth.getSession();

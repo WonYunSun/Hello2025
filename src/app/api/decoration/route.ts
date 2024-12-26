@@ -10,7 +10,7 @@ export async function GET(request: Request) {
         if (error) {
             return NextResponse.json({ error: error.message }, { status: 400 });
         }
-        return NextResponse.json({ username }, { status: 200 });
+        return NextResponse.json(username.username, { status: 200 });
     } catch (err) {
         return NextResponse.json({ error: "Failed to process request" }, { status: 500 });
     }
