@@ -8,6 +8,7 @@ import greenEnvelope from "@/assets/images/green-envelope.svg";
 import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
+
 import iconForward from "@/assets/images/icon-forward.svg";
 import LetterModal from "./LetterModal";
 
@@ -27,8 +28,9 @@ type LetterType = {
     content: string;
     created_at: string;
     envelope_type: number;
-    paper_type: number;
-    is_public: boolean;
+    paper_type: string;
+    is_private: boolean;
+    sendername: string;
 };
 
 type LetterListProps = {
@@ -76,6 +78,7 @@ const LetterList = ({ letters }: LetterListProps) => {
                     <Letter
                         key={letter.id}
                         sender_id={letter.sender_id}
+                        sendername={letter.sendername}
                         selectedEnvelope={envelopeItems[letter.envelope_type - 1]?.src || redEnvelope}
                         onclick={() => handleClick(letter)}
                     />

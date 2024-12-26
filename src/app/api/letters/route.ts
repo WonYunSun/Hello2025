@@ -28,10 +28,9 @@ export async function GET(request: Request) {
         return NextResponse.json({ error: letterError.message }, { status: 500 });
     }
 
-    // 편지가 없는 경우에도 유저 이름을 포함시켜 반환
     const responseData = {
-        username: user?.username || null, // 유저 이름이 없으면 null
-        letters: letter || [] // 편지가 없으면 빈 배열 반환
+        username: user?.username || null,
+        letters: letter || []
     };
 
     return NextResponse.json(responseData);
