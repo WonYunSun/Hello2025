@@ -1,4 +1,5 @@
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 type StepProps = {
     name: string;
@@ -10,7 +11,17 @@ type FunnelProps = {
 };
 
 export const useFunnel = (initialStep: string) => {
-    const [currentStep, setCurrentStep] = useState<string>(initialStep);
+    const searchParams = useSearchParams();
+    const [currentStep, setCurrentStep] = useState<string>(() => searchParams.get("step") || initialStep);
+
+    useEffect(() => {
+        const stepParam = searchParams.get("step");
+        if (stepParam) {
+            setCurrentStep(stepParam);
+        } else {
+            window.history.replaceState(null, "", `?step=${currentStep}`);
+        }
+    }, [searchParams]);
 
     const Step = ({ name, children }: StepProps): ReactNode => {
         return <>{children}</>;
@@ -22,12 +33,17 @@ export const useFunnel = (initialStep: string) => {
         return activeStep || null;
     };
 
+    const updateStep = (step: string): void => {
+        setCurrentStep(step);
+        window.history.pushState(null, "", `?step=${step}`);
+    };
+
     const next = (nextStep: string): void => {
-        setCurrentStep(nextStep);
+        updateStep(nextStep);
     };
 
     const prev = (prevStep: string): void => {
-        setCurrentStep(prevStep);
+        updateStep(prevStep);
     };
 
     return { Funnel, Step, next, prev, currentStep };
