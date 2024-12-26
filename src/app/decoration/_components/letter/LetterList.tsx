@@ -2,10 +2,11 @@
 import Image from "next/image";
 import colorLetter from "@/assets/images/color-letter.svg";
 import patternLetter from "@/assets/images/pattern-letter.svg";
+import { Decoration } from "@/lib/types/decoration";
 
 type LetterListProps = {
-    selectedLetter: string;
-    onLetterSelect: (letter: string) => void;
+    selectedLetter: Decoration["letter"];
+    onLetterSelect: (letter: Decoration["letter"]) => void;
 };
 
 // 편지지들
@@ -15,7 +16,7 @@ const letterItems = [
 ];
 
 const LetterList = ({ selectedLetter, onLetterSelect }: LetterListProps) => {
-    const handleClick = (letter: string) => {
+    const handleClick = (letter: Decoration["letter"]) => {
         onLetterSelect(letter);
     };
 
