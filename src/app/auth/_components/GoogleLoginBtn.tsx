@@ -5,6 +5,7 @@ import Image from "next/image";
 import { createClient } from "@/lib/utils/supabase/client";
 import googleLogo from "@/assets/images/google-logo.svg"
 
+
 const GoogleLoginBtn = () => {
     const handleGoogleLogin = async () => {
         const supabase = await createClient();
@@ -29,7 +30,7 @@ const GoogleLoginBtn = () => {
             onClick={handleGoogleLogin}
             className="w-4/6 h-10 md:h-12 border text-sm md:text-base bg-[#ffffff] font-medium text-[#666666] border-[#dddddd] rounded-md flex items-center gap-8 md:gap-20"
         >
-            <Image src={googleLogo} width={24} height={24} alt="googleLogo" className="ml-8" />
+            {/* <Image src={googleLogo} width={24} height={24} alt="googleLogo" className="ml-8" /> */}
             <span>Google 계정으로 시작</span>
         </button>
     );
