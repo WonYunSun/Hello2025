@@ -13,7 +13,13 @@ const Letter = ({ selectedEnvelope, sender_id, sendername, onclick }: LetterProp
             <div>
                 <span className="font-light">from</span> <span className="font-medium">{sendername}</span>
             </div>
-            <Image src={selectedEnvelope} width={156} height={97} alt="envelope"></Image>
+            <Image
+                src={selectedEnvelope}
+                width={156}
+                height={97}
+                alt="envelope"
+                className="hover:scale-105 transition ease-in-out delay-20"
+            ></Image>
         </div>
     );
 };
