@@ -7,24 +7,8 @@ import MailboxSettingSection from "../_component/MailboxSettingSection";
 import Link from "next/link";
 import iconForward from "@/assets/images/icon-forward.svg";
 import Image from "next/image";
-import { useUserStore } from "@/stores/userStore";
-import { useRouter } from "next/navigation";
 
 const SettingsPage = () => {
-    const { user, isLogin, fetchUser, signOut } = useUserStore();
-    const router = useRouter();
-
-    useEffect(() => {
-        fetchUser();
-    }, [])
-
-    console.log(user)
-    console.log(isLogin)
-    
-    const handleSignOut = async () => {
-        await signOut();
-        router.push("/");
-    };
 
     return (
         <>

@@ -3,8 +3,9 @@
 import { create } from "zustand";
 
 import { createClient } from "@/lib/utils/supabase/client";
+import { UserState } from "@/lib/types/auth";
 
-export const useUserStore = create((set) => ({
+export const useUserStore = create<UserState>((set) => ({
     user: null,
     isLogin: false,
 
@@ -35,7 +36,6 @@ export const useUserStore = create((set) => ({
     },
 
     signOut: async () => {
-        set({ loading: true });
         const supabase = createClient();
 
         try {
