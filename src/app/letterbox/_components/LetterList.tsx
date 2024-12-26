@@ -29,6 +29,7 @@ type LetterType = {
     envelope_type: number;
     paper_type: number;
     is_public: boolean;
+    sendername: string;
 };
 
 type LetterListProps = {
@@ -76,6 +77,7 @@ const LetterList = ({ letters }: LetterListProps) => {
                     <Letter
                         key={letter.id}
                         sender_id={letter.sender_id}
+                        sendername={letter.sendername}
                         selectedEnvelope={envelopeItems[letter.envelope_type - 1]?.src || redEnvelope}
                         onclick={() => handleClick(letter)}
                     />
