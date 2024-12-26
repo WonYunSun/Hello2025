@@ -53,14 +53,14 @@ export default function DecorationForms() {
             {/* Step 3: 메세지 작성 */}
             <Step name={steps[2]}>
                 <Message
-                    previousMessage={decorationData.message}
+                    decorationData={decorationData}
                     onNext={(data) => handleNext(data, steps[3])}
                     onPrev={(message) => handlePrev(steps[1], message)}
                 />
             </Step>
             {/* Step 4: 작성 완료 */}
             <Step name={steps[3]}>
-                <Complete decorationData={decorationData} />
+                <Complete />
             </Step>
         </Funnel>
     );
