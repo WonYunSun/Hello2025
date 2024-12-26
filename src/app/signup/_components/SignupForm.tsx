@@ -8,6 +8,7 @@ import Writer from "./Writer";
 import Viewer from "./Viewer";
 import LetterCount from "./LetterCount";
 import Complete from "./Complete";
+import { createClient } from "@/lib/utils/supabase/client";
 
 export type SignupData = {
     nickname: string;
@@ -33,6 +34,7 @@ const SignupForms = () => {
     const handlePrev = (prevStep: string): void => {
         prev(prevStep);
     };
+
 
     return (
         <Funnel>

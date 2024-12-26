@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { createClient } from "@/lib/utils/supabase/client";
-import googleLogo from "@/assets/images/구글 로고.svg"
+import googleLogo from "@/assets/images/google-logo.svg"
 
 const GoogleLoginBtn = () => {
     const handleGoogleLogin = async () => {
