@@ -1,7 +1,6 @@
 import SmallButton from "@/components/ui/SmallButton";
 import React from "react";
 import UserInfoSection from "../_components/UserInfoSection";
-import MailboxSettingSection from "../_components/MailboxSettingSection";
 import Link from "next/link";
 import iconForward from "@/assets/images/icon-forward.svg";
 import Image from "next/image";
@@ -22,7 +21,7 @@ const SettingsPage = async () => {
                 </section>
 
                 <UserInfoSection session={session} />
-                <MailboxSettingSection />
+                {/* <MailboxSettingSection /> */}
 
                 <Link
                     href="/mymessages"
