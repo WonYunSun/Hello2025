@@ -1,26 +1,39 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { SignupData } from "./SignupForm";
+import { SignupData } from "@/lib/types/signup";
+
 import CheckboxInput from "../../../components/common/CheckboxInput";
 import { Button, InputForm } from "../../../components/common";
 import TermsModal from "./TermsModal";
 
 type NicknameProps = {
+    prevNickname: SignupData["nickname"];
     onNext: (data: Pick<SignupData, "nickname">) => void;
 };
 
-const Nickname = ({ onNext }: NicknameProps) => {
+const Nickname = ({ prevNickname, onNext }: NicknameProps) => {
+    const [nickname, setNickname] = useState(prevNickname);
+
     const handleNext = () => {
-        onNext({ nickname: "test-nickname" });
+        onNext({ nickname: nickname });
     };
 
-    const [nickname, setNickname] = useState("");
+    const [checkItems, setCheckItems] = useState({ isAdult: false, isAgreed: false });
+    const isAllChecked = checkItems.isAdult && checkItems.isAgreed ? true : false;
+
+    const handleAllCheck = () => {
+        if (checkItems.isAdult === false || checkItems.isAgreed === false) {
+            setCheckItems({ isAdult: true, isAgreed: true });
+        } else {
+            setCheckItems({ isAdult: !checkItems.isAdult, isAgreed: !checkItems.isAdult });
+        }
+    };
+
     const [modalOpen, setModalOpen] = useState(false);
-    const modalBackground = useRef();
 
     return (
         <>
@@ -51,40 +64,46 @@ const Nickname = ({ onNext }: NicknameProps) => {
                             </div>
 
                             <div className="grid gap-[24px]">
-                                <CheckboxInput
-                                    label="전체 동의"
-                                    checked={false}
-                                    onChange={() => console.log("clicked")}
-                                />
+                                <CheckboxInput label="전체 동의" checked={isAllChecked} onChange={handleAllCheck} />
                                 <hr className="border-1 border-textDark" />
                                 <div className="grid gap-[16px]">
                                     <CheckboxInput
                                         blueLabel="(필수)"
                                         label="만 14세 이상이에요"
-                                        checked={false}
-                                        onChange={() => console.log("clicked")}
+                                        checked={checkItems.isAdult}
+                                        onChange={() => setCheckItems({ ...checkItems, isAdult: !checkItems.isAdult })}
                                     />
-                                    <button
-                                        onClick={() => {
+
+                                    <CheckboxInput
+                                        blueLabel="(필수)"
+                                        label="이용약관 및 개인정보수집이용 동의"
+                                        checked={checkItems.isAgreed}
+                                        onChange={() => {
+                                            setCheckItems({ ...checkItems, isAgreed: !checkItems.isAgreed });
+                                            if (!checkItems.isAgreed) {
+                                                setModalOpen(true);
+                                            }
+                                        }}
+                                        onLabelClick={() => {
                                             setModalOpen(true);
                                         }}
-                                    >
-                                        <CheckboxInput
-                                            blueLabel="(필수)"
-                                            label="이용약관 및 개인정보수집이용 동의"
-                                            checked={false}
-                                            onChange={() => console.log("clicked")}
-                                        />
-                                    </button>
+                                    />
                                 </div>
                             </div>
                         </div>
                     </main>
 
-                    <Button type="button" color="btn-blue" full label="다음으로" handleClick={() => handleNext()} />
+                    <Button
+                        disabled={!(isAllChecked && nickname)}
+                        type="button"
+                        color="btn-blue"
+                        full
+                        label="다음으로"
+                        handleClick={() => handleNext()}
+                    />
                 </section>
 
-                {modalOpen && <TermsModal modalBackground={modalBackground} setModalOpen={setModalOpen} />}
+                {modalOpen && <TermsModal setModalOpen={setModalOpen} />}
             </div>
         </>
     );

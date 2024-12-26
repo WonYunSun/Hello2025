@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import snake from "@/assets/images/snake.svg";
 import { Button } from "@/components/common";
-import { SignupData } from "./SignupForm";
+import { SignupData } from "@/lib/types/signup";
 
 const Complete = ({ signupData }: { signupData: SignupData }) => {
     const handleSubmit = () => {
@@ -23,7 +23,7 @@ const Complete = ({ signupData }: { signupData: SignupData }) => {
                             </h1>
                             <h3 className="text-[16px] font-semibold pt-3">지금부터 편지함을 이용하실 수 있어요!</h3>
                         </div>
-                        <Image width={150} height={150} src={snake} alt="snake" />
+                        <Image width={0} height={0} src={snake} alt="snake" className="w-[150px]" />
                     </main>
 
                     <Button type="button" color="btn-blue" full label="내 편지함 가기" handleClick={handleSubmit} />

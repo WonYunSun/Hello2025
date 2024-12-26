@@ -1,6 +1,6 @@
 import SignupForms from "./_components/SignupForm";
 
-const NewPostbox = async () => {
+const NewPostbox = () => {
     return <SignupForms />;
 };
 

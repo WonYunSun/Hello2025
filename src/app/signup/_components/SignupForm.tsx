@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { useFunnel } from "@/lib/hooks/useFunnel";
+import { SignupData } from "@/lib/types/signup";
 import ProgressBar from "@/components/common/ProgressBar";
 
 import Nickname from "./Nickname";
@@ -10,22 +11,16 @@ import Writer from "./Writer";
 import Viewer from "./Viewer";
 import LetterCount from "./LetterCount";
 import Complete from "./Complete";
-import { createClient } from "@/lib/utils/supabase/client";
 
-export type SignupData = {
-    nickname: string;
-    writer: boolean;
-    viewer: boolean;
-    letterCount: boolean;
-};
+const steps = ["닉네임", "작성자", "뷰어", "편지개수", "가입성공"];
 
 const SignupForms = () => {
-    const { Funnel, Step, next, prev, currentStep } = useFunnel("닉네임");
+    const { Funnel, Step, next, prev, currentStep } = useFunnel(steps[0]);
     const [signupData, setSignupData] = useState<SignupData>({
         nickname: "",
-        writer: true,
-        viewer: true,
-        letterCount: true
+        isAnonymous: true,
+        isLetterVisible: true,
+        isCountVisible: true
     });
 
     const handleNext = (data: Partial<SignupData>, nextStep: string): void => {
@@ -33,73 +28,74 @@ const SignupForms = () => {
         next(nextStep);
     };
 
-    const handlePrev = (prevStep: string): void => {
+    const handlePrev = (data: Partial<SignupData>, prevStep: string): void => {
+        setSignupData((prev) => ({ ...prev, ...data }));
         prev(prevStep);
     };
 
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(120);
 
-    const supabase = createClient();
-    const session = supabase.auth.getSession();
-    console.log("session", session);
-
     return (
         <>
             <ProgressBar start={start} end={end} />
             <Funnel>
-                <Step name="닉네임">
+                <Step name={steps[0]}>
                     <Nickname
+                        prevNickname={signupData.nickname}
                         onNext={(data) => {
-                            handleNext(data, "작성자");
+                            handleNext(data, steps[1]);
                             setStart(end);
                             setEnd(240);
                         }}
                     />
                 </Step>
-                <Step name="작성자">
+                <Step name={steps[1]}>
                     <Writer
+                        prevIsAnonymous={signupData.isAnonymous}
                         onNext={(data) => {
-                            handleNext(data, "뷰어");
+                            handleNext(data, steps[2]);
                             setStart(end);
                             setEnd(360);
                         }}
-                        onPrev={() => {
-                            handlePrev("닉네임");
+                        onPrev={(data) => {
+                            handlePrev(data, steps[0]);
                             setStart(end);
                             setEnd(120);
                         }}
                     />
                 </Step>
-                <Step name="뷰어">
+                <Step name={steps[2]}>
                     <Viewer
+                        prevIsLetterVisible={signupData.isLetterVisible}
                         onNext={(data) => {
-                            handleNext(data, "편지개수");
+                            handleNext(data, steps[3]);
                             setStart(end);
                             setEnd(480);
                         }}
-                        onPrev={() => {
-                            handlePrev("작성자");
+                        onPrev={(data) => {
+                            handlePrev(data, steps[1]);
                             setStart(end);
                             setEnd(240);
                         }}
                     />
                 </Step>
-                <Step name="편지개수">
+                <Step name={steps[3]}>
                     <LetterCount
+                        prevIsCountVisible={signupData.isCountVisible}
                         onNext={(data) => {
-                            handleNext(data, "가입성공");
+                            handleNext(data, steps[4]);
                             setStart(end);
                             setEnd(600);
                         }}
-                        onPrev={() => {
-                            handlePrev("뷰어");
+                        onPrev={(data) => {
+                            handlePrev(data, steps[2]);
                             setStart(end);
                             setEnd(360);
                         }}
                     />
                 </Step>
-                <Step name="가입성공">
+                <Step name={steps[4]}>
                     <Complete signupData={signupData} />
                 </Step>
             </Funnel>
