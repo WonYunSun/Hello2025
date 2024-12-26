@@ -24,7 +24,7 @@ type LettersType = {
     letters: LetterType[];
 };
 
-const fetchLetters = async (id: string) => {
+const fetchLetters = async (id: string): Promise<LettersType> => {
     const res = await fetch(`/api/letters?id=${id}`);
     if (!res.ok) {
         throw new Error("Failed to fetch letters");
@@ -54,7 +54,7 @@ const LetterBox = ({ params }: Props) => {
     if (isLoading) return <div className="inner">Loading...</div>;
     if (error) return <div className="inner">Error: {error}</div>;
     if (!letters) return <div className="inner">No letters found.</div>;
-    console.log(letters);
+
     return (
         <div className="inner">
             <div className="title">
