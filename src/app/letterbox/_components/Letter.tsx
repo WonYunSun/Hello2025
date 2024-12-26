@@ -4,10 +4,11 @@ import Image from "next/image";
 type LetterProps = {
     selectedEnvelope: string;
     sender_id: string;
+    onclick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
-const Letter = ({ selectedEnvelope, sender_id }: LetterProps) => {
+const Letter = ({ selectedEnvelope, sender_id, onclick }: LetterProps) => {
     return (
-        <div>
+        <div onClick={onclick}>
             <div>
                 <span className="font-light">from</span> <span className="font-medium">{sender_id}</span>
             </div>
