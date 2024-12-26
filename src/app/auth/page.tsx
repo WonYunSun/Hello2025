@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 import titleImage from "@/assets/images/title.svg";
-import pineTree from "@/assets/images/소나무.svg";
+import pineTree from "@/assets/images/pine-tree.svg";
 import deco from "@/assets/images/deco.svg";
-import ground from "@/assets/images/땅.svg";
-import kakaoLogo from "@/assets/images/카카오 로고.svg";
+import ground from "@/assets/images/ground.svg";
+import kakaoLogo from "@/assets/images/kakao-logo.svg";
 
 import GoogleLoginBtn from "./_components/GoogleLoginBtn";
 
