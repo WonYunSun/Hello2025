@@ -7,7 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "genTypes": "supabase gen types typescript --project-id zmgygrglsgtpguajczrb --schema public > src/types/supabase.ts"
+        "genTypes": "supabase gen types typescript --project-id zmgygrglsgtpguajczrb --schema public > src/lib/types/supabase.ts"
     },
     "dependencies": {
         "@supabase/ssr": "^0.5.2",
@@ -30,6 +30,7 @@
         "eslint": "^8",
         "eslint-config-next": "14.2.3",
         "postcss": "^8",
+        "supabase": "^2.1.1",
         "tailwindcss": "^3.4.1",
         "typescript": "^5"
     }
