@@ -5,8 +5,14 @@ import MailboxSettingSection from "../_components/MailboxSettingSection";
 import Link from "next/link";
 import iconForward from "@/assets/images/icon-forward.svg";
 import Image from "next/image";
+import { createClient } from "@/lib/utils/supabase/server";
 
-const SettingsPage = () => {
+const SettingsPage = async () => {
+    const supabase = await createClient();
+    const {
+        data: { session }
+    } = await supabase.auth.getSession();
+
     return (
         <>
             <div className="inner">
@@ -15,7 +21,7 @@ const SettingsPage = () => {
                     <SmallButton icon="icon-back.svg" to={"/"} />
                 </section>
 
-                <UserInfoSection />
+                <UserInfoSection session={session} />
                 <MailboxSettingSection />
 
                 <Link
