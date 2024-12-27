@@ -1,8 +1,8 @@
 type CheckboxInputProps = {
     label: string;
     blueLabel?: string;
-    checked: boolean;
-    onChange: () => void;
+    checked?: boolean;
+    onChange?: () => void;
     onLabelClick?: () => void;
 };
 
