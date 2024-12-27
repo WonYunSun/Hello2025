@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { useFunnel } from "@/lib/hooks/useFunnel";
-import { User } from "@/lib/types/user";
+import { UserTable } from "@/lib/types/usertable";
 import { useUserStore } from "@/stores/userStore";
 
 import Nickname from "./Nickname";
@@ -30,19 +30,19 @@ const SignupForms = () => {
         letter_visibility: true,
         count_visibility: true
     };
-    const [signupData, setSignupData] = useState<User>(initialSignupData);
+    const [signupData, setSignupData] = useState<UserTable>(initialSignupData);
 
     useEffect(() => {
         setSignupData((prev) => ({ ...prev, id: user?.id }));
     }, [user]);
 
-    const handleNext = (data: Partial<User>, nextStep: string): void => {
+    const handleNext = (data: Partial<UserTable>, nextStep: string): void => {
         setSignupData((prev) => ({ ...prev, ...data }));
         next(nextStep);
         sessionStorage.setItem("signupData", JSON.stringify(signupData));
     };
 
-    const handlePrev = (data: Partial<User>, prevStep: string): void => {
+    const handlePrev = (data: Partial<UserTable>, prevStep: string): void => {
         setSignupData((prev) => ({ ...prev, ...data }));
         prev(prevStep);
         sessionStorage.setItem("signupData", JSON.stringify(signupData));
@@ -102,6 +102,7 @@ const SignupForms = () => {
                 </Step>
                 <Step name={steps[3]}>
                     <LetterCount
+                        signupData={signupData}
                         prevIsCountVisible={signupData.count_visibility}
                         onNext={(data) => {
                             handleNext(data, steps[4]);
@@ -114,7 +115,7 @@ const SignupForms = () => {
                     />
                 </Step>
                 <Step name={steps[4]}>
-                    <Complete signupData={signupData} />
+                    <Complete />
                 </Step>
             </Funnel>
         </>

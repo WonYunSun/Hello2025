@@ -4,15 +4,15 @@ import Image from "next/image";
 import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { User } from "@/lib/types/user";
+import { UserTable } from "@/lib/types/usertable";
 
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
 
 type ViewerProps = {
-    prevIsLetterVisible: User["letter_visibility"];
-    onNext: (data: Pick<User, "letter_visibility">) => void;
-    onPrev: (data: Pick<User, "letter_visibility">) => void;
+    prevIsLetterVisible: UserTable["letter_visibility"];
+    onNext: (data: Pick<UserTable, "letter_visibility">) => void;
+    onPrev: (data: Pick<UserTable, "letter_visibility">) => void;
 };
 
 const Viewer = ({ prevIsLetterVisible, onNext, onPrev }: ViewerProps) => {
