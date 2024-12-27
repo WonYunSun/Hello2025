@@ -25,7 +25,7 @@ const Unregister = () => {
         <div className="inner">
             <section className="flex justify-between relative">
                 <h1 className="title">회원 탈퇴</h1>
-                <SmallButton icon="icon-back.svg" to={"/settings"} />
+                <SmallButton icon="/icon-back.svg" to={"/settings"} />
             </section>
             <p className="mt-8 text-[20px] font-semibold">
                 회원 탈퇴 후에는 <span className="text-warning">편지함과 메시지가 삭제되며</span>

@@ -17,7 +17,7 @@ const SettingsPage = async () => {
             <div className="inner">
                 <section className="flex justify-between relative">
                     <h1 className="title">계정설정</h1>
-                    <SmallButton icon="icon-back.svg" to={"/"} />
+                    <SmallButton icon="/icon-back.svg" to={"/"} />
                 </section>
                 <UserInfoSection session={session} />
 
