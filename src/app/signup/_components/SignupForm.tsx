@@ -17,12 +17,14 @@ const steps = ["닉네임", "작성자", "뷰어", "편지개수", "가입성공
 const ProgressBar = dynamic(() => import("@/components/common/ProgressBar"), { ssr: false });
 
 const SignupForms = () => {
-    const { Funnel, Step, next, prev, currentStep } = useFunnel(steps[0]);
+    const { Funnel, Step, next, prev } = useFunnel(steps[0]);
     //supabase 로그인한 유저 정보 가져오기
     const { user } = useUserStore();
 
-    //signup data session storage 저장
-    const sessionSignupData = typeof window !== "undefined" ? JSON.parse(sessionStorage.getItem("signupData")) : null;
+    //get session storage signup data
+    const prevSessionSignupData = typeof window !== "undefined" && sessionStorage.getItem("signupData");
+    const sessionSignupData =
+        typeof window !== "undefined" && prevSessionSignupData ? JSON.parse(prevSessionSignupData) : null;
     const initialSignupData = sessionSignupData?.signupData || {
         id: "",
         username: "",
@@ -30,10 +32,12 @@ const SignupForms = () => {
         letter_visibility: true,
         count_visibility: true
     };
+    console.log("initialSignupData", initialSignupData);
     const [signupData, setSignupData] = useState<UserTable>(initialSignupData);
-
     useEffect(() => {
-        setSignupData((prev) => ({ ...prev, id: user?.id }));
+        if (user) {
+            setSignupData((prev) => ({ ...prev, id: user.id }));
+        }
     }, [user]);
 
     const handleNext = (data: Partial<UserTable>, nextStep: string): void => {
@@ -49,13 +53,16 @@ const SignupForms = () => {
     };
 
     //progressbar session storage 저장
-    const session = typeof window !== "undefined" ? JSON.parse(sessionStorage.getItem("pgBarLevel")) : null;
+    const pgBarLevel = typeof window !== "undefined" && sessionStorage.getItem("pgBarLevel");
+    type pgBarLeveltype = { start: number; end: number };
+    const session: pgBarLeveltype = typeof window !== "undefined" && pgBarLevel ? JSON.parse(pgBarLevel) : null;
+
     const initialStart = session?.start || 0;
     const initialEnd = session?.end || 120;
     const [start, setStart] = useState(initialStart);
     const [end, setEnd] = useState(initialEnd);
 
-    const onPgBarHandler = (start, end) => {
+    const onPgBarHandler = (start: number, end: number) => {
         setStart(start);
         setEnd(end);
         sessionStorage.setItem("pgBarLevel", JSON.stringify({ start: start, end: end }));
