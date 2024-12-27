@@ -1,7 +1,59 @@
+"use client";
 import SmallButton from "@/components/ui/SmallButton";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { createClient } from "@/lib/utils/supabase/client";
+import { useUserStore } from "@/stores/userStore";
 
-const MyMessages = () => {
+type Letter = {
+    id: string;
+    content: string;
+    recipient_id: string;
+    sender_id: string | null;
+    receiver_name?: string;
+};
+
+const MyMessages: React.FC = () => {
+    const [messages, setMessages] = useState<Letter[]>([]);
+    const { user } = useUserStore();
+    const supabase = createClient();
+
+    useEffect(() => {
+        const fetchMessages = async () => {
+            if (!user) return;
+            const letters = await fetchLetters(user.id);
+            const messagesWithUsernames = await Promise.all(letters.map(fetchReceiverName));
+            setMessages(messagesWithUsernames);
+        };
+
+        fetchMessages();
+    }, [user]);
+
+    const fetchLetters = async (userId: string): Promise<Letter[]> => {
+        const { data: letters, error } = await supabase.from("letters").select("*").eq("sender_id", userId);
+
+        if (error) {
+            console.error("편지 가져오기 오류:", error);
+            return [];
+        }
+
+        return letters as Letter[]; // 타입 캐스팅
+    };
+
+    const fetchReceiverName = async (letter: Letter): Promise<Letter> => {
+        const { data: userData, error } = await supabase
+            .from("users")
+            .select("username")
+            .eq("id", letter.recipient_id)
+            .single();
+
+        if (error) {
+            console.error("수신자 가져오기 오류:", error);
+            return { ...letter, receiver_name: "알 수 없음" };
+        }
+
+        return { ...letter, receiver_name: userData.username };
+    };
+
     return (
         <div className="inner">
             <section className="mb-6 flex justify-between relative">
@@ -9,54 +61,26 @@ const MyMessages = () => {
                 <SmallButton icon="icon-back.svg" to={"/settings"} />
             </section>
             <p className="font-semibold">
-                총 <span className="text-primary">5</span>개의 편지를 남겼습니다
+                총 <span className="text-primary">{messages.length}</span>개의 편지를 남겼습니다
             </p>
 
             <ul className="scroll-custom w-full pr-3 mt-10 h-[73vh] overflow-auto ">
-                <li className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px]">
-                    <p className="font-semibold">
-                        <span className="text-[14px] text-beige">To. </span>
-                        <span className="text-[18px] ">김철수</span>
-                    </p>
-                    <p className="mt-4 font-medium">
-                        지난 한 해 동안 함께한 소중한 순간들을 돌아보며, 당신과의 인연에 감사한 마음이 듭니다. 올 한
-                        해도 건강과 행복이 항상 함께하시기를 바라며, 새로운 도전과 기회가 여러분을 기다리고 있기를
-                        희망합니다.
-                    </p>
-                </li>
-                <li className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px] mt-5">
-                    <p className="font-semibold">
-                        <span className="text-[14px] text-beige">To. </span>
-                        <span className="text-[18px] ">김철수</span>
-                    </p>
-                    <p className="mt-4 font-medium">
-                        지난 한 해 동안 함께한 소중한 순간들을 돌아보며, 당신과의 인연에 감사한 마음이 듭니다. 올 한
-                        해도 건강과 행복이 항상 함께하시기를 바라며, 새로운 도전과 기회가 여러분을 기다리고 있기를
-                        희망합니다.
-                    </p>
-                </li>
-                <li className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px] mt-5">
-                    <p className="font-semibold">
-                        <span className="text-[14px] text-beige">To. </span>
-                        <span className="text-[18px] ">김철수</span>
-                    </p>
-                    <p className="mt-4 font-medium">
-                        지난 한 해 동안 함께한 소중한 순간들을 돌아보며, 당신과의 인연에 감사한 마음이 듭니다. 올 한
-                        해도 건강과 행복이 항상 함께하시기를 바라며, 새로운 도전과 기회가 여러분을 기다리고 있기를
-                        희망합니다.
-                    </p>
-                </li>
-                <li className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px] mt-5">
-                    <p className="font-semibold">
-                        <span className="text-[14px] text-beige">To. </span>
-                        <span className="text-[18px] ">김철수</span>
-                    </p>
-                    <p className="mt-4 font-medium">
-                        지난 한 해 동안 함께한 소중한 순간들을 돌아보며, 당신과의 인연에 감사한 마음이 듭니다. 올 한
-                        해도 건강과 행복이 항상 함께하시기를 바라며, 새로운 도전과 기회가 여러분을 기다리고 있기를
-                        희망합니다.
-                    </p>
-                </li>
+                {messages.length === 0 ? (
+                    <li className="p-[25px] text-center">작성한 편지가 없습니다.</li>
+                ) : (
+                    messages.map((message) => (
+                        <li
+                            key={message.id}
+                            className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px] mt-5"
+                        >
+                            <p className="font-semibold">
+                                <span className="text-[14px] text-beige">To. </span>
+                                <span className="text-[18px] ">{message.receiver_name}</span>
+                            </p>
+                            <p className="mt-4 font-medium">{message.content}</p>
+                        </li>
+                    ))
+                )}
             </ul>
         </div>
     );
