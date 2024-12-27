@@ -110,7 +110,6 @@ const LetterBox = ({ params }: Props) => {
                     <Button type="button" color="btn-blue" full label="편지 남기기" />
                 </Link>
             )}
-
             {/* 알림 모달 */}
             {showAlert && (
                 <div
