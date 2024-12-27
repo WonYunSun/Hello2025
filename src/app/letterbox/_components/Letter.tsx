@@ -9,16 +9,15 @@ type LetterProps = {
 };
 const Letter = ({ selectedEnvelope, sendername, onclick }: LetterProps) => {
     return (
-        <div onClick={onclick}>
+        <div onClick={onclick} className="mx-auto my-0">
             <div>
                 <span className="font-light">from</span> <span className="font-medium">{sendername}</span>
             </div>
             <Image
                 src={selectedEnvelope}
-                width={156}
-                height={97}
+                width={126}
                 alt="envelope"
-                className="hover:scale-105 transition ease-in-out delay-20 cursor-pointer"
+                className="hover:scale-105 transition ease-in-out delay-20 cursor-pointer pt-[5px]"
             ></Image>
         </div>
     );

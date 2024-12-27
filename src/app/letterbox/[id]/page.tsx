@@ -18,7 +18,7 @@ type LetterType = {
     sendername: string;
     content: string;
     created_at: string;
-    envelope_type: number;
+    envelope_type: string;
     paper_type: string;
     is_private: boolean;
 };

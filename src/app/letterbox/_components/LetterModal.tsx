@@ -9,7 +9,7 @@ type LetterType = {
     recipient_id: string;
     content: string;
     created_at: string;
-    envelope_type: number;
+    envelope_type: string;
     paper_type: string;
     is_private: boolean;
 };
@@ -28,8 +28,7 @@ const LetterModal = ({ isOpen, onClose, contents }: ModalProps) => {
         "pattern-letter": patternLetter
     };
     const selectedPaper = paperImages[contents.paper_type] || colorLetter;
-    console.log(paperImages[contents.paper_type]);
-    console.log(selectedPaper);
+
     return (
         <div
             onClick={onClose}
