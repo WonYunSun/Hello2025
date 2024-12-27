@@ -5,4 +5,5 @@ export type UserState = {
     isLogin: boolean;
     fetchUser: () => Promise<void>;
     signOut: () => Promise<void>;
+    deleteUser: () => Promise<void>;
 };
