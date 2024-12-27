@@ -42,7 +42,7 @@ const LetterBox = ({ params }: Props) => {
             alert("초대코드 복사 실패");
         }
     };
-    const { user, userTable } = useUserStore();
+    const { user } = useUserStore();
 
     useEffect(() => {
         const getLetters = async () => {
@@ -82,19 +82,19 @@ const LetterBox = ({ params }: Props) => {
                         <span className="text-primary">{letters.user.username}</span>님의 편지함입니다.
                     </div>
                     <h3 className="text-[16px] font-semibold mt-[15px]">
-                        {letters.user.count_visibility ? (
+                        {!letters.user.count_visibility && !isOwner ? (
+                            <></>
+                        ) : (
                             <>
                                 총 <span className="text-primary font-semibold">{letters.letters.length}</span>개의
                                 편지가 도착했습니다.
                             </>
-                        ) : (
-                            <></>
                         )}
                     </h3>
                 </div>
                 {user !== null && <SmallButton icon="/icon-user.svg" to={"/settings"} />}
             </section>
-            {letters.user.allow_anonymous ? (
+            {!letters.user.allow_anonymous && !isOwner ? (
                 <div className="flex-grow flex items-center justify-center">
                     <div className="text-center text-lg text-textLight">이 편지함은 비공개 편지함입니다.</div>
                 </div>
