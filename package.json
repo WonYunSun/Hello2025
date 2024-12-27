@@ -22,7 +22,8 @@
         "react-slick": "^0.30.3",
         "react-spinners": "^0.15.0",
         "slick-carousel": "^1.8.1",
-        "uuid": "^11.0.3"
+        "uuid": "^11.0.3",
+        "zustand": "^5.0.2"
     },
     "devDependencies": {
         "@types/node": "^20",

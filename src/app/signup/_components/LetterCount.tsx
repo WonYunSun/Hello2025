@@ -1,20 +1,26 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { SignupData } from "./SignupForm";
+import { SignupData } from "@/lib/types/signup";
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
 
 type LetterCountProps = {
-    onNext: (data: Pick<SignupData, "letterCount">) => void;
-    onPrev: () => void;
+    prevIsCountVisible: boolean;
+    onNext: (data: Pick<SignupData, "isCountVisible">) => void;
+    onPrev: (data: Pick<SignupData, "isCountVisible">) => void;
 };
 
-const LetterCount = ({ onNext, onPrev }: LetterCountProps) => {
+const LetterCount = ({ prevIsCountVisible, onNext, onPrev }: LetterCountProps) => {
+    const [isCountVisible, setIsCountVisible] = useState(prevIsCountVisible);
     const handleNext = () => {
-        onNext({ letterCount: true });
+        onNext({ isCountVisible: isCountVisible });
+    };
+    const handlePrev = () => {
+        onPrev({ isCountVisible: isCountVisible });
     };
     return (
         <>
@@ -34,7 +40,12 @@ const LetterCount = ({ onNext, onPrev }: LetterCountProps) => {
                             </div>
                         </div>
 
-                        <Radiobtns text1="전체 공개" text2="나만 보기" />
+                        <Radiobtns
+                            isOption1={isCountVisible}
+                            onChangeHandler={setIsCountVisible}
+                            text1="전체 공개"
+                            text2="나만 보기"
+                        />
                     </main>
 
                     <div className="flex gap-[20px]">
@@ -43,7 +54,7 @@ const LetterCount = ({ onNext, onPrev }: LetterCountProps) => {
                             color="btn-white"
                             full={false}
                             label="이전"
-                            handleClick={() => onPrev()}
+                            handleClick={() => handlePrev()}
                         />
                         <Button type="button" color="btn-blue" full label="다음으로" handleClick={() => handleNext()} />
                     </div>

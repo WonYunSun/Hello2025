@@ -1,12 +1,17 @@
 import SmallButton from "@/components/ui/SmallButton";
 import React from "react";
-import NicknameEditSection from "../_component/NicknameEditSection";
-import MailboxSettingSection from "../_component/MailboxSettingSection";
+import UserInfoSection from "../_components/UserInfoSection";
 import Link from "next/link";
 import iconForward from "@/assets/images/icon-forward.svg";
 import Image from "next/image";
+import { createClient } from "@/lib/utils/supabase/server";
 
-const SettingsPage = () => {
+const SettingsPage = async () => {
+    const supabase = await createClient();
+    const {
+        data: { session }
+    } = await supabase.auth.getSession();
+
     return (
         <>
             <div className="inner">
@@ -14,22 +19,8 @@ const SettingsPage = () => {
                     <h1 className="title">계정설정</h1>
                     <SmallButton icon="icon-back.svg" to={"/"} />
                 </section>
-
-                <section className="mt-10 pb-5 border-b-[1px] border-textDark">
-                    <div className="flex justify-between">
-                        <p className="text-[28px] font-bold tracking-tight">
-                            <span className="text-primary">홍길동</span>님 안녕하세요
-                        </p>
-                        <button type="button" className="font-bold">
-                            로그아웃
-                        </button>
-                    </div>
-                    <p>구글로 로그인중</p>
-                </section>
-
-                <NicknameEditSection />
-                <MailboxSettingSection />
-
+                <UserInfoSection session={session} />
+                {/* <MailboxSettingSection /> */}
                 <Link
                     href="/mymessages"
                     className="flex justify-between items-center border-t-[1px] border-b-[1px] border-gray-300 mb-20"

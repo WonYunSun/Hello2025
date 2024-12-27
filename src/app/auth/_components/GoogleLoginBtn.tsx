@@ -12,7 +12,10 @@ const GoogleLoginBtn = () => {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: "google",
                 options: {
-                    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/signup`
+                    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/signup`,
+                    queryParams: {
+                        prompt: "consent select_account", // 계정 선택 + 동의 창 표시
+                      }
                 }
             });
 
