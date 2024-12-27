@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import snake from "@/assets/images/snake.svg";
 import { Button } from "@/components/common";
+import Loading from "@/components/ui/Loading";
 import { useQuery } from "@tanstack/react-query";
 import { getUsername } from "@/lib/api/message";
 
@@ -16,13 +17,13 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, title, nextButtonLabel = "다음으로", onPrev, handleClick }: LayoutProps) => {
-    const {data: username, isPending} = useQuery({
+    const { data: username, isPending } = useQuery({
         queryKey: ["username"],
         queryFn: getUsername
     });
 
-    if (isPending) return <p>loading...</p>
-    
+    if (isPending) return <Loading />;
+
     return (
         <section className="w-full h-full flex flex-col justify-between">
             <header className="relative">
