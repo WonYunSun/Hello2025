@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import snake from "@/assets/images/snake.svg";
@@ -17,10 +17,19 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, title, nextButtonLabel = "다음으로", onPrev, handleClick }: LayoutProps) => {
+    const [uid, setUid] = useState<string | null>(null);
     const { data: username, isPending } = useQuery({
         queryKey: ["username"],
-        queryFn: getUsername
+        queryFn: () => getUsername(uid),
+        enabled: !!uid
     });
+
+    useEffect(() => {
+        const url = new URL(window.location.href);
+        const pathSegments = url.pathname.split("/");
+        const extractedUid = pathSegments[pathSegments.length - 1];
+        setUid(extractedUid);
+    }, []);
 
     if (isPending) return <Loading />;
 

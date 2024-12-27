@@ -4,9 +4,13 @@ import { createClient } from "@/lib/utils/supabase/server";
 export async function GET(request: Request) {
     const supabase = await createClient();
     try {
-        const userId = "ebe62c44-7bec-4762-910f-2f00686504cf"; // TODO : 임시 uid
-        const { data: username, error } = await supabase.from("users").select("username").eq("id", userId).single();
+        const { searchParams } = new URL(request.url);
+        const userId = searchParams.get("uid");
+        if (!userId) {
+            return NextResponse.json({ error: "UID is required" }, { status: 400 });
+        }
 
+        const { data: username, error } = await supabase.from("users").select("username").eq("id", userId).single();
         if (error) {
             return NextResponse.json({ error: error.message }, { status: 400 });
         }
