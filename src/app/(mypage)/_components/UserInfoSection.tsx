@@ -12,6 +12,7 @@ import { useUserStore } from "@/stores/userStore";
 
 type UserInfoSectionProps = {
     session: Session | null;
+    userTable: UserTable | null; // userTable을 props로 받도록 추가
 };
 
 type LogoMap = {
@@ -24,16 +25,10 @@ const logos: LogoMap = {
     github: githubLogo
 };
 
-const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
-    const { userTable, fetchUserData, updateUser, signOut } = useUserStore();
+const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session, userTable }) => {
+    const { fetchUserData, updateUser, signOut } = useUserStore();
     const [inputValue, setInputValue] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
-    useEffect(() => {
-        if (session) {
-            fetchUserData(session.user.id);
-        }
-    }, [session, fetchUserData]);
 
     useEffect(() => {
         if (userTable) {
@@ -76,7 +71,14 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
             <section className="mt-10 pb-5 border-b-[1px] border-textDark">
                 <div className="flex justify-between">
                     <p className="text-[28px] font-bold tracking-tight">
-                        {userTable ? <span className="text-primary">{userTable.username}</span> : "오류"}님 안녕하세요
+                        {userTable ? (
+                            <>
+                                <span className="text-primary">{userTable.username}</span>
+                                <span>님 안녕하세요</span>
+                            </>
+                        ) : (
+                            <span>&nbsp;</span>
+                        )}
                     </p>
                     <button
                         type="button"
@@ -88,10 +90,12 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
                         로그아웃
                     </button>
                 </div>
-                <p>
-                    <Image src={logos[socialLogin]} alt="" width={16} height={16} className="inline-block mr-1" />
-                    {`${socialLogin} 로그인 중`}
-                </p>
+                {userTable && (
+                    <p>
+                        <Image src={logos[socialLogin]} alt="" width={16} height={16} className="inline-block mr-1" />
+                        {`${socialLogin} 로그인 중`}
+                    </p>
+                )}
             </section>
 
             <section className="mt-7 pb-7 border-b-[1px] border-gray-300">

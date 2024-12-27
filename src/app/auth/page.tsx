@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import titleImage from "@/assets/images/title.svg";
 import pineTree from "@/assets/images/pine-tree.svg";
 import deco from "@/assets/images/deco.svg";

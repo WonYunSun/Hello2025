@@ -37,7 +37,7 @@ export const useUserStore = create<UserState>((set, get) => ({
         }
     },
 
-    fetchUserData: async (userId: string) => {
+    fetchUserData: async (userId: string): Promise<void> => {
         const supabase = createClient();
 
         try {
@@ -45,7 +45,7 @@ export const useUserStore = create<UserState>((set, get) => ({
 
             if (error) {
                 console.error("사용자 데이터 가져오기 오류:", error);
-                return; // 오류 발생 시 종료
+                return;
             }
 
             if (data) {
@@ -56,7 +56,8 @@ export const useUserStore = create<UserState>((set, get) => ({
                     count_visibility: data.count_visibility !== null ? data.count_visibility : false,
                     letter_visibility: data.letter_visibility !== null ? data.letter_visibility : false
                 };
-                set({ userTable: userData, isLogin: true }); // 사용자 데이터와 로그인 상태 업데이트
+
+                set({ userTable: userData, isLogin: true });
             }
         } catch (err) {
             console.error("사용자 데이터 가져오기 오류:", err);
@@ -99,7 +100,10 @@ export const useUserStore = create<UserState>((set, get) => ({
 
         try {
             await supabase.auth.signOut();
+            window.location.href = "/auth";
             set({ user: null, userTable: null, isLogin: false });
+            document.cookie = "supabase.auth.token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;"; // 쿠키 삭제
+
             console.log("로그아웃 성공!");
         } catch (err) {
             console.error("로그아웃 오류:", err);
