@@ -7,7 +7,7 @@ type LetterProps = {
     sender_id: string;
     onclick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
-const Letter = ({ selectedEnvelope, sender_id, sendername, onclick }: LetterProps) => {
+const Letter = ({ selectedEnvelope, sendername, onclick }: LetterProps) => {
     return (
         <div onClick={onclick}>
             <div>
@@ -18,7 +18,7 @@ const Letter = ({ selectedEnvelope, sender_id, sendername, onclick }: LetterProp
                 width={156}
                 height={97}
                 alt="envelope"
-                className="hover:scale-105 transition ease-in-out delay-20"
+                className="hover:scale-105 transition ease-in-out delay-20 cursor-pointer"
             ></Image>
         </div>
     );

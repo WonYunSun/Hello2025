@@ -24,11 +24,12 @@ const LetterModal = ({ isOpen, onClose, contents }: ModalProps) => {
     if (!isOpen || !contents) return null;
     console.log(contents);
     const paperImages: { [key: string]: string } = {
-        colorLetter: colorLetter,
-        patternLetter: patternLetter
+        "color-letter": colorLetter,
+        "pattern-letter": patternLetter
     };
     const selectedPaper = paperImages[contents.paper_type] || colorLetter;
-
+    console.log(paperImages[contents.paper_type]);
+    console.log(selectedPaper);
     return (
         <div
             onClick={onClose}
@@ -39,8 +40,7 @@ const LetterModal = ({ isOpen, onClose, contents }: ModalProps) => {
                     className="w-[600px] h-[640px]  bg-white p-[4rem] "
                     style={{
                         backgroundImage: `url(${selectedPaper.src})`, // 배경 이미지 설정
-                        backgroundSize: "cover", // 배경 이미지 크기 조정
-                        backgroundPosition: "center" // 배경 이미지 위치
+                        backgroundSize: "cover" // 배경 이미지 크기 조정
                     }}
                 >
                     <div className="pb-5 text-[20px] font-semibold">From {contents.sendername}</div>
