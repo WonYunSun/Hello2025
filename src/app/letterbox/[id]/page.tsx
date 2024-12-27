@@ -4,6 +4,7 @@ import { Button } from "@/components/common";
 import LetterList from "../_components/LetterList";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { createClient } from "@/lib/utils/supabase/client";
 
 type Props = {
     params: {
@@ -33,8 +34,27 @@ const fetchLetters = async (id: string): Promise<LettersType> => {
     }
     return res.json();
 };
+const supabase = createClient();
+const getSession = async () => {
+    const { data, error } = await supabase.auth.getSession();
 
+    if (error) {
+        console.error("Error fetching session:", error);
+        return null;
+    }
+
+    // session이 null이 아닌 경우에만 user를 반환
+    const session = data?.session;
+    if (session) {
+        console.log(session.user); // 세션 정보에서 사용자 정보 출력
+        return session.user;
+    } else {
+        console.log("No active session");
+        return null;
+    }
+};
 const LetterBox = ({ params }: Props) => {
+    const user = getSession();
     const [letters, setLetters] = useState<LettersType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<null | string>(null);
@@ -45,7 +65,7 @@ const LetterBox = ({ params }: Props) => {
             await navigator.clipboard.writeText(currentUrl);
             setShowAlert(true); // 알림 표시
         } catch (e) {
-            alert("초대코드 복사 실패패");
+            alert("초대코드 복사 실패");
         }
     };
     useEffect(() => {
@@ -88,7 +108,12 @@ const LetterBox = ({ params }: Props) => {
                 <LetterList letters={letters.letters} />
             )}
             <button onClick={copyLetterboxLink}>내 편지함 공유하기</button>
-            <Link href={`/decoration/${params.id}`}>
+            <Link
+                href={{
+                    pathname: "/decoration",
+                    query: { id: params.id }
+                }}
+            >
                 <Button type="button" color="btn-blue" full label="편지 남기기" />
             </Link>
             {/* 알림 모달 */}
