@@ -7,7 +7,7 @@ import Link from "next/link";
 import SmallButton from "@/components/ui/SmallButton";
 import { useUserStore } from "@/stores/userStore";
 import { Database } from "@/lib/types/supabase";
-
+import Loading from "@/components/ui/Loading";
 type Props = {
     params: {
         id: string;
@@ -67,10 +67,7 @@ const LetterBox = ({ params }: Props) => {
 
     const isOwner = user?.id === params.id;
 
-    console.log(user);
-    console.log(letters);
-
-    if (isLoading) return <div className="inner flex items-center justify-center">Loading...</div>;
+    if (isLoading) return <Loading />;
     if (error) return <div className="inner flex items-center justify-center">편지함을 찾을 수 없어요.</div>;
     if (!letters) return <div className="inner flex items-center justify-center">편지함을 찾을 수 없어요.</div>;
 

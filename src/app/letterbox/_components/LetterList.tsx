@@ -8,7 +8,6 @@ import greenEnvelope from "@/assets/images/green-envelope.svg";
 import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
-
 import iconForward from "@/assets/images/icon-forward.svg";
 import LetterModal from "./LetterModal";
 import { Database } from "@/lib/types/supabase";
