@@ -78,7 +78,7 @@ const LetterModal = ({ isOpen, onClose, contents, letter_visibility }: ModalProp
                         <p>{contents.content}</p>
                     )}
                 </div>
-                <div className="w-[600px] flex justify-between pt-[21px]">
+                <div className="w-[600px] flex justify-between pt-[20px]">
                     {isOwner ? (
                         <Button
                             type="button"
