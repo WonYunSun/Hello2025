@@ -4,8 +4,6 @@ import { Button } from "@/components/common";
 import LetterList from "../_components/LetterList";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { createClient } from "@/lib/utils/supabase/client";
-import { AuthUser } from "@supabase/supabase-js";
 import SmallButton from "@/components/ui/SmallButton";
 import { useUserStore } from "@/stores/userStore";
 import { Database } from "@/lib/types/supabase";
@@ -69,6 +67,7 @@ const LetterBox = ({ params }: Props) => {
 
     const isOwner = user?.id === params.id;
 
+    console.log(user);
     if (isLoading) return <div className="inner flex items-center justify-center">Loading...</div>;
     if (error) return <div className="inner flex items-center justify-center">편지함을 찾을 수 없어요.</div>;
     if (!letters) return <div className="inner flex items-center justify-center">편지함을 찾을 수 없어요.</div>;
@@ -85,9 +84,9 @@ const LetterBox = ({ params }: Props) => {
                         도착했습니다.
                     </h3>
                 </div>
-                {user !== null && <SmallButton icon="icon-back.svg" to={"/settings"} />}
+                {user !== null && <SmallButton icon="/icon-user.svg" to={"/settings"} />}
             </section>
-
+            {/* {user?.is_anonymous} */}
             {letters.letters.length === 0 ? (
                 <div className="flex-grow flex items-center justify-center">
                     <div className="text-center text-lg text-textLight">아직 도착한 편지가 없어요.</div>
