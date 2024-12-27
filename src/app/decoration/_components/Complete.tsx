@@ -1,19 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/common";
 import snake from "@/assets/images/snake.svg";
+import useRecipientURL from "@/lib/hooks/useRecipientURL";
 
 const Complete = () => {
-    const [uid, setUid] = useState<string | null>(null);
-
-    useEffect(() => {
-        const url = new URL(window.location.href);
-        const pathSegments = url.pathname.split("/");
-        const extractedUid = pathSegments[pathSegments.length - 1];
-        setUid(extractedUid);
-    }, []);
+    const { uid } = useRecipientURL();
 
     return (
         <section className="w-full h-full flex flex-col justify-between">
