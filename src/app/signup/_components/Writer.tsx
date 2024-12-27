@@ -4,24 +4,24 @@ import Image from "next/image";
 import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { SignupData } from "@/lib/types/signup";
+import { User } from "@/lib/types/user";
 
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
 
 type WriterProps = {
-    prevIsAnonymous: SignupData["isAnonymous"];
-    onNext: (data: Pick<SignupData, "isAnonymous">) => void;
-    onPrev: (data: Pick<SignupData, "isAnonymous">) => void;
+    prevIsAnonymous: User["allow_anonymous"];
+    onNext: (data: Pick<User, "allow_anonymous">) => void;
+    onPrev: (data: Pick<User, "allow_anonymous">) => void;
 };
 
 const Writer = ({ prevIsAnonymous, onNext, onPrev }: WriterProps) => {
     const [isAnonymous, setIsAnonymous] = useState(prevIsAnonymous);
     const handleNext = () => {
-        onNext({ isAnonymous: isAnonymous });
+        onNext({ allow_anonymous: isAnonymous });
     };
     const handlePrev = () => {
-        onPrev({ isAnonymous: isAnonymous });
+        onPrev({ allow_anonymous: isAnonymous });
     };
 
     return (

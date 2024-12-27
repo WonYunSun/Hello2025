@@ -1,10 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 
 type ProgressBarProps = { start: number; end: number };
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ start = 0, end = 120 }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ start, end }) => {
     const [width, setWidth] = useState(start);
 
     useEffect(() => {
@@ -21,4 +22,4 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ start = 0, end = 120 }) => {
     );
 };
 
-export default ProgressBar;
+export default dynamic(() => Promise.resolve(ProgressBar), { ssr: false });

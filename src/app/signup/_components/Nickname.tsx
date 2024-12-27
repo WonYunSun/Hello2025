@@ -4,22 +4,22 @@ import Image from "next/image";
 import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { SignupData } from "@/lib/types/signup";
+import { User } from "@/lib/types/user";
 
 import CheckboxInput from "../../../components/common/CheckboxInput";
 import { Button, InputForm } from "../../../components/common";
 import TermsModal from "./TermsModal";
 
 type NicknameProps = {
-    prevNickname: SignupData["nickname"];
-    onNext: (data: Pick<SignupData, "nickname">) => void;
+    prevNickname: User["username"];
+    onNext: (data: Pick<User, "username">) => void;
 };
 
 const Nickname = ({ prevNickname, onNext }: NicknameProps) => {
     const [nickname, setNickname] = useState(prevNickname);
 
     const handleNext = () => {
-        onNext({ nickname: nickname });
+        onNext({ username: nickname });
     };
 
     const [checkItems, setCheckItems] = useState({ isAdult: false, isAgreed: false });
