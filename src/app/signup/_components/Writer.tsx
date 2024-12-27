@@ -1,20 +1,27 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { SignupData } from "./SignupForm";
+import { SignupData } from "@/lib/types/signup";
+
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
 
 type WriterProps = {
-    onNext: (data: Pick<SignupData, "writer">) => void;
-    onPrev: () => void;
+    prevIsAnonymous: SignupData["isAnonymous"];
+    onNext: (data: Pick<SignupData, "isAnonymous">) => void;
+    onPrev: (data: Pick<SignupData, "isAnonymous">) => void;
 };
 
-const Writer = ({ onNext, onPrev }: WriterProps) => {
+const Writer = ({ prevIsAnonymous, onNext, onPrev }: WriterProps) => {
+    const [isAnonymous, setIsAnonymous] = useState(prevIsAnonymous);
     const handleNext = () => {
-        onNext({ writer: true });
+        onNext({ isAnonymous: isAnonymous });
+    };
+    const handlePrev = () => {
+        onPrev({ isAnonymous: isAnonymous });
     };
 
     return (
@@ -35,7 +42,12 @@ const Writer = ({ onNext, onPrev }: WriterProps) => {
                             </div>
                         </div>
 
-                        <Radiobtns text1="누구나 메시지를 남길 수 있어요" text2="로그인 한 사람에게만 받을게요" />
+                        <Radiobtns
+                            isOption1={isAnonymous}
+                            onChangeHandler={setIsAnonymous}
+                            text1="누구나 메시지를 남길 수 있어요"
+                            text2="로그인 한 사람에게만 받을게요"
+                        />
                     </main>
 
                     <div className="flex gap-[20px]">
@@ -44,7 +56,7 @@ const Writer = ({ onNext, onPrev }: WriterProps) => {
                             color="btn-white"
                             full={false}
                             label="이전"
-                            handleClick={() => onPrev()}
+                            handleClick={() => handlePrev()}
                         />
                         <Button type="button" color="btn-blue" full label="다음으로" handleClick={() => handleNext()} />
                     </div>
