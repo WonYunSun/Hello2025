@@ -12,16 +12,16 @@ type ModalProps = {
     isOpen: boolean;
     onClose: () => void;
     contents: LetterType | null;
+    letter_visibility: boolean | null;
 };
 
-const LetterModal = ({ isOpen, onClose, contents }: ModalProps) => {
+const LetterModal = ({ isOpen, onClose, contents, letter_visibility }: ModalProps) => {
     const { user } = useUserStore(); // 현재 로그인한 사용자 정보
     const params = useParams(); // URL 파라미터 가져오기
     const currentId = params?.id as string | undefined; // URL의 id 값
     const isOwner = user?.id === currentId;
-    console.log(isOwner);
+
     if (!isOpen || !contents) return null;
-    console.log(contents);
     const paperImages: { [key: string]: string } = {
         "color-letter": colorLetter,
         "pattern-letter": patternLetter
@@ -43,7 +43,7 @@ const LetterModal = ({ isOpen, onClose, contents }: ModalProps) => {
                 >
                     <div className="pb-5 text-[20px] font-semibold">From {contents.sendername}</div>
                     {/* 조건부 렌더링 */}
-                    {contents.is_private && !isOwner ? (
+                    {(contents.is_private || !letter_visibility) && !isOwner ? (
                         <div className="pt-[40%] text-center text-lg text-textLight">이 편지는 비공개 편지입니다.</div>
                     ) : (
                         <p>{contents.content}</p>

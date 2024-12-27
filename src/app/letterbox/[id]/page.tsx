@@ -106,7 +106,7 @@ const LetterBox = ({ params }: Props) => {
                         </div>
                     ) : (
                         <div className="flex-grow">
-                            <LetterList letters={letters.letters} />
+                            <LetterList letters={letters.letters} letter_visibility={letters.user.letter_visibility} />
                         </div>
                     )}
                 </>
