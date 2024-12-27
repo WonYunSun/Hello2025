@@ -19,7 +19,6 @@ const SettingsPage = async () => {
                     <h1 className="title">계정설정</h1>
                     <SmallButton icon="icon-back.svg" to={"/"} />
                 </section>
-
                 <UserInfoSection session={session} />
 
                 <Link
