@@ -1,7 +1,45 @@
+"use client";
 import SmallButton from "@/components/ui/SmallButton";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const MyMessages = () => {
+type Letter = {
+    id: string;
+    content: string;
+    recipient_id: string;
+    sender_id: string | null;
+    receiver_name?: string;
+};
+
+const MyMessages: React.FC = () => {
+    const [messages, setMessages] = useState<Letter[]>([]);
+
+    const fetchUserMessages = async () => {
+        const response = await fetch(`/api/myletters`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            console.error("편지 데이터 가져오기 실패");
+            return;
+        }
+
+        const data = await response.json();
+
+        const letters = data.letters.map((letter: {}) => ({
+            ...letter,
+            receiver_name: data.username
+        }));
+
+        setMessages(letters);
+    };
+
+    useEffect(() => {
+        fetchUserMessages();
+    }, []);
+
     return (
         <div className="inner">
             <section className="mb-6 flex justify-between relative">
@@ -9,54 +47,26 @@ const MyMessages = () => {
                 <SmallButton icon="icon-back.svg" to={"/settings"} />
             </section>
             <p className="font-semibold">
-                총 <span className="text-primary">5</span>개의 편지를 남겼습니다
+                총 <span className="text-primary">{messages.length}</span>개의 편지를 남겼습니다
             </p>
 
             <ul className="scroll-custom w-full pr-3 mt-10 h-[73vh] overflow-auto ">
-                <li className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px]">
-                    <p className="font-semibold">
-                        <span className="text-[14px] text-beige">To. </span>
-                        <span className="text-[18px] ">김철수</span>
-                    </p>
-                    <p className="mt-4 font-medium">
-                        지난 한 해 동안 함께한 소중한 순간들을 돌아보며, 당신과의 인연에 감사한 마음이 듭니다. 올 한
-                        해도 건강과 행복이 항상 함께하시기를 바라며, 새로운 도전과 기회가 여러분을 기다리고 있기를
-                        희망합니다.
-                    </p>
-                </li>
-                <li className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px] mt-5">
-                    <p className="font-semibold">
-                        <span className="text-[14px] text-beige">To. </span>
-                        <span className="text-[18px] ">김철수</span>
-                    </p>
-                    <p className="mt-4 font-medium">
-                        지난 한 해 동안 함께한 소중한 순간들을 돌아보며, 당신과의 인연에 감사한 마음이 듭니다. 올 한
-                        해도 건강과 행복이 항상 함께하시기를 바라며, 새로운 도전과 기회가 여러분을 기다리고 있기를
-                        희망합니다.
-                    </p>
-                </li>
-                <li className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px] mt-5">
-                    <p className="font-semibold">
-                        <span className="text-[14px] text-beige">To. </span>
-                        <span className="text-[18px] ">김철수</span>
-                    </p>
-                    <p className="mt-4 font-medium">
-                        지난 한 해 동안 함께한 소중한 순간들을 돌아보며, 당신과의 인연에 감사한 마음이 듭니다. 올 한
-                        해도 건강과 행복이 항상 함께하시기를 바라며, 새로운 도전과 기회가 여러분을 기다리고 있기를
-                        희망합니다.
-                    </p>
-                </li>
-                <li className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px] mt-5">
-                    <p className="font-semibold">
-                        <span className="text-[14px] text-beige">To. </span>
-                        <span className="text-[18px] ">김철수</span>
-                    </p>
-                    <p className="mt-4 font-medium">
-                        지난 한 해 동안 함께한 소중한 순간들을 돌아보며, 당신과의 인연에 감사한 마음이 듭니다. 올 한
-                        해도 건강과 행복이 항상 함께하시기를 바라며, 새로운 도전과 기회가 여러분을 기다리고 있기를
-                        희망합니다.
-                    </p>
-                </li>
+                {messages.length === 0 ? (
+                    <li className="p-[25px] text-center">작성한 편지가 없습니다.</li>
+                ) : (
+                    messages.map((message) => (
+                        <li
+                            key={message.id}
+                            className="p-[25px] bg-white border-dashed border-[2px] border-beige rounded-[10px] mt-5"
+                        >
+                            <p className="font-semibold">
+                                <span className="text-[14px] text-beige">To. </span>
+                                <span className="text-[18px] ">{message.receiver_name}</span>
+                            </p>
+                            <p className="mt-4 font-medium">{message.content}</p>
+                        </li>
+                    ))
+                )}
             </ul>
         </div>
     );
