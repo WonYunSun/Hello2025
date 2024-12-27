@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import snake from "@/assets/images/snake.svg";
@@ -7,6 +7,7 @@ import { Button } from "@/components/common";
 import Loading from "@/components/ui/Loading";
 import { useQuery } from "@tanstack/react-query";
 import { getUsername } from "@/lib/api/message";
+import useRecipientURL from "@/lib/hooks/useRecipientURL";
 
 type LayoutProps = {
     children: ReactNode;
@@ -17,19 +18,12 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, title, nextButtonLabel = "다음으로", onPrev, handleClick }: LayoutProps) => {
-    const [uid, setUid] = useState<string | null>(null);
+    const { uid } = useRecipientURL();
     const { data: username, isPending } = useQuery({
         queryKey: ["username"],
         queryFn: () => getUsername(uid),
         enabled: !!uid
     });
-
-    useEffect(() => {
-        const url = new URL(window.location.href);
-        const pathSegments = url.pathname.split("/");
-        const extractedUid = pathSegments[pathSegments.length - 1];
-        setUid(extractedUid);
-    }, []);
 
     if (isPending) return <Loading />;
 
