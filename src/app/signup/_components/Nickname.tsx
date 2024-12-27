@@ -4,15 +4,15 @@ import Image from "next/image";
 import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { User } from "@/lib/types/user";
+import { UserTable } from "@/lib/types/usertable";
 
 import CheckboxInput from "../../../components/common/CheckboxInput";
 import { Button, InputForm } from "../../../components/common";
 import TermsModal from "./TermsModal";
 
 type NicknameProps = {
-    prevNickname: User["username"];
-    onNext: (data: Pick<User, "username">) => void;
+    prevNickname: UserTable["username"];
+    onNext: (data: Pick<UserTable, "username">) => void;
 };
 
 const Nickname = ({ prevNickname, onNext }: NicknameProps) => {

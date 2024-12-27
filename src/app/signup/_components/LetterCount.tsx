@@ -4,20 +4,38 @@ import Image from "next/image";
 import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { User } from "@/lib/types/user";
+import { UserTable } from "@/lib/types/usertable";
 
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
+import { createClient } from "@/lib/utils/supabase/client";
 
 type LetterCountProps = {
     prevIsCountVisible: boolean;
-    onNext: (data: Pick<User, "count_visibility">) => void;
-    onPrev: (data: Pick<User, "count_visibility">) => void;
+    onNext: (data: Pick<UserTable, "count_visibility">) => void;
+    onPrev: (data: Pick<UserTable, "count_visibility">) => void;
+    signupData: UserTable;
 };
 
-const LetterCount = ({ prevIsCountVisible, onNext, onPrev }: LetterCountProps) => {
+const LetterCount = ({ prevIsCountVisible, onNext, onPrev, signupData }: LetterCountProps) => {
     const [isCountVisible, setIsCountVisible] = useState(prevIsCountVisible);
+    const supabase = createClient();
+    const addUserData = async () => {
+        const { data, error } = await supabase
+            .from("users")
+            .update({
+                username: signupData.username,
+                allow_anonymous: signupData.allow_anonymous,
+                count_visibility: isCountVisible,
+                letter_visibility: signupData.letter_visibility
+            })
+            .eq("id", signupData.id)
+            .select();
+        console.log(data);
+    };
+
     const handleNext = () => {
+        addUserData();
         onNext({ count_visibility: isCountVisible });
     };
     const handlePrev = () => {

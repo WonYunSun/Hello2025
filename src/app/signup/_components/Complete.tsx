@@ -4,26 +4,8 @@ import Image from "next/image";
 
 import snake from "@/assets/images/snake.svg";
 import { Button } from "@/components/common";
-import { User } from "@/lib/types/user";
-import { createClient } from "@/lib/utils/supabase/client";
 
-const Complete = ({ signupData }: { signupData: User }) => {
-    const supabase = createClient();
-
-    const addUserData = async () => {
-        const { data, error } = await supabase
-            .from("users")
-            .update({
-                username: signupData.username,
-                allow_anonymous: signupData.allow_anonymous,
-                count_visibility: signupData.count_visibility,
-                letter_visibility: signupData.letter_visibility
-            })
-            .eq("id", signupData.id)
-            .select();
-        console.log(data);
-    };
-
+const Complete = () => {
     return (
         <>
             <div className="inner">
@@ -48,7 +30,6 @@ const Complete = ({ signupData }: { signupData: User }) => {
                         handleClick={() => {
                             location.href = "/";
                             sessionStorage.removeItem("pgBarLevel");
-                            addUserData();
                         }}
                     />
                 </section>

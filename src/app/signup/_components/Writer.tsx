@@ -4,15 +4,15 @@ import Image from "next/image";
 import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { User } from "@/lib/types/user";
+import { UserTable } from "@/lib/types/usertable";
 
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
 
 type WriterProps = {
-    prevIsAnonymous: User["allow_anonymous"];
-    onNext: (data: Pick<User, "allow_anonymous">) => void;
-    onPrev: (data: Pick<User, "allow_anonymous">) => void;
+    prevIsAnonymous: UserTable["allow_anonymous"];
+    onNext: (data: Pick<UserTable, "allow_anonymous">) => void;
+    onPrev: (data: Pick<UserTable, "allow_anonymous">) => void;
 };
 
 const Writer = ({ prevIsAnonymous, onNext, onPrev }: WriterProps) => {
