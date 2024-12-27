@@ -4,6 +4,7 @@ import { Session } from "@supabase/supabase-js";
 import React, { useEffect, useState } from "react";
 import googleLogo from "@/assets/images/google-logo.svg";
 import kakaoLogo from "@/assets/images/kakao-logo.svg";
+import githubLogo from "@/assets/images/github-logo.svg";
 import Image from "next/image";
 import { createClient } from "@/lib/utils/supabase/client";
 import { User } from "@/lib/types/user";
@@ -34,18 +35,17 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
         const fetchUserData = async () => {
             if (session) {
                 const { data, error } = await supabase.from("users").select("*").eq("id", session.user.id).single();
-
                 if (error) {
                     console.error("사용자 데이터 가져오기 오류:", error);
                 } else {
                     setUserData(data);
-                    setInputValue(data.username); //초기값
+                    setInputValue(data.username || ""); // 초기값 설정
                 }
             }
         };
 
         fetchUserData();
-    }, [session, supabase]);
+    }, [session]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -74,13 +74,13 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
         return <>오류</>;
     }
 
-    const socialLogins: [] = session.user.app_metadata.providers;
-    const socialLogin: keyof LogoMap = socialLogins[socialLogins.length - 1];
+    const socialLogins: string[] = session.user.app_metadata.providers || [];
+    const socialLogin = socialLogins[socialLogins.length - 1] || "google";
 
     const handleToggle = async (field: keyof User) => {
         if (!userData) return;
 
-        const updatedValue = !userData[field]; // 현재 값을 반전
+        const updatedValue = !userData[field];
         const { error } = await supabase
             .from("users")
             .update({ [field]: updatedValue })
