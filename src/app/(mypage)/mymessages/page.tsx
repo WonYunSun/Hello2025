@@ -28,9 +28,9 @@ const MyMessages: React.FC = () => {
 
         const data = await response.json();
 
-        const letters = data.letters.map((letter: {}) => ({
+        const letters = data.letters.map((letter: Letter) => ({
             ...letter,
-            receiver_name: data.username
+            receiver_name: letter.receiver_name
         }));
 
         setMessages(letters);
@@ -44,7 +44,7 @@ const MyMessages: React.FC = () => {
         <div className="inner">
             <section className="mb-6 flex justify-between relative">
                 <h1 className="title">내가 작성한 편지</h1>
-                <SmallButton icon="icon-back.svg" to={"/settings"} />
+                <SmallButton icon="/icon-back.svg" to={"/settings"} />
             </section>
             <p className="font-semibold">
                 총 <span className="text-primary">{messages.length}</span>개의 편지를 남겼습니다
