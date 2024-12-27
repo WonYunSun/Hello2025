@@ -1,10 +1,17 @@
+"use client";
 import SmallButton from "@/components/ui/SmallButton";
 import Image from "next/image";
 import cryingSnake from "@/assets/images/crying-snake.svg";
 import React from "react";
 import { Button, CheckboxInput } from "@/components/common";
+import { useUserStore } from "@/stores/userStore";
 
 const Unregister = () => {
+    const { deleteUser } = useUserStore();
+    const handleDeleteAccount = async () => {
+        await deleteUser();
+    };
+
     return (
         <div className="inner">
             <section className="flex justify-between relative">
@@ -24,7 +31,7 @@ const Unregister = () => {
                 <CheckboxInput label="모든 데이터를 삭제하고 탈퇴하는 것에 동의합니다." />
             </div>
             <div className="mt-20">
-                <Button type="button" color="btn-red" full={true} label="회원 탈퇴" />
+                <Button type="button" color="btn-red" full={true} label="회원 탈퇴" handleClick={handleDeleteAccount} />
             </div>
         </div>
     );

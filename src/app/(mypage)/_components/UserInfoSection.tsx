@@ -4,38 +4,42 @@ import { Session } from "@supabase/supabase-js";
 import React, { useEffect, useState } from "react";
 import googleLogo from "@/assets/images/google-logo.svg";
 import kakaoLogo from "@/assets/images/kakao-logo.svg";
+import githubLogo from "@/assets/images/github-logo.svg";
 import Image from "next/image";
-import { createClient } from "@/lib/utils/supabase/client";
-import { User } from "@/lib/types/user";
 import ToggleSetting from "./ToggleSetting";
+import { UserTable } from "@/lib/types/usertable";
+import { useUserStore } from "@/stores/userStore";
 
 type UserInfoSectionProps = {
     session: Session | null;
 };
 
+type LogoMap = {
+    [key: string]: string;
+};
+
+const logos: LogoMap = {
+    google: googleLogo,
+    kakao: kakaoLogo,
+    github: githubLogo
+};
+
 const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
-    const [userData, setUserData] = useState<User | null>(null);
+    const { userTable, fetchUserData, updateUser, signOut } = useUserStore();
     const [inputValue, setInputValue] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const supabase = createClient();
+    useEffect(() => {
+        if (session) {
+            fetchUserData(session.user.id);
+        }
+    }, [session, fetchUserData]);
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            if (session) {
-                const { data, error } = await supabase.from("users").select("*").eq("id", session.user.id).single();
-
-                if (error) {
-                    console.error("사용자 데이터 가져오기 오류:", error);
-                } else {
-                    setUserData(data);
-                    setInputValue(data.username); //초기값
-                }
-            }
-        };
-
-        fetchUserData();
-    }, [session, supabase]);
+        if (userTable) {
+            setInputValue(userTable.username || "");
+        }
+    }, [userTable]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -49,35 +53,22 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
             return;
         }
 
-        const { error } = await supabase.from("users").update({ username: inputValue }).eq("id", session.user.id);
-
-        if (error) {
-            console.error("닉네임 변경 오류:", error);
-            setErrorMessage("닉네임 변경에 실패했습니다.");
-        } else {
-            setErrorMessage("");
-            setUserData((prevData) => (prevData ? { ...prevData, username: inputValue } : prevData));
-        }
+        await updateUser({ username: inputValue });
+        setErrorMessage("");
     };
 
     if (!session) {
         return <>오류</>;
     }
 
-    const handleToggle = async (field: keyof User) => {
-        if (!userData) return;
+    const socialLogins: string[] = session.user.app_metadata.providers || [];
+    const socialLogin = socialLogins[socialLogins.length - 1] || "google";
 
-        const updatedValue = !userData[field]; // 현재 값을 반전
-        const { error } = await supabase
-            .from("users")
-            .update({ [field]: updatedValue })
-            .eq("id", session.user.id);
+    const handleToggle = async (field: keyof UserTable) => {
+        if (!userTable) return;
 
-        if (error) {
-            console.error(`${field} 업데이트 오류:`, error);
-        } else {
-            setUserData((prevData) => (prevData ? { ...prevData, [field]: updatedValue } : prevData));
-        }
+        const updatedValue = !userTable[field];
+        await updateUser({ [field]: updatedValue });
     };
 
     return (
@@ -85,42 +76,21 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
             <section className="mt-10 pb-5 border-b-[1px] border-textDark">
                 <div className="flex justify-between">
                     <p className="text-[28px] font-bold tracking-tight">
-                        {userData ? <span className="text-primary">{userData.username}</span> : "오류"}님 안녕하세요
+                        {userTable ? <span className="text-primary">{userTable.username}</span> : "오류"}님 안녕하세요
                     </p>
                     <button
                         type="button"
                         className="font-bold"
-                        onClick={() => {
-                            /* 로그아웃 처리 */
+                        onClick={async () => {
+                            await signOut();
                         }}
                     >
                         로그아웃
                     </button>
                 </div>
                 <p>
-                    {session.user.app_metadata.provider === "google" ? (
-                        <>
-                            <Image
-                                src={googleLogo}
-                                alt="Google Logo"
-                                width={16}
-                                height={16}
-                                className="inline-block mr-1"
-                            />
-                            {`${session.user.app_metadata.provider} 로그인 중`}
-                        </>
-                    ) : (
-                        <>
-                            <Image
-                                src={kakaoLogo}
-                                alt="Kakao Logo"
-                                width={16}
-                                height={16}
-                                className="inline-block mr-1"
-                            />
-                            {`${session.user.app_metadata.provider} 로그인 중`}
-                        </>
-                    )}
+                    <Image src={logos[socialLogin]} alt="" width={16} height={16} className="inline-block mr-1" />
+                    {`${socialLogin} 로그인 중`}
                 </p>
             </section>
 
@@ -142,21 +112,21 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
                 <ul className="p-5 border-[1px] bg-background border-beige rounded-[5px]">
                     <ToggleSetting
                         label="메시지를 남길 수 있는 사람"
-                        value={userData?.allow_anonymous || false}
-                        trueLabel="허용"
-                        falseLabel="비허용"
+                        value={userTable?.allow_anonymous || false}
+                        trueLabel="모두"
+                        falseLabel="회원만"
                         onToggle={() => handleToggle("allow_anonymous")}
                     />
                     <ToggleSetting
                         label="받은 편지 개수 전체 공개"
-                        value={userData?.count_visibility || false}
+                        value={userTable?.count_visibility || false}
                         trueLabel="공개"
                         falseLabel="비공개"
                         onToggle={() => handleToggle("count_visibility")}
                     />
                     <ToggleSetting
                         label="받은 편지 내용"
-                        value={userData?.letter_visibility || false}
+                        value={userTable?.letter_visibility || false}
                         trueLabel="보이기"
                         falseLabel="숨기기"
                         onToggle={() => handleToggle("letter_visibility")}
