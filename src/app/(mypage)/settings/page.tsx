@@ -20,7 +20,7 @@ const SettingsPage = async () => {
                     <SmallButton icon="icon-back.svg" to={"/"} />
                 </section>
                 <UserInfoSection session={session} />
-                {/* <MailboxSettingSection /> */}
+
                 <Link
                     href="/mymessages"
                     className="flex justify-between items-center border-t-[1px] border-b-[1px] border-gray-300 mb-20"
