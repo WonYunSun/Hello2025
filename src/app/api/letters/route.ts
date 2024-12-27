@@ -39,3 +39,24 @@ export async function GET(request: Request) {
 
     return NextResponse.json(responseData);
 }
+//편지 삭제 API
+export async function DELETE(request: Request) {
+    const supabase = await createClient();
+
+    const { searchParams } = new URL(request.url);
+    const letterId = searchParams.get("id");
+
+    if (!letterId) {
+        return NextResponse.json({ error: "Missing letter ID" }, { status: 400 });
+    }
+
+    // 해당 편지 삭제
+    const { error } = await supabase.from("letters").delete().eq("id", letterId);
+
+    if (error) {
+        console.error("Failed to delete letter:", error);
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: "Letter deleted successfully" });
+}
