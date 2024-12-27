@@ -4,12 +4,8 @@ import Image from "next/image";
 
 import snake from "@/assets/images/snake.svg";
 import { Button } from "@/components/common";
-import { SignupData } from "@/lib/types/signup";
 
-const Complete = ({ signupData }: { signupData: SignupData }) => {
-    const handleSubmit = () => {
-        console.log("최종 데이터:", signupData);
-    };
+const Complete = () => {
     return (
         <>
             <div className="inner">
@@ -26,7 +22,16 @@ const Complete = ({ signupData }: { signupData: SignupData }) => {
                         <Image width={0} height={0} src={snake} alt="snake" className="w-[150px]" />
                     </main>
 
-                    <Button type="button" color="btn-blue" full label="내 편지함 가기" handleClick={handleSubmit} />
+                    <Button
+                        type="button"
+                        color="btn-blue"
+                        full
+                        label="내 편지함 가기"
+                        handleClick={() => {
+                            location.href = "/";
+                            sessionStorage.removeItem("pgBarLevel");
+                        }}
+                    />
                 </section>
             </div>
         </>
