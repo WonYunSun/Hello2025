@@ -1,19 +1,11 @@
-// hooks/useUserData.ts
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/utils/supabase/client";
 import { Session } from "@supabase/supabase-js";
-
-type User = {
-    id: string;
-    username: string;
-    allow_anonymous: boolean;
-    count_visibility: boolean;
-    letter_visibility: boolean;
-};
+import { User } from "../types/user";
 
 const useUserData = (session: Session | null) => {
     const [userData, setUserData] = useState<User | null>(null);
-    const supabase = createClient(); // 여기에서 클라이언트 생성
+    const supabase = createClient();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -31,7 +23,7 @@ const useUserData = (session: Session | null) => {
         fetchUserData();
     }, [session, supabase]);
 
-    return { userData, setUserData, supabase }; // supabase 클라이언트를 반환
+    return { userData, setUserData, supabase };
 };
 
 export default useUserData;

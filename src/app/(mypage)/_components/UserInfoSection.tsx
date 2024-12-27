@@ -13,6 +13,16 @@ type UserInfoSectionProps = {
     session: Session | null;
 };
 
+type LogoMap = {
+    [key: string]: string;
+};
+
+const logos: LogoMap = {
+    google: googleLogo,
+    kakao: kakaoLogo,
+    github: githubLogo
+};
+
 const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
     const [userData, setUserData] = useState<User | null>(null);
     const [inputValue, setInputValue] = useState("");
@@ -64,6 +74,9 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
         return <>오류</>;
     }
 
+    const socialLogins: [] = session.user.app_metadata.providers;
+    const socialLogin: keyof LogoMap = socialLogins[socialLogins.length - 1];
+
     const handleToggle = async (field: keyof User) => {
         if (!userData) return;
 
@@ -98,29 +111,8 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
                     </button>
                 </div>
                 <p>
-                    {session.user.app_metadata.provider === "google" ? (
-                        <>
-                            <Image
-                                src={googleLogo}
-                                alt="Google Logo"
-                                width={16}
-                                height={16}
-                                className="inline-block mr-1"
-                            />
-                            {`${session.user.app_metadata.provider} 로그인 중`}
-                        </>
-                    ) : (
-                        <>
-                            <Image
-                                src={kakaoLogo}
-                                alt="Kakao Logo"
-                                width={16}
-                                height={16}
-                                className="inline-block mr-1"
-                            />
-                            {`${session.user.app_metadata.provider} 로그인 중`}
-                        </>
-                    )}
+                    <Image src={logos[socialLogin]} alt="" width={16} height={16} className="inline-block mr-1" />
+                    {`${socialLogin} 로그인 중`}
                 </p>
             </section>
 
@@ -143,8 +135,8 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session }) => {
                     <ToggleSetting
                         label="메시지를 남길 수 있는 사람"
                         value={userData?.allow_anonymous || false}
-                        trueLabel="허용"
-                        falseLabel="비허용"
+                        trueLabel="모두"
+                        falseLabel="회원만"
                         onToggle={() => handleToggle("allow_anonymous")}
                     />
                     <ToggleSetting

@@ -21,7 +21,6 @@ const SettingsPage = async () => {
                 </section>
 
                 <UserInfoSection session={session} />
-                {/* <MailboxSettingSection /> */}
 
                 <Link
                     href="/mymessages"
