@@ -4,9 +4,10 @@ import titleImage from "@/assets/images/title.svg";
 import pineTree from "@/assets/images/pine-tree.svg";
 import deco from "@/assets/images/deco.svg";
 import ground from "@/assets/images/ground.svg";
-import kakaoLogo from "@/assets/images/kakao-logo.svg";
 
 import GoogleLoginBtn from "./_components/GoogleLoginBtn";
+import KakaoLoginBtn from "./_components/KakaoLoginBtn";
+import GithubLoginBtn from "./_components/GithubLoginBtn";
 
 const LoginPage = () => {
     return (
@@ -28,10 +29,8 @@ const LoginPage = () => {
             </div>
             <div className="flex flex-col items-center gap-3 md:gap-4 mt-12 md:mt-24 w-full">
                 <GoogleLoginBtn />
-                <button className="w-4/6 h-10 md:h-12 border text-sm md:text-base bg-[#FFEB00] font-medium text-[#333333] border-[#dddddd] rounded-md flex items-center gap-8 md:gap-20">
-                    <Image src={kakaoLogo} width={24} height={24} alt="kakaoLogo" className="ml-8"/>
-                    <span>카카오 계정으로 시작</span>
-                </button>
+                <KakaoLoginBtn />
+                <GithubLoginBtn />
             </div>
             <picture className="absolute z-20 bottom-10 w-full flex justify-center">
                 <Image src={deco} width={567.47} height={248} alt="deco_img" className="w-[90%] md:w-[567px]" />
