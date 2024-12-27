@@ -1,50 +1,52 @@
-import { createServerClient } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+// 필요없을 거 같은데 혹시 몰라 일단 주석처리
 
-export async function updateSession(request: NextRequest) {
-    let supabaseResponse = NextResponse.next({
-        request
-    });
+// import { createServerClient } from "@supabase/ssr";
+// import { NextResponse, type NextRequest } from "next/server";
 
-    const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        {
-            cookies: {
-                getAll() {
-                    return request.cookies.getAll();
-                },
-                setAll(cookiesToSet) {
-                    cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
-                    supabaseResponse = NextResponse.next({
-                        request
-                    });
-                    cookiesToSet.forEach(({ name, value, options }) =>
-                        supabaseResponse.cookies.set(name, value, options)
-                    );
-                }
-            }
-        }
-    );
+// export async function updateSession(request: NextRequest) {
+//     let supabaseResponse = NextResponse.next({
+//         request
+//     });
 
-    // IMPORTANT: Avoid writing any logic between createServerClient and
-    // supabase.auth.getUser(). A simple mistake could make it very hard to debug
-    // issues with users being randomly logged out.
+//     const supabase = createServerClient(
+//         process.env.NEXT_PUBLIC_SUPABASE_URL!,
+//         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+//         {
+//             cookies: {
+//                 getAll() {
+//                     return request.cookies.getAll();
+//                 },
+//                 setAll(cookiesToSet) {
+//                     cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
+//                     supabaseResponse = NextResponse.next({
+//                         request
+//                     });
+//                     cookiesToSet.forEach(({ name, value, options }) =>
+//                         supabaseResponse.cookies.set(name, value, options)
+//                     );
+//                 }
+//             }
+//         }
+//     );
 
-    const {
-        data: { user }
-    } = await supabase.auth.getUser();
+//     // IMPORTANT: Avoid writing any logic between createServerClient and
+//     // supabase.auth.getUser(). A simple mistake could make it very hard to debug
+//     // issues with users being randomly logged out.
 
-    // if (
-    //   !user &&
-    //   !request.nextUrl.pathname.startsWith("/login") &&
-    //   !request.nextUrl.pathname.startsWith("/auth")
-    // ) {
-    //   // no user, potentially respond by redirecting the user to the login page
-    //   const url = request.nextUrl.clone();
-    //   url.pathname = "/login";
-    //   return NextResponse.redirect(url);
-    // }
+//     const {
+//         data: { user }
+//     } = await supabase.auth.getUser();
 
-    return supabaseResponse;
-}
+//     // if (
+//     //   !user &&
+//     //   !request.nextUrl.pathname.startsWith("/login") &&
+//     //   !request.nextUrl.pathname.startsWith("/auth")
+//     // ) {
+//     //   // no user, potentially respond by redirecting the user to the login page
+//     //   const url = request.nextUrl.clone();
+//     //   url.pathname = "/login";
+//     //   return NextResponse.redirect(url);
+//     // }
+
+//     return supabaseResponse;
+// }

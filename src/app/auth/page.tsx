@@ -5,9 +5,7 @@ import pineTree from "@/assets/images/pine-tree.svg";
 import deco from "@/assets/images/deco.svg";
 import ground from "@/assets/images/ground.svg";
 
-import GoogleLoginBtn from "./_components/GoogleLoginBtn";
-import KakaoLoginBtn from "./_components/KakaoLoginBtn";
-import GithubLoginBtn from "./_components/GithubLoginBtn";
+import SocialLoginBtn from "./_components/SocialLoginBtn";
 
 const LoginPage = () => {
     return (
@@ -28,9 +26,9 @@ const LoginPage = () => {
                 </picture>
             </div>
             <div className="flex flex-col items-center gap-3 md:gap-4 mt-12 md:mt-24 w-full">
-                <GoogleLoginBtn />
-                <KakaoLoginBtn />
-                <GithubLoginBtn />
+                <SocialLoginBtn provider="google" />
+                <SocialLoginBtn provider="kakao" />
+                <SocialLoginBtn provider="github" />
             </div>
             <picture className="absolute z-20 bottom-10 w-full flex justify-center">
                 <Image src={deco} width={567.47} height={248} alt="deco_img" className="w-[90%] md:w-[567px]" />
