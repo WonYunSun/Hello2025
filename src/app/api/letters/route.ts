@@ -13,8 +13,12 @@ export async function GET(request: Request) {
     }
 
     // 유저 정보를 먼저 가져오기
-    let { data: user, error: userError } = await supabase.from("users").select("username").eq("id", userId).single();
-    console.log(user);
+    let { data: user, error: userError } = await supabase
+        .from("users")
+        .select("username, allow_anonymous, count_visibility, letter_visibility")
+        .eq("id", userId)
+        .single();
+
     if (userError) {
         console.log(userError);
         return NextResponse.json({ error: userError.message }, { status: 500 });
@@ -29,7 +33,7 @@ export async function GET(request: Request) {
     }
 
     const responseData = {
-        username: user?.username || null,
+        user: user || null,
         letters: letter || []
     };
 

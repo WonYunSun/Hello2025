@@ -5,6 +5,7 @@ type LetterProps = {
     selectedEnvelope: string;
     sendername: string;
     sender_id: string | null;
+
     onclick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 const Letter = ({ selectedEnvelope, sendername, onclick }: LetterProps) => {

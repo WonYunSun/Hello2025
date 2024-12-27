@@ -14,9 +14,9 @@ type Props = {
     };
 };
 type LetterType = Database["public"]["Tables"]["letters"]["Row"];
-
+type User = Database["public"]["Tables"]["users"]["Row"];
 type LettersType = {
-    username: string;
+    user: User;
     letters: LetterType[];
 };
 
@@ -68,6 +68,8 @@ const LetterBox = ({ params }: Props) => {
     const isOwner = user?.id === params.id;
 
     console.log(user);
+    console.log(letters);
+
     if (isLoading) return <div className="inner flex items-center justify-center">Loading...</div>;
     if (error) return <div className="inner flex items-center justify-center">편지함을 찾을 수 없어요.</div>;
     if (!letters) return <div className="inner flex items-center justify-center">편지함을 찾을 수 없어요.</div>;
@@ -77,26 +79,48 @@ const LetterBox = ({ params }: Props) => {
             <section className="mb-6 flex justify-between relative">
                 <div>
                     <div className="title">
-                        <span className="text-primary">{letters.username}</span>님의 편지함입니다.
+                        <span className="text-primary">{letters.user.username}</span>님의 편지함입니다.
                     </div>
                     <h3 className="text-[16px] font-semibold mt-[15px]">
-                        총 <span className="text-primary font-semibold">{letters.letters.length}</span>개의 편지가
-                        도착했습니다.
+                        {letters.user.count_visibility ? (
+                            <>
+                                총 <span className="text-primary font-semibold">{letters.letters.length}</span>개의
+                                편지가 도착했습니다.
+                            </>
+                        ) : (
+                            <></>
+                        )}
                     </h3>
                 </div>
                 {user !== null && <SmallButton icon="/icon-user.svg" to={"/settings"} />}
             </section>
-            {/* {user?.is_anonymous} */}
-            {letters.letters.length === 0 ? (
+            {letters.user.allow_anonymous ? (
                 <div className="flex-grow flex items-center justify-center">
-                    <div className="text-center text-lg text-textLight">아직 도착한 편지가 없어요.</div>
+                    <div className="text-center text-lg text-textLight">이 편지함은 비공개 편지함입니다.</div>
                 </div>
             ) : (
-                <div className="flex-grow">
-                    <LetterList letters={letters.letters} />
-                </div>
+                <>
+                    {letters.letters.length === 0 ? (
+                        <div className="flex-grow flex items-center justify-center">
+                            <div className="text-center text-lg text-textLight">아직 도착한 편지가 없어요.</div>
+                        </div>
+                    ) : (
+                        <div className="flex-grow">
+                            <LetterList letters={letters.letters} />
+                        </div>
+                    )}
+                </>
             )}
 
+            {/* 알림 모달 */}
+            {showAlert && (
+                <div
+                    className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-black text-white py-2 px-4 rounded shadow-lg transition-all duration-500 opacity-100"
+                    style={{ transition: "opacity 1s ease-in-out, transform 1s ease" }}
+                >
+                    편지함 링크가 복사되었습니다!
+                </div>
+            )}
             {isOwner ? (
                 <Button
                     type="button"
@@ -110,18 +134,9 @@ const LetterBox = ({ params }: Props) => {
                     <Button type="button" color="btn-blue" full label="편지 남기기" />
                 </Link>
             )}
-            {/* 알림 모달 */}
-            {showAlert && (
-                <div
-                    className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-black text-white py-2 px-4 rounded shadow-lg transition-all duration-500 opacity-100"
-                    style={{ transition: "opacity 1s ease-in-out, transform 1s ease" }}
-                >
-                    편지함 링크가 복사되었습니다!
-                </div>
-            )}
             {!isOwner && (
                 <div className="min-w-[100px] pt-[18px] text-center">
-                    <Link href={`/letterbox/${user?.id}`}>
+                    <Link href={user ? `/letterbox/${user.id}` : "/signup"}>
                         <button className="font-bold text-lg">내 편지함으로 돌아가기</button>
                     </Link>
                 </div>
