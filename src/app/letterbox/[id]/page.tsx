@@ -108,12 +108,7 @@ const LetterBox = ({ params }: Props) => {
                 <LetterList letters={letters.letters} />
             )}
             <button onClick={copyLetterboxLink}>내 편지함 공유하기</button>
-            <Link
-                href={{
-                    pathname: "/decoration",
-                    query: { id: params.id }
-                }}
-            >
+            <Link href={`/decoration/${params.id}`}>
                 <Button type="button" color="btn-blue" full label="편지 남기기" />
             </Link>
             {/* 알림 모달 */}
