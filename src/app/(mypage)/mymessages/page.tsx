@@ -1,8 +1,6 @@
 "use client";
 import SmallButton from "@/components/ui/SmallButton";
 import React, { useEffect, useState } from "react";
-import { createClient } from "@/lib/utils/supabase/client";
-import { useUserStore } from "@/stores/userStore";
 
 type Letter = {
     id: string;
@@ -14,45 +12,33 @@ type Letter = {
 
 const MyMessages: React.FC = () => {
     const [messages, setMessages] = useState<Letter[]>([]);
-    const { user } = useUserStore();
-    const supabase = createClient();
+
+    const fetchUserMessages = async () => {
+        const response = await fetch(`/api/myletters`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            console.error("편지 데이터 가져오기 실패");
+            return;
+        }
+
+        const data = await response.json();
+
+        const letters = data.letters.map((letter: {}) => ({
+            ...letter,
+            receiver_name: data.username
+        }));
+
+        setMessages(letters);
+    };
 
     useEffect(() => {
-        const fetchMessages = async () => {
-            if (!user) return;
-            const letters = await fetchLetters(user.id);
-            const messagesWithUsernames = await Promise.all(letters.map(fetchReceiverName));
-            setMessages(messagesWithUsernames);
-        };
-
-        fetchMessages();
-    }, [user]);
-
-    const fetchLetters = async (userId: string): Promise<Letter[]> => {
-        const { data: letters, error } = await supabase.from("letters").select("*").eq("sender_id", userId);
-
-        if (error) {
-            console.error("편지 가져오기 오류:", error);
-            return [];
-        }
-
-        return letters as Letter[]; // 타입 캐스팅
-    };
-
-    const fetchReceiverName = async (letter: Letter): Promise<Letter> => {
-        const { data: userData, error } = await supabase
-            .from("users")
-            .select("username")
-            .eq("id", letter.recipient_id)
-            .single();
-
-        if (error) {
-            console.error("수신자 가져오기 오류:", error);
-            return { ...letter, receiver_name: "알 수 없음" };
-        }
-
-        return { ...letter, receiver_name: userData.username };
-    };
+        fetchUserMessages();
+    }, []);
 
     return (
         <div className="inner">
