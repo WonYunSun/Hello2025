@@ -11,27 +11,9 @@ import redEnvelope from "@/assets/images/red-envelope.svg";
 
 import iconForward from "@/assets/images/icon-forward.svg";
 import LetterModal from "./LetterModal";
+import { Database } from "@/lib/types/supabase";
 
-// 봉투 이미지 매핑
-const envelopeItems = [
-    { src: redEnvelope, alt: "red-envelope" },
-    { src: greenEnvelope, alt: "green-envelope" },
-    { src: blueEnvelope, alt: "blue-envelope" },
-    { src: pinkEnvelope, alt: "pink-envelope" },
-    { src: navyEnvelope, alt: "navy-envelope" }
-];
-
-type LetterType = {
-    id: string;
-    sender_id: string;
-    recipient_id: string;
-    content: string;
-    created_at: string;
-    envelope_type: number;
-    paper_type: string;
-    is_private: boolean;
-    sendername: string;
-};
+type LetterType = Database["public"]["Tables"]["letters"]["Row"];
 
 type LetterListProps = {
     letters: LetterType[];
@@ -44,7 +26,13 @@ const LetterList = ({ letters }: LetterListProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedLetter, setSelectedLetter] = useState<LetterType | null>(null);
     const totalPage = Math.ceil(letters.length / ITEMS_PER_PAGE);
-
+    const envelopeItems: { [key: string]: string } = {
+        "red-envelope": redEnvelope,
+        "green-envelope": greenEnvelope,
+        "blue-envelope": blueEnvelope,
+        "pink-envelope": pinkEnvelope,
+        "navy-envelope": navyEnvelope
+    };
     // 현재 페이지에 해당하는 편지 목록
     const currentData = letters.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
@@ -73,20 +61,22 @@ const LetterList = ({ letters }: LetterListProps) => {
     return (
         <div>
             {/* 편지 목록 */}
-            <div className="grid grid-cols-3 grid-rows-4 pt-[56px] gap-4">
-                {currentData.map((letter) => (
-                    <Letter
-                        key={letter.id}
-                        sender_id={letter.sender_id}
-                        sendername={letter.sendername}
-                        selectedEnvelope={envelopeItems[letter.envelope_type - 1]?.src || redEnvelope}
-                        onclick={() => handleClick(letter)}
-                    />
-                ))}
+            <div className="grid grid-cols-3 grid-rows-4  gap-2 ">
+                {currentData.map((letter) => {
+                    const selectedEnvelope = envelopeItems[letter.envelope_type] || envelopeItems["red-envelope"]; // 기본값 설정
+                    return (
+                        <Letter
+                            key={letter.id}
+                            sender_id={letter.sender_id}
+                            sendername={letter.sendername}
+                            selectedEnvelope={selectedEnvelope}
+                            onclick={() => handleClick(letter)}
+                        />
+                    );
+                })}
             </div>
-
             {/* 페이지네이션 UI */}
-            <div className="pb-[34px] pt-[34px] flex justify-center items-center">
+            <div className="pb-[25px] pt-[25px] flex justify-center items-center">
                 <button onClick={goToPreviousPage} disabled={currentPage === 1}>
                     <Image src={iconForward} alt="이전" className="rotate-180"></Image>
                 </button>
