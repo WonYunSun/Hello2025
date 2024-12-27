@@ -1,15 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Decoration } from "@/lib/types/decoration";
 import { Button } from "@/components/common";
 import snake from "@/assets/images/snake.svg";
 
-type CompleteProps = {
-    decorationData: Decoration;
-};
-
-const Complete = ({ decorationData }: CompleteProps) => {
-    // TODO : decorationData => Supabase에 저장하기
+const Complete = () => {
     return (
         <section className="w-full h-full flex flex-col justify-between">
             <main className="flex flex-col justify-between h-[520px] place-items-center">
