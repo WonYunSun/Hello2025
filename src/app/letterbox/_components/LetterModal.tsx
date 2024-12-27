@@ -2,17 +2,9 @@ import { Button } from "@/components/common";
 import React from "react";
 import colorLetter from "@/assets/images/color-letter.svg";
 import patternLetter from "@/assets/images/pattern-letter.svg";
-type LetterType = {
-    id: string;
-    sender_id: string;
-    sendername: string;
-    recipient_id: string;
-    content: string;
-    created_at: string;
-    envelope_type: string;
-    paper_type: string;
-    is_private: boolean;
-};
+import { Database } from "@/lib/types/supabase";
+
+type LetterType = Database["public"]["Tables"]["letters"]["Row"];
 
 type ModalProps = {
     isOpen: boolean;

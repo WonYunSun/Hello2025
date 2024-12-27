@@ -11,20 +11,9 @@ import redEnvelope from "@/assets/images/red-envelope.svg";
 
 import iconForward from "@/assets/images/icon-forward.svg";
 import LetterModal from "./LetterModal";
+import { Database } from "@/lib/types/supabase";
 
-// 봉투 이미지 매핑
-
-type LetterType = {
-    id: string;
-    sender_id: string;
-    recipient_id: string;
-    content: string;
-    created_at: string;
-    envelope_type: string;
-    paper_type: string;
-    is_private: boolean;
-    sendername: string;
-};
+type LetterType = Database["public"]["Tables"]["letters"]["Row"];
 
 type LetterListProps = {
     letters: LetterType[];
@@ -72,7 +61,7 @@ const LetterList = ({ letters }: LetterListProps) => {
     return (
         <div>
             {/* 편지 목록 */}
-            <div className="grid grid-cols-3 grid-rows-4 pt-[56px] gap-1 ">
+            <div className="grid grid-cols-3 grid-rows-4  gap-2 ">
                 {currentData.map((letter) => {
                     const selectedEnvelope = envelopeItems[letter.envelope_type] || envelopeItems["red-envelope"]; // 기본값 설정
                     return (
@@ -86,7 +75,6 @@ const LetterList = ({ letters }: LetterListProps) => {
                     );
                 })}
             </div>
-
             {/* 페이지네이션 UI */}
             <div className="pb-[25px] pt-[25px] flex justify-center items-center">
                 <button onClick={goToPreviousPage} disabled={currentPage === 1}>
