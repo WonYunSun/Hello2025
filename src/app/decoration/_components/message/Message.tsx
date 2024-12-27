@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { Decoration } from "@/lib/types/decoration";
 import { sendMessage } from "@/lib/api/message";
 import Layout from "../layout/Layout";
