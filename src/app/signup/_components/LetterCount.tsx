@@ -4,24 +4,26 @@ import Image from "next/image";
 import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { SignupData } from "@/lib/types/signup";
+import { User } from "@/lib/types/user";
+
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
 
 type LetterCountProps = {
     prevIsCountVisible: boolean;
-    onNext: (data: Pick<SignupData, "isCountVisible">) => void;
-    onPrev: (data: Pick<SignupData, "isCountVisible">) => void;
+    onNext: (data: Pick<User, "count_visibility">) => void;
+    onPrev: (data: Pick<User, "count_visibility">) => void;
 };
 
 const LetterCount = ({ prevIsCountVisible, onNext, onPrev }: LetterCountProps) => {
     const [isCountVisible, setIsCountVisible] = useState(prevIsCountVisible);
     const handleNext = () => {
-        onNext({ isCountVisible: isCountVisible });
+        onNext({ count_visibility: isCountVisible });
     };
     const handlePrev = () => {
-        onPrev({ isCountVisible: isCountVisible });
+        onPrev({ count_visibility: isCountVisible });
     };
+
     return (
         <>
             <div className="inner">
@@ -56,7 +58,15 @@ const LetterCount = ({ prevIsCountVisible, onNext, onPrev }: LetterCountProps) =
                             label="이전"
                             handleClick={() => handlePrev()}
                         />
-                        <Button type="button" color="btn-blue" full label="다음으로" handleClick={() => handleNext()} />
+                        <Button
+                            type="button"
+                            color="btn-blue"
+                            full
+                            label="다음으로"
+                            handleClick={() => {
+                                handleNext();
+                            }}
+                        />
                     </div>
                 </section>
             </div>

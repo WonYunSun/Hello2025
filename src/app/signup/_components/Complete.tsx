@@ -4,12 +4,26 @@ import Image from "next/image";
 
 import snake from "@/assets/images/snake.svg";
 import { Button } from "@/components/common";
-import { SignupData } from "@/lib/types/signup";
+import { User } from "@/lib/types/user";
+import { createClient } from "@/lib/utils/supabase/client";
 
-const Complete = ({ signupData }: { signupData: SignupData }) => {
-    const handleSubmit = () => {
-        console.log("최종 데이터:", signupData);
+const Complete = ({ signupData }: { signupData: User }) => {
+    const supabase = createClient();
+
+    const addUserData = async () => {
+        const { data, error } = await supabase
+            .from("users")
+            .update({
+                username: signupData.username,
+                allow_anonymous: signupData.allow_anonymous,
+                count_visibility: signupData.count_visibility,
+                letter_visibility: signupData.letter_visibility
+            })
+            .eq("id", signupData.id)
+            .select();
+        console.log(data);
     };
+
     return (
         <>
             <div className="inner">
@@ -26,7 +40,17 @@ const Complete = ({ signupData }: { signupData: SignupData }) => {
                         <Image width={0} height={0} src={snake} alt="snake" className="w-[150px]" />
                     </main>
 
-                    <Button type="button" color="btn-blue" full label="내 편지함 가기" handleClick={handleSubmit} />
+                    <Button
+                        type="button"
+                        color="btn-blue"
+                        full
+                        label="내 편지함 가기"
+                        handleClick={() => {
+                            location.href = "/";
+                            sessionStorage.removeItem("pgBarLevel");
+                            addUserData();
+                        }}
+                    />
                 </section>
             </div>
         </>
