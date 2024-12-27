@@ -44,6 +44,23 @@ export const useUserStore = create<UserState>((set) => ({
             console.log("로그아웃 성공!");
         } catch (err) {
             console.error("logout 오류:", err);
-        } 
+        }
+    },
+
+    deleteUser: async () => {
+        try {
+            const response = await fetch("/api/auth/delete", {
+                method: "DELETE"
+            });
+
+            if (!response.ok) {
+                throw new Error("회원 탈퇴 실패");
+            }
+
+            set({ user: null, isLogin: false });
+            console.log("회원 탈퇴 설공!");
+        } catch (error: any) {
+            console.error("회원 탈퇴 오류", error.message);
+        }
     }
 }));
