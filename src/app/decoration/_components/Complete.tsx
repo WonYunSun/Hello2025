@@ -3,8 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/common";
 import snake from "@/assets/images/snake.svg";
+import useRecipientURL from "@/lib/hooks/useRecipientURL";
 
 const Complete = () => {
+    const { uid } = useRecipientURL();
+
     return (
         <section className="w-full h-full flex flex-col justify-between">
             <main className="flex flex-col justify-between h-[520px] place-items-center">
@@ -17,7 +20,7 @@ const Complete = () => {
                 <Image width={150} height={150} src={snake} alt="snake" />
             </main>
 
-            <Link href="/">
+            <Link href={`/letterbox/${uid}`}>
                 <Button type="button" color="btn-blue" full={true} label="편지함 가기" />
             </Link>
         </section>

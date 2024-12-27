@@ -4,24 +4,44 @@ import Image from "next/image";
 import { useState } from "react";
 
 import snake from "@/assets/images/snake.svg";
-import { SignupData } from "@/lib/types/signup";
+import { UserTable } from "@/lib/types/usertable";
+
 import { Button } from "../../../components/common";
 import Radiobtns from "./Radiobtns";
+import { createClient } from "@/lib/utils/supabase/client";
 
 type LetterCountProps = {
     prevIsCountVisible: boolean;
-    onNext: (data: Pick<SignupData, "isCountVisible">) => void;
-    onPrev: (data: Pick<SignupData, "isCountVisible">) => void;
+    onNext: (data: Pick<UserTable, "count_visibility">) => void;
+    onPrev: (data: Pick<UserTable, "count_visibility">) => void;
+    signupData: UserTable;
 };
 
-const LetterCount = ({ prevIsCountVisible, onNext, onPrev }: LetterCountProps) => {
+const LetterCount = ({ prevIsCountVisible, onNext, onPrev, signupData }: LetterCountProps) => {
     const [isCountVisible, setIsCountVisible] = useState(prevIsCountVisible);
+    const supabase = createClient();
+    const addUserData = async () => {
+        const { data, error } = await supabase
+            .from("users")
+            .update({
+                username: signupData.username,
+                allow_anonymous: signupData.allow_anonymous,
+                count_visibility: isCountVisible,
+                letter_visibility: signupData.letter_visibility
+            })
+            .eq("id", signupData.id)
+            .select();
+        console.log(data);
+    };
+
     const handleNext = () => {
-        onNext({ isCountVisible: isCountVisible });
+        addUserData();
+        onNext({ count_visibility: isCountVisible });
     };
     const handlePrev = () => {
-        onPrev({ isCountVisible: isCountVisible });
+        onPrev({ count_visibility: isCountVisible });
     };
+
     return (
         <>
             <div className="inner">
@@ -56,7 +76,15 @@ const LetterCount = ({ prevIsCountVisible, onNext, onPrev }: LetterCountProps) =
                             label="이전"
                             handleClick={() => handlePrev()}
                         />
-                        <Button type="button" color="btn-blue" full label="다음으로" handleClick={() => handleNext()} />
+                        <Button
+                            type="button"
+                            color="btn-blue"
+                            full
+                            label="다음으로"
+                            handleClick={() => {
+                                handleNext();
+                            }}
+                        />
                     </div>
                 </section>
             </div>

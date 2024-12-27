@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Decoration } from "@/lib/types/decoration";
 import { sendMessage } from "@/lib/api/message";
+import useRecipientURL from "@/lib/hooks/useRecipientURL";
 import Layout from "../layout/Layout";
 import MessageList from "./MessageList";
 
@@ -12,7 +13,7 @@ type MessageProps = {
 };
 
 const Message = ({ decorationData, onNext, onPrev }: MessageProps) => {
-    const [uid, setUid] = useState<string | null>(null);
+    const { uid } = useRecipientURL();
     const [messageData, setMessageData] = useState<Decoration["message"]>(decorationData.message);
 
     const handleNext = async () => {
@@ -23,13 +24,6 @@ const Message = ({ decorationData, onNext, onPrev }: MessageProps) => {
     const handlePrev = () => {
         onPrev(messageData);
     };
-
-    useEffect(() => {
-        const url = new URL(window.location.href);
-        const pathSegments = url.pathname.split("/");
-        const extractedUid = pathSegments[pathSegments.length - 1];
-        setUid(extractedUid);
-    }, []);
 
     return (
         <Layout
