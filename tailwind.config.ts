@@ -13,6 +13,7 @@ const config: Config = {
                 background: "#FFFAF5", //기본 배경 색상
                 warning: "#ef6f7e",
                 textDark: "#544A40",
+                textLight: "#AB9B8A",
                 beige: "#d4c4b3",
                 beigeLight: "#E5D8CA"
             }
