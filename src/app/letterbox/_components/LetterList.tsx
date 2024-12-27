@@ -88,7 +88,7 @@ const LetterList = ({ letters }: LetterListProps) => {
             </div>
 
             {/* 페이지네이션 UI */}
-            <div className="pb-[34px] pt-[34px] flex justify-center items-center">
+            <div className="pb-[25px] pt-[25px] flex justify-center items-center">
                 <button onClick={goToPreviousPage} disabled={currentPage === 1}>
                     <Image src={iconForward} alt="이전" className="rotate-180"></Image>
                 </button>

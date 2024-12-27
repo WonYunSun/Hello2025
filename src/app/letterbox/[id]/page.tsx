@@ -5,6 +5,8 @@ import LetterList from "../_components/LetterList";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/utils/supabase/client";
+import { Database } from "@/lib/types/supabase";
+import { AuthUser } from "@supabase/supabase-js";
 
 type Props = {
     params: {
@@ -35,7 +37,8 @@ const fetchLetters = async (id: string): Promise<LettersType> => {
     return res.json();
 };
 const supabase = createClient();
-const getSession = async () => {
+
+const getSession = async (): Promise<AuthUser | null> => {
     const { data, error } = await supabase.auth.getSession();
 
     if (error) {
@@ -53,8 +56,10 @@ const getSession = async () => {
         return null;
     }
 };
+// type User = Database["public"]["Tables"]["users"]["Row"];
+
 const LetterBox = ({ params }: Props) => {
-    const user = getSession();
+    const [user, setUser] = useState<AuthUser | null>(null);
     const [letters, setLetters] = useState<LettersType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<null | string>(null);
@@ -68,6 +73,18 @@ const LetterBox = ({ params }: Props) => {
             alert("초대코드 복사 실패");
         }
     };
+
+    // 사용자 세션 불러오기
+    useEffect(() => {
+        const fetchUserSession = async () => {
+            const sessionUser = await getSession();
+
+            setUser(sessionUser);
+        };
+
+        fetchUserSession();
+    }, []);
+
     useEffect(() => {
         const getLetters = async () => {
             try {
@@ -88,7 +105,9 @@ const LetterBox = ({ params }: Props) => {
             setTimeout(() => setShowAlert(false), 1500); // 2초 후 알림 사라짐
         }
     }, [showAlert]);
-    console.log(letters);
+
+    const isOwner = user?.id === params.id;
+
     if (isLoading) return <div className="inner">Loading...</div>;
     if (error) return <div className="inner">Error: {error}</div>;
     if (!letters) return <div className="inner">No letters found.</div>;
@@ -107,10 +126,19 @@ const LetterBox = ({ params }: Props) => {
             ) : (
                 <LetterList letters={letters.letters} />
             )}
-            <button onClick={copyLetterboxLink}>내 편지함 공유하기</button>
-            <Link href={`/decoration/${params.id}`}>
-                <Button type="button" color="btn-blue" full label="편지 남기기" />
-            </Link>
+            {isOwner ? (
+                <Button
+                    type="button"
+                    color="btn-blue"
+                    full
+                    label="내 편지함 공유하기"
+                    handleClick={copyLetterboxLink}
+                />
+            ) : (
+                <Link href={`/decoration/${params.id}`}>
+                    <Button type="button" color="btn-blue" full label="편지 남기기" />
+                </Link>
+            )}
             {/* 알림 모달 */}
             {showAlert && (
                 <div
@@ -120,12 +148,13 @@ const LetterBox = ({ params }: Props) => {
                     편지함 링크가 복사되었습니다!
                 </div>
             )}
-
-            <div className="min-w-[100px] pt-[24px] text-center">
-                <button className="font-bold text-lg" onClick={() => {}}>
-                    내 편지함으로 돌아가기
-                </button>
-            </div>
+            {!isOwner && (
+                <div className="min-w-[100px] pt-[24px] text-center">
+                    <button className="font-bold text-lg" onClick={() => {}}>
+                        내 편지함으로 돌아가기
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
