@@ -5,7 +5,7 @@ import Image from "next/image";
 import snake from "@/assets/images/snake.svg";
 import { Button } from "@/components/common";
 
-const Complete = () => {
+const Complete = ({ id }: { id?: string }) => {
     return (
         <>
             <div className="inner">
@@ -28,7 +28,7 @@ const Complete = () => {
                         full
                         label="내 편지함 가기"
                         handleClick={() => {
-                            location.href = "/";
+                            location.href = `/letterbox/${id}`;
                             sessionStorage.removeItem("pgBarLevel");
                         }}
                     />
