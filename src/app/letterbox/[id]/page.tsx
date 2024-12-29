@@ -8,6 +8,8 @@ import SmallButton from "@/components/ui/SmallButton";
 import { useUserStore } from "@/stores/userStore";
 import { Database } from "@/lib/types/supabase";
 import Loading from "@/components/ui/Loading";
+import { ErrorPage } from "../_components/ErrorPage";
+
 type Props = {
     params: {
         id: string;
@@ -33,6 +35,8 @@ const LetterBox = ({ params }: Props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<null | string>(null);
     const [showAlert, setShowAlert] = useState(false);
+    const { user } = useUserStore();
+
     const copyLetterboxLink = async () => {
         const currentUrl = window.location.href;
         try {
@@ -42,7 +46,6 @@ const LetterBox = ({ params }: Props) => {
             alert("초대코드 복사 실패");
         }
     };
-    const { user } = useUserStore();
 
     useEffect(() => {
         const getLetters = async () => {
@@ -61,15 +64,15 @@ const LetterBox = ({ params }: Props) => {
 
     useEffect(() => {
         if (showAlert) {
-            setTimeout(() => setShowAlert(false), 1500); // 2초 후 알림 사라짐
+            setTimeout(() => setShowAlert(false), 1500);
         }
     }, [showAlert]);
 
     const isOwner = user?.id === params.id;
 
     if (isLoading) return <Loading />;
-    if (error) return <div className="inner flex items-center justify-center">편지함을 찾을 수 없어요.</div>;
-    if (!letters) return <div className="inner flex items-center justify-center">편지함을 찾을 수 없어요.</div>;
+    if (error) return <ErrorPage />;
+    if (!letters) return <ErrorPage />;
 
     return (
         <div className="inner flex flex-col justify-center h-screen">
