@@ -1,11 +1,8 @@
 "use client";
-
-import Image from "next/image";
 import { useState } from "react";
-
+import Image from "next/image";
 import snake from "@/assets/images/snake.svg";
 import { UserTable } from "@/lib/types/usertable";
-
 import CheckboxInput from "../../../components/common/CheckboxInput";
 import { Button, InputForm } from "../../../components/common";
 import TermsModal from "./TermsModal";

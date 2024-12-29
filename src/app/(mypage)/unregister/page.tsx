@@ -1,9 +1,9 @@
 "use client";
-import SmallButton from "@/components/ui/SmallButton";
-import Image from "next/image";
-import cryingSnake from "@/assets/images/crying-snake.svg";
 import React, { useState } from "react";
+import Image from "next/image";
+import SmallButton from "@/components/ui/SmallButton";
 import { Button, CheckboxInput } from "@/components/common";
+import cryingSnake from "@/assets/images/crying-snake.svg";
 import { useUserStore } from "@/stores/userStore";
 
 const Unregister = () => {

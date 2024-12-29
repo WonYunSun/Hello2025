@@ -1,15 +1,14 @@
 "use client";
-
-import { Button } from "@/components/common";
-import LetterList from "../_components/LetterList";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Button } from "@/components/common";
 import SmallButton from "@/components/ui/SmallButton";
+import Loading from "@/components/ui/Loading";
+import AlertModal from "@/components/common/AlertModal";
 import { useUserStore } from "@/stores/userStore";
 import { Database } from "@/lib/types/supabase";
-import Loading from "@/components/ui/Loading";
 import { ErrorPage } from "../_components/ErrorPage";
-import AlertModal from "@/components/common/AlertModal";
+import LetterList from "../_components/LetterList";
 
 type Props = {
     params: {

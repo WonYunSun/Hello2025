@@ -1,18 +1,15 @@
 "use client";
-
 import { useEffect, useState } from "react";
-
+import dynamic from "next/dynamic";
 import { useFunnel } from "@/lib/hooks/useFunnel";
 import { UserTable } from "@/lib/types/usertable";
 import { useUserStore } from "@/stores/userStore";
 import Loading from "@/components/ui/Loading";
-
 import Nickname from "./Nickname";
 import Writer from "./Writer";
 import Viewer from "./Viewer";
 import LetterCount from "./LetterCount";
 import Complete from "./Complete";
-import dynamic from "next/dynamic";
 
 const steps = ["닉네임", "작성자", "뷰어", "편지개수", "가입성공"];
 const ProgressBar = dynamic(() => import("@/components/common/ProgressBar"), { ssr: false });

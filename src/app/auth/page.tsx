@@ -3,7 +3,6 @@ import titleImage from "@/assets/images/title.svg";
 import pineTree from "@/assets/images/pine-tree.svg";
 import deco from "@/assets/images/deco.svg";
 import ground from "@/assets/images/ground.svg";
-
 import SocialLoginBtn from "./_components/SocialLoginBtn";
 
 const LoginPage = () => {

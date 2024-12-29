@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-
 import { Database } from "@/lib/types/supabase";
 import { createServerClient } from "@supabase/ssr";
 

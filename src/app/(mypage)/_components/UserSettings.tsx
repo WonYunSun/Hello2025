@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
-import UserInfoSection from "./UserInfoSection";
 import Link from "next/link";
-import iconForward from "@/assets/images/icon-forward.svg";
 import Image from "next/image";
+import iconForward from "@/assets/images/icon-forward.svg";
 import { useUserStore } from "@/stores/userStore";
 import { Session } from "@supabase/supabase-js";
 import Loading from "@/components/ui/Loading";
+import UserInfoSection from "./UserInfoSection";
 
 type UserSettingsProps = {
     session: Session;

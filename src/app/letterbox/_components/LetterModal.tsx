@@ -1,10 +1,10 @@
-import { Button } from "@/components/common";
 import React, { useState } from "react";
+import { useParams } from "next/navigation";
+import { Button } from "@/components/common";
 import colorLetter from "@/assets/images/color-letter.svg";
 import patternLetter from "@/assets/images/pattern-letter.svg";
 import { Database } from "@/lib/types/supabase";
 import { useUserStore } from "@/stores/userStore";
-import { useParams } from "next/navigation";
 
 type LetterType = Database["public"]["Tables"]["letters"]["Row"];
 

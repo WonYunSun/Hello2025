@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import bgDeco from "@/assets/images/bg-deco.svg";
-import Squares from "./Squares";
 import useBgDecoVisibility from "@/lib/hooks/useBgDecoVisibility";
+import Squares from "./Squares";
 
 const BgDeco = () => {
     const shouldHideBgDeco = useBgDecoVisibility();

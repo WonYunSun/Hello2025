@@ -1,5 +1,4 @@
 "use client";
-
 import { create } from "zustand";
 import { createClient } from "@/lib/utils/supabase/client";
 import { UserState } from "@/lib/types/auth";
