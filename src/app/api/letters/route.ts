@@ -20,7 +20,6 @@ export async function GET(request: Request) {
         .single();
 
     if (userError) {
-        console.log(userError);
         return NextResponse.json({ error: userError.message }, { status: 500 });
     }
 
