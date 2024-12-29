@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useFunnel } from "@/lib/hooks/useFunnel";
 import { UserTable } from "@/lib/types/usertable";
 import { useUserStore } from "@/stores/userStore";
+import Loading from "@/components/ui/Loading";
 
 import Nickname from "./Nickname";
 import Writer from "./Writer";
@@ -21,24 +22,29 @@ const SignupForms = () => {
     //supabase 로그인한 유저 정보 가져오기
     const { user } = useUserStore();
 
-    //get session storage signup data
+    const [isHydrated, setIsHydrated] = useState<boolean>(false);
+
+    //signup data session storage 저장
     const prevSessionSignupData = typeof window !== "undefined" && sessionStorage.getItem("signupData");
     const sessionSignupData =
         typeof window !== "undefined" && prevSessionSignupData ? JSON.parse(prevSessionSignupData) : null;
-    const initialSignupData = sessionSignupData?.signupData || {
+    const initialSignupData = sessionSignupData ?? {
         id: "",
         username: "",
         allow_anonymous: true,
         letter_visibility: true,
         count_visibility: true
     };
-    console.log("initialSignupData", initialSignupData);
+
     const [signupData, setSignupData] = useState<UserTable>(initialSignupData);
     useEffect(() => {
         if (user) {
             setSignupData((prev) => ({ ...prev, id: user.id }));
         }
     }, [user]);
+    useEffect(() => {
+        setIsHydrated(true);
+    }, []);
 
     const handleNext = (data: Partial<UserTable>, nextStep: string): void => {
         setSignupData((prev) => ({ ...prev, ...data }));
@@ -73,13 +79,17 @@ const SignupForms = () => {
             <ProgressBar start={start} end={end} />
             <Funnel>
                 <Step name={steps[0]}>
-                    <Nickname
-                        prevNickname={signupData.username}
-                        onNext={(data) => {
-                            handleNext(data, steps[1]);
-                            onPgBarHandler(end, 240);
-                        }}
-                    />
+                    {isHydrated ? (
+                        <Nickname
+                            prevNickname={signupData.username}
+                            onNext={(data) => {
+                                handleNext(data, steps[1]);
+                                onPgBarHandler(end, 240);
+                            }}
+                        />
+                    ) : (
+                        <Loading />
+                    )}
                 </Step>
                 <Step name={steps[1]}>
                     <Writer
@@ -122,7 +132,7 @@ const SignupForms = () => {
                     />
                 </Step>
                 <Step name={steps[4]}>
-                    <Complete />
+                    <Complete id={user?.id} />
                 </Step>
             </Funnel>
         </>
