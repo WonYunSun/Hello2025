@@ -17,7 +17,6 @@ export const useUserStore = create<UserState>((set, get) => ({
 
             if (error) throw error;
 
-            console.log("세션 정보 확인:", data.session);
 
             if (data.session) {
                 set({
@@ -104,7 +103,6 @@ export const useUserStore = create<UserState>((set, get) => ({
             set({ user: null, userTable: null, isLogin: false });
             document.cookie = "supabase.auth.token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;"; // 쿠키 삭제
 
-            console.log("로그아웃 성공!");
         } catch (err) {
             console.error("로그아웃 오류:", err);
         }
@@ -123,7 +121,6 @@ export const useUserStore = create<UserState>((set, get) => ({
             set({ user: null, userTable: null, isLogin: false });
             document.cookie = "supabase.auth.token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;"; // 쿠키 삭제
 
-            console.log("회원 탈퇴 성공!");
         } catch (error: any) {
             console.error("회원 탈퇴 오류", error.message);
         }
