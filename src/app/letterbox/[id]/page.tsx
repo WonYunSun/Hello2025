@@ -9,6 +9,7 @@ import { useUserStore } from "@/stores/userStore";
 import { Database } from "@/lib/types/supabase";
 import Loading from "@/components/ui/Loading";
 import { ErrorPage } from "../_components/ErrorPage";
+import AlertModal from "@/components/common/AlertModal";
 
 type Props = {
     params: {
@@ -42,6 +43,11 @@ const LetterBox = ({ params }: Props) => {
         try {
             await navigator.clipboard.writeText(currentUrl);
             setShowAlert(true); // 알림 표시
+
+            // 1.5초 후 알림 숨기기
+            setTimeout(() => {
+                setShowAlert(false);
+            }, 1500);
         } catch (e) {
             alert("초대코드 복사 실패");
         }
@@ -61,12 +67,6 @@ const LetterBox = ({ params }: Props) => {
 
         getLetters();
     }, [params.id]);
-
-    useEffect(() => {
-        if (showAlert) {
-            setTimeout(() => setShowAlert(false), 1500);
-        }
-    }, [showAlert]);
 
     const isOwner = user?.id === params.id;
 
@@ -113,14 +113,8 @@ const LetterBox = ({ params }: Props) => {
             )}
 
             {/* 알림 모달 */}
-            {showAlert && (
-                <div
-                    className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-black text-white py-2 px-4 rounded shadow-lg transition-all duration-500 opacity-100"
-                    style={{ transition: "opacity 1s ease-in-out, transform 1s ease" }}
-                >
-                    편지함 링크가 복사되었습니다!
-                </div>
-            )}
+            <AlertModal show={showAlert} message="편지함 링크가 복사되었습니다!" />
+
             {isOwner ? (
                 <Button
                     type="button"
