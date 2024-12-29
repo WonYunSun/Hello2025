@@ -64,9 +64,9 @@
 <img src="https://img.shields.io/badge/zustand-FF4154?style=for-the-badge&logo=TanstackQuery&logoColor=white">
 <img src="https://img.shields.io/badge/tailwind css-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
 <img src="https://img.shields.io/badge/supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white">
-<img src="https://img.shields.io/badge/react-slick-FF4154?style=for-the-badge&logo=react-slick&logoColor=white">
-<img src="https://img.shields.io/badge/react-spinners-FF4154?style=for-the-badge&logo=react-spinners&logoColor=white">
-<img src="https://img.shields.io/badge/react-carousel-FF4154?style=for-the-badge&logo=react-carousel&logoColor=white">
+<img src="https://img.shields.io/badge/react slick-FF4154?style=for-the-badge&logo=react-slick&logoColor=white">
+<img src="https://img.shields.io/badge/react spinners-FF4154?style=for-the-badge&logo=react-spinners&logoColor=white">
+<img src="https://img.shields.io/badge/react carousel-FF4154?style=for-the-badge&logo=react-carousel&logoColor=white">
 <img src="https://img.shields.io/badge/uuid-FF4154?style=for-the-badge&logo=uuid&logoColor=white">
 
 
