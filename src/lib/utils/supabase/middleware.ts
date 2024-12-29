@@ -48,7 +48,6 @@ export async function updateSession(request: NextRequest) {
         const allow_anonymous = (data as { allow_anonymous: boolean | null })?.allow_anonymous;
 
         if (allow_anonymous !== null) {
-            const restrictedPaths = ["/signup"];
             if (restrictedPaths.includes(pathname)) {
                 return NextResponse.redirect(new URL(`/letterbox/${user.id}`, request.url)); // 홈으로 리다이렉트
             }
