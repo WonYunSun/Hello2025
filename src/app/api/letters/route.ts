@@ -1,5 +1,5 @@
-import { createClient } from "@/lib/utils/supabase/server";
 import { NextResponse } from "next/server";
+import { createClient } from "@/lib/utils/supabase/server";
 
 // 해당 유저의 편지와 username을 최상단에 배치한 형태로 반환하는 API
 export async function GET(request: Request) {

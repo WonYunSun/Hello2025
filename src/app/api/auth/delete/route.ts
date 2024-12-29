@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 import { adminAuthClient } from "@/lib/utils/supabase/admin";
 import { createClient } from "@/lib/utils/supabase/server";
 

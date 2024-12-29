@@ -1,6 +1,6 @@
-import { Button } from "@/components/common";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import { Button } from "@/components/common";
 
 export const ErrorPage = () => {
     return (

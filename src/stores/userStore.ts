@@ -1,9 +1,8 @@
 "use client";
-
 import { create } from "zustand";
 import { createClient } from "@/lib/utils/supabase/client";
-import { UserState } from "@/lib/types/auth";
-import { UserTable } from "@/lib/types/usertable";
+import type { UserState } from "@/lib/types/auth";
+import type { UserTable } from "@/lib/types/usertable";
 
 export const useUserStore = create<UserState>((set, get) => ({
     user: null,

@@ -1,15 +1,15 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { InputForm } from "@/components/common";
 import { Session } from "@supabase/supabase-js";
-import React, { useEffect, useState } from "react";
 import googleLogo from "@/assets/images/google-logo.svg";
 import kakaoLogo from "@/assets/images/kakao-logo.svg";
 import githubLogo from "@/assets/images/github-logo.svg";
-import Image from "next/image";
-import ToggleSetting from "./ToggleSetting";
-import { UserTable } from "@/lib/types/usertable";
+import type { UserTable } from "@/lib/types/usertable";
 import { useUserStore } from "@/stores/userStore";
 import AlertModal from "@/components/common/AlertModal";
+import ToggleSetting from "./ToggleSetting";
 
 type UserInfoSectionProps = {
     session: Session | null;

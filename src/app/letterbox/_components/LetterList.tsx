@@ -1,16 +1,15 @@
 "use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
-import Letter from "./Letter";
 import blueEnvelope from "@/assets/images/blue-envelope.svg";
 import greenEnvelope from "@/assets/images/green-envelope.svg";
 import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import iconForward from "@/assets/images/icon-forward.svg";
+import type { Database } from "@/lib/types/supabase";
+import Letter from "./Letter";
 import LetterModal from "./LetterModal";
-import { Database } from "@/lib/types/supabase";
 
 type LetterType = Database["public"]["Tables"]["letters"]["Row"];
 

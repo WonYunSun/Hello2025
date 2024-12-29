@@ -1,14 +1,11 @@
 "use client";
-
-import Image from "next/image";
 import { useState } from "react";
-
+import Image from "next/image";
 import snake from "@/assets/images/snake.svg";
-import { UserTable } from "@/lib/types/usertable";
-
-import { Button } from "../../../components/common";
-import Radiobtns from "./Radiobtns";
+import type { UserTable } from "@/lib/types/usertable";
 import { createClient } from "@/lib/utils/supabase/client";
+import Radiobtns from "./Radiobtns";
+import { Button } from "../../../components/common";
 
 type LetterCountProps = {
     prevIsCountVisible: boolean;

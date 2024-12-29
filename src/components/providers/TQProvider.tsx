@@ -1,7 +1,7 @@
 "use client";
+import { useEffect } from "react";
 import { useUserStore } from "@/stores/userStore";
 import { isServer, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 function makeQueryClient() {
     return new QueryClient({

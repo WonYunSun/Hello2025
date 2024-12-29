@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import "./globals.css";
 import { Suspense } from "react";
-import GlobalLoading from "../components/GlobalLoading";
+import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Providers from "@/components/providers/TQProvider";
 import BgDeco from "@/components/ui/BgDeco";
+import GlobalLoading from "../components/GlobalLoading";
+import "./globals.css";
 
 const pretendard = localFont({
     src: "../assets/fonts/PretendardVariable.woff2",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Hello 2025",
     description: "새해 인사를 전해보세요!",
     icons: {
-        icon: "/icon.png"
+        icon: "/icons/icon-192x192.png"
     }
 };
 

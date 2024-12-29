@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Decoration } from "@/lib/types/decoration";
+import type { Decoration } from "@/lib/types/decoration";
 import { sendMessage } from "@/lib/api/message";
 import useRecipientURL from "@/lib/hooks/useRecipientURL";
 import Layout from "../layout/Layout";

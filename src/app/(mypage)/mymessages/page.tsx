@@ -1,6 +1,6 @@
 "use client";
-import SmallButton from "@/components/ui/SmallButton";
 import React from "react";
+import SmallButton from "@/components/ui/SmallButton";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/ui/Loading";
 

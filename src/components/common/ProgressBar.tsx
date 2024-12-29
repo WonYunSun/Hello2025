@@ -1,7 +1,6 @@
 "use client";
-
-import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
 type ProgressBarProps = { start: number; end: number };
 

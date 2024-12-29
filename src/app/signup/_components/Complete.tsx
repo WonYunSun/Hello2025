@@ -1,7 +1,5 @@
 "use client";
-
 import Image from "next/image";
-
 import snake from "@/assets/images/snake.svg";
 import { Button } from "@/components/common";
 

@@ -1,8 +1,7 @@
-import SmallButton from "@/components/ui/SmallButton";
 import React from "react";
+import SmallButton from "@/components/ui/SmallButton";
 import { createClient } from "@/lib/utils/supabase/server";
 import UserSettings from "../_components/UserSettings";
-import { Session } from "@supabase/supabase-js";
 
 const SettingsPage = async () => {
     const supabase = await createClient();

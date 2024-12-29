@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useFunnel } from "@/lib/hooks/useFunnel";
-import { Decoration } from "@/lib/types/decoration";
+import type { Decoration } from "@/lib/types/decoration";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import colorLetter from "@/assets/images/color-letter.svg";
 import Envelope from "./envelope/Envelope";

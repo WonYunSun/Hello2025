@@ -2,7 +2,7 @@
 import { ChangeEvent } from "react";
 import { InputForm } from "@/components/common";
 import CheckboxInput from "@/components/common/CheckboxInput";
-import { Decoration } from "@/lib/types/decoration";
+import type { Decoration } from "@/lib/types/decoration";
 
 type MessageListProps = {
     message: Decoration["message"];
