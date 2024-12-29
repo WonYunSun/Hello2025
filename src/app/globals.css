@@ -30,11 +30,11 @@
     }
 
     .bg-container {
-        @apply max-w-[600px] h-screen mx-auto bg-background flex flex-col justify-center overflow-hidden;
+        @apply w-[600px] max-w-[100vw] h-screen mx-auto bg-background flex flex-col justify-center overflow-hidden;
     }
 
     .inner {
-        @apply w-[500px] h-full mx-auto  pt-[75px] pb-[60px] max-h-[958px] relative;
+        @apply w-[500px] max-w-[90%] h-full mx-auto pt-[75px] pb-[60px] max-h-[958px] relative;
     }
 }
 
