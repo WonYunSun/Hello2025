@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Decoration } from "@/lib/types/decoration";
+import type { Decoration } from "@/lib/types/decoration";
 import Layout from "../layout/Layout";
 import EnvelopeList from "./EnvelopeList";
 

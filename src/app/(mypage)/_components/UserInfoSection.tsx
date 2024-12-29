@@ -6,7 +6,7 @@ import { Session } from "@supabase/supabase-js";
 import googleLogo from "@/assets/images/google-logo.svg";
 import kakaoLogo from "@/assets/images/kakao-logo.svg";
 import githubLogo from "@/assets/images/github-logo.svg";
-import { UserTable } from "@/lib/types/usertable";
+import type { UserTable } from "@/lib/types/usertable";
 import { useUserStore } from "@/stores/userStore";
 import ToggleSetting from "./ToggleSetting";
 

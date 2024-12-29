@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import { Button } from "@/components/common";
 import colorLetter from "@/assets/images/color-letter.svg";
 import patternLetter from "@/assets/images/pattern-letter.svg";
-import { Database } from "@/lib/types/supabase";
+import type { Database } from "@/lib/types/supabase";
 import { useUserStore } from "@/stores/userStore";
 
 type LetterType = Database["public"]["Tables"]["letters"]["Row"];

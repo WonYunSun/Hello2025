@@ -2,7 +2,7 @@
 import Image from "next/image";
 import colorLetter from "@/assets/images/color-letter.svg";
 import patternLetter from "@/assets/images/pattern-letter.svg";
-import { Decoration } from "@/lib/types/decoration";
+import type { Decoration } from "@/lib/types/decoration";
 
 type LetterListProps = {
     selectedLetter: Decoration["letter"];

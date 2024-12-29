@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { createClient } from "@/lib/utils/supabase/client";
-import { Decoration } from "@/lib/types/decoration";
+import type { Decoration } from "@/lib/types/decoration";
 
 const anonymousId = "41905cea-4486-40bb-a04a-08544742ef0c";
 

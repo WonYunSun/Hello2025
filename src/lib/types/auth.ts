@@ -1,5 +1,5 @@
 import { User } from "@supabase/supabase-js";
-import { UserTable } from "./usertable";
+import type { UserTable } from "./usertable";
 
 export interface UserState {
     user: User | null;

@@ -6,7 +6,7 @@ import navyEnvelope from "@/assets/images/navy-envelope.svg";
 import pinkEnvelope from "@/assets/images/pink-envelope.svg";
 import redEnvelope from "@/assets/images/red-envelope.svg";
 import { Carousel } from "@/components/common";
-import { Decoration } from "@/lib/types/decoration";
+import type { Decoration } from "@/lib/types/decoration";
 
 type EnvelopeListProps = {
     prevSelectedEnvelope: Decoration["envelope"];

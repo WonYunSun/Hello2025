@@ -1,6 +1,6 @@
 "use client";
-import SmallButton from "@/components/ui/SmallButton";
 import React, { useEffect, useState } from "react";
+import SmallButton from "@/components/ui/SmallButton";
 
 type Letter = {
     id: string;

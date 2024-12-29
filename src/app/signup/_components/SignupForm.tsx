@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useFunnel } from "@/lib/hooks/useFunnel";
-import { UserTable } from "@/lib/types/usertable";
+import type { UserTable } from "@/lib/types/usertable";
 import { useUserStore } from "@/stores/userStore";
 import Loading from "@/components/ui/Loading";
 import Nickname from "./Nickname";

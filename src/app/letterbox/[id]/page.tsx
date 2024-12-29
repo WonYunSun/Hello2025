@@ -6,7 +6,7 @@ import SmallButton from "@/components/ui/SmallButton";
 import Loading from "@/components/ui/Loading";
 import AlertModal from "@/components/common/AlertModal";
 import { useUserStore } from "@/stores/userStore";
-import { Database } from "@/lib/types/supabase";
+import type { Database } from "@/lib/types/supabase";
 import { ErrorPage } from "../_components/ErrorPage";
 import LetterList from "../_components/LetterList";
 
