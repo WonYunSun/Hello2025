@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Hello 2025",
     description: "새해 인사를 전해보세요!",
     icons: {
-        icon: "/icons/icon-192x192.png"
+        icon: "/icon.png"
     }
 };
 
