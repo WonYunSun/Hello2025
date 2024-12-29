@@ -28,10 +28,10 @@ const LoginPage = () => {
                 <SocialLoginBtn provider="kakao" />
                 <SocialLoginBtn provider="github" />
             </div>
-            <picture className="absolute z-20 bottom-10 w-full flex justify-center">
+            <picture className="absolute z-10 bottom-10 w-full flex justify-center">
                 <Image src={deco} width={567.47} height={248} alt="deco_img" className="w-[90%] md:w-[567px]" />
             </picture>
-            <picture className="fixed bottom-0 z-10 w-full">
+            <picture className="fixed bottom-0 z-20 w-full">
                 <Image src={ground} width={600} height={125} alt="ground_img" />
             </picture>
         </div>
