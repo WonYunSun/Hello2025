@@ -93,22 +93,21 @@ const LetterBox = ({ params }: Props) => {
                 </div>
                 {user !== null && <SmallButton icon="/icon-user.svg" to={"/settings"} />}
             </section>
-            {!letters.user.allow_anonymous && !isOwner ? (
+
+            {/* {!letters.user.allow_anonymous && !isOwner ? (
                 <div className="flex-grow flex items-center justify-center">
                     <div className="text-center text-lg text-textLight">이 편지함은 비공개 편지함입니다.</div>
                 </div>
+            ) : ( */}
+
+            {letters.letters.length === 0 ? (
+                <div className="flex-grow flex items-center justify-center">
+                    <div className="text-center text-lg text-textLight">아직 도착한 편지가 없어요.</div>
+                </div>
             ) : (
-                <>
-                    {letters.letters.length === 0 ? (
-                        <div className="flex-grow flex items-center justify-center">
-                            <div className="text-center text-lg text-textLight">아직 도착한 편지가 없어요.</div>
-                        </div>
-                    ) : (
-                        <div className="flex-grow">
-                            <LetterList letters={letters.letters} letter_visibility={letters.user.letter_visibility} />
-                        </div>
-                    )}
-                </>
+                <div className="flex-grow">
+                    <LetterList letters={letters.letters} letter_visibility={letters.user.letter_visibility} />
+                </div>
             )}
 
             {/* 알림 모달 */}
@@ -122,11 +121,14 @@ const LetterBox = ({ params }: Props) => {
                     label="내 편지함 공유하기"
                     handleClick={copyLetterboxLink}
                 />
-            ) : (
+            ) : user || letters.user.allow_anonymous ? (
                 <Link href={`/decoration/${params.id}`}>
                     <Button type="button" color="btn-blue" full label="편지 남기기" />
                 </Link>
+            ) : (
+                <Button type="button" color="btn-blue" full label="로그인 후 이용가능합니다." disabled={true} />
             )}
+
             {!isOwner && (
                 <div className="min-w-[100px] pt-[18px] text-center">
                     <Link href={user ? `/letterbox/${user.id}` : "/signup"}>
