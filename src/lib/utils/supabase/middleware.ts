@@ -46,16 +46,13 @@ export async function updateSession(request: NextRequest) {
     if (user) {
         const { data } = await supabase.from("users").select("allow_anonymous").eq("id", user.id).single();
         const allow_anonymous = (data as { allow_anonymous: boolean | null })?.allow_anonymous;
-
         if (allow_anonymous !== null) {
-            if (restrictedPaths.includes(pathname)) {
+            if (pathname.includes("/signup")) {
                 return NextResponse.redirect(new URL(`/letterbox/${user.id}`, request.url)); // 홈으로 리다이렉트
             }
         }
-    }
 
-    // 로그인된 사용자 처리
-    if (user) {
+        // 로그인된 사용자 처리
         // 로그인된 사용자가 접근할 수 없는 경로
         if (restrictedPaths.includes(pathname) || pathname === "/") {
             return NextResponse.redirect(new URL(`/letterbox/${user.id}`, request.url)); // 홈으로 리다이렉트
