@@ -1,6 +1,11 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+// 로그인된 사용자가 접근할 수 없는 경로
+const restrictedPaths = ["/auth"];
+// 인증이 필요한 경로
+const protectedPaths = ["/settings", "/mymessages", "/unregister", "/signup"];
+
 export async function updateSession(request: NextRequest) {
     let supabaseResponse = NextResponse.next({
         request
@@ -35,16 +40,32 @@ export async function updateSession(request: NextRequest) {
         data: { user }
     } = await supabase.auth.getUser();
 
-    // if (
-    //   !user &&
-    //   !request.nextUrl.pathname.startsWith("/login") &&
-    //   !request.nextUrl.pathname.startsWith("/auth")
-    // ) {
-    //   // no user, potentially respond by redirecting the user to the login page
-    //   const url = request.nextUrl.clone();
-    //   url.pathname = "/login";
-    //   return NextResponse.redirect(url);
-    // }
+    const { pathname } = request.nextUrl.clone();
+
+    //회원가입이면 signup으로, 로그인이면 letterbox로
+    if (user) {
+        const { data } = await supabase.from("users").select("allow_anonymous").eq("id", user.id).single();
+        const allow_anonymous = (data as { allow_anonymous: boolean | null })?.allow_anonymous;
+        if (allow_anonymous !== null) {
+            if (pathname.includes("/signup")) {
+                return NextResponse.redirect(new URL(`/letterbox/${user.id}`, request.url)); // 홈으로 리다이렉트
+            }
+        }
+
+        // 로그인된 사용자 처리
+        // 로그인된 사용자가 접근할 수 없는 경로
+        if (restrictedPaths.includes(pathname) || pathname === "/") {
+            return NextResponse.redirect(new URL(`/letterbox/${user.id}`, request.url)); // 홈으로 리다이렉트
+        }
+    }
+
+    // 로그인되지 않은 사용자 처리
+    if (!user) {
+        // 인증이 필요한 경로
+        if (protectedPaths.some((path) => pathname.startsWith(path)) || pathname === "/") {
+            return NextResponse.redirect(new URL("/auth", request.url)); // 로그인 페이지로 리다이렉트
+        }
+    }
 
     return supabaseResponse;
 }

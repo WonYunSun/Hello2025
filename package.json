@@ -7,15 +7,24 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "genTypes": "supabase gen types typescript --project-id zmgygrglsgtpguajczrb --schema public > src/types/supabase.ts"
+        "genTypes": "supabase gen types typescript --project-id zmgygrglsgtpguajczrb --schema public > src/lib/types/supabase.ts"
     },
     "dependencies": {
         "@supabase/ssr": "^0.5.2",
         "@supabase/supabase-js": "^2.47.10",
         "@tanstack/react-query": "^5.62.8",
+        "@types/lodash.debounce": "^4.0.9",
+        "@types/react-slick": "^0.23.13",
+        "lodash.debounce": "^4.0.8",
         "next": "14.2.3",
         "react": "^18",
-        "react-dom": "^18"
+        "react-dom": "^18",
+        "react-slick": "^0.30.3",
+        "react-spinners": "^0.15.0",
+        "slick-carousel": "^1.8.1",
+        "tailwind-scrollbar": "^3.1.0",
+        "uuid": "^11.0.3",
+        "zustand": "^5.0.2"
     },
     "devDependencies": {
         "@types/node": "^20",
@@ -24,6 +33,7 @@
         "eslint": "^8",
         "eslint-config-next": "14.2.3",
         "postcss": "^8",
+        "supabase": "^2.1.1",
         "tailwindcss": "^3.4.1",
         "typescript": "^5"
     }

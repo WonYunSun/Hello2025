@@ -1,7 +1,8 @@
 import React from "react";
+import Loading from "./ui/Loading";
 
 const GlobalLoading = () => {
-  return <div>GlobalLoading</div>;
+    return <Loading />;
 };
 
 export default GlobalLoading;
