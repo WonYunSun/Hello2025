@@ -21,6 +21,11 @@ const LetterModal = ({ isOpen, onClose, contents, letter_visibility }: ModalProp
     const currentId = params?.id as string | undefined; // URL의 id 값
     const isOwner = user?.id === currentId;
     const [isDeleting, setIsDeleting] = useState(false); // 삭제 상태 관리
+
+    // 현재 날짜가 1월 1일 이전인지 확인
+    const currentDate = new Date();
+    const isBeforeNewYear = currentDate < new Date(currentDate.getFullYear(), 0, 1);
+
     if (!isOpen || !contents) return null;
     const paperImages: { [key: string]: string } = {
         "color-letter": colorLetter,
@@ -72,8 +77,10 @@ const LetterModal = ({ isOpen, onClose, contents, letter_visibility }: ModalProp
                 >
                     <div className="pb-5 text-[20px] font-semibold">From {contents.sendername}</div>
                     {/* 조건부 렌더링 */}
-                    {(contents.is_private || !letter_visibility) && !isOwner ? (
-                        <div className="pt-[40%] text-center text-lg text-textLight">이 편지는 비공개 편지입니다.</div>
+                    {!isBeforeNewYear || ((contents.is_private || !letter_visibility) && !isOwner) ? (
+                        <div className="pt-[40%] text-center text-lg text-textLight">
+                            이 편지는 1월 1일 이후에 확인할 수 있습니다.
+                        </div>
                     ) : (
                         <p>{contents.content}</p>
                     )}
