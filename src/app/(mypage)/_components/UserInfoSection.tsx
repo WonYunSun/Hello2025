@@ -117,16 +117,9 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session, userTable })
                     <ToggleSetting
                         label="메시지를 남길 수 있는 사람"
                         value={userTable?.allow_anonymous || false}
-                        trueLabel="모두"
+                        trueLabel="누구나"
                         falseLabel="회원만"
                         onToggle={() => handleToggle("allow_anonymous")}
-                    />
-                    <ToggleSetting
-                        label="받은 편지 개수 전체 공개"
-                        value={userTable?.count_visibility || false}
-                        trueLabel="공개"
-                        falseLabel="비공개"
-                        onToggle={() => handleToggle("count_visibility")}
                     />
                     <ToggleSetting
                         label="받은 편지 내용"
@@ -134,6 +127,13 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session, userTable })
                         trueLabel="보이기"
                         falseLabel="숨기기"
                         onToggle={() => handleToggle("letter_visibility")}
+                    />
+                    <ToggleSetting
+                        label="받은 편지 개수 전체 공개"
+                        value={userTable?.count_visibility || false}
+                        trueLabel="공개"
+                        falseLabel="비공개"
+                        onToggle={() => handleToggle("count_visibility")}
                     />
                 </ul>
             </section>
