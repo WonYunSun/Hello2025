@@ -5,8 +5,7 @@
 
 <br />
 
-![Macbook Pro - Dark Background](https://github.com/user-attachments/assets/9f6fdcab-10ad-4137-b904-69d7027fb868)
-
+![Macbook Pro - Dark Background](https://github.com/user-attachments/assets/ec27cca4-c820-4927-81a1-3693a7fac5b1)
 
 <br/>
 
