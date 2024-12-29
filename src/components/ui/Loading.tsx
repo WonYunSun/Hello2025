@@ -7,7 +7,7 @@ type LoadingProps = {
 
 const Loading = ({ size = 60, color = "#d4c4b3" }: LoadingProps) => {
     return (
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-full absolute left-0 top-0 flex items-center justify-center">
             <ClipLoader size={size} color={color} loading={true} />
         </div>
     );
