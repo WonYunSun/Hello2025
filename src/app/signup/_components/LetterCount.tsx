@@ -31,7 +31,6 @@ const LetterCount = ({ prevIsCountVisible, onNext, onPrev, signupData }: LetterC
             })
             .eq("id", signupData.id)
             .select();
-        console.log(data);
     };
 
     const handleNext = () => {
