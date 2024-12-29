@@ -31,9 +31,9 @@ const UserSettings: React.FC<UserSettingsProps> = ({ session }) => {
 
             <Link
                 href="/mymessages"
-                className="flex justify-between items-center border-t-[1px] border-b-[1px] border-gray-300 mb-20"
+                className="flex justify-between items-center border-t-[1px] border-b-[1px] border-gray-300 mb-8"
             >
-                <p className="h-[70px] leading-[70px] text-[20px] font-bold tracking-tight">내가 작성한 편지</p>
+                <p className="h-[60px] leading-[60px] text-[20px] font-bold tracking-tight">내가 작성한 편지</p>
                 <Image src={iconForward} alt="" width={9} height={16} />
             </Link>
 

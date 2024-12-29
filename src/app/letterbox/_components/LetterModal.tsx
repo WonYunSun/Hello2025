@@ -67,9 +67,9 @@ const LetterModal = ({ isOpen, onClose, contents, letter_visibility }: ModalProp
             onClick={onClose}
             className="backdrop-blur-sm fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center flex-col z-50"
         >
-            <div onClick={(e) => e.stopPropagation()}>
+            <div className="w-[600px] max-w-[90%] " onClick={(e) => e.stopPropagation()}>
                 <div
-                    className="w-[600px] h-[640px] bg-white p-[4rem]"
+                    className="w-full aspect-[1/1.067] bg-white p-[4rem]"
                     style={{
                         backgroundImage: `url(${selectedPaper.src})`, // 배경 이미지 설정
                         backgroundSize: "cover" // 배경 이미지 크기 조정
@@ -90,7 +90,7 @@ const LetterModal = ({ isOpen, onClose, contents, letter_visibility }: ModalProp
                         <p>{contents.content}</p>
                     )}
                 </div>
-                <div className="w-[600px] flex justify-between pt-[20px]">
+                <div className="w-[600px] max-w-[100%] flex justify-between pt-[20px]">
                     {isOwner ? (
                         <Button
                             type="button"

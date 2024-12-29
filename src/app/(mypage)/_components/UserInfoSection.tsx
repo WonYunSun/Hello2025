@@ -108,7 +108,7 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session, userTable })
                 )}
             </section>
 
-            <section className="mt-7 pb-7 border-b-[1px] border-gray-300">
+            <section className="mt-5 pb-5 border-b-[1px] border-gray-300">
                 <div className="mb-3 flex justify-between">
                     <p className="text-[20px] font-bold tracking-tight">닉네임</p>
                     <button type="button" className="font-bold" onClick={handleNicknameChange}>
@@ -119,11 +119,11 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session, userTable })
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
             </section>
 
-            <section className="pt-7 pb-7">
+            <section className="pt-5 pb-5">
                 <div className="mb-3 flex justify-between">
                     <p className="text-[20px] font-bold tracking-tight">내 편지함 설정</p>
                 </div>
-                <ul className="p-5 border-[1px] bg-background border-beige rounded-[5px]">
+                <ul className="p-4 border-[1px] bg-background border-beige rounded-[5px]">
                     <ToggleSetting
                         label="메시지를 남길 수 있는 사람"
                         value={userTable?.allow_anonymous || false}
