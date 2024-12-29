@@ -8,6 +8,7 @@ import kakaoLogo from "@/assets/images/kakao-logo.svg";
 import githubLogo from "@/assets/images/github-logo.svg";
 import type { UserTable } from "@/lib/types/usertable";
 import { useUserStore } from "@/stores/userStore";
+import AlertModal from "@/components/common/AlertModal";
 import ToggleSetting from "./ToggleSetting";
 
 type UserInfoSectionProps = {
@@ -27,8 +28,11 @@ const logos: LogoMap = {
 
 const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session, userTable }) => {
     const { fetchUserData, updateUser, signOut } = useUserStore();
+    const [showAlert, setShowAlert] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+
+    console.log("modal", showAlert);
 
     useEffect(() => {
         if (userTable) {
@@ -47,6 +51,12 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session, userTable })
             setErrorMessage("닉네임을 입력해주세요.");
             return;
         }
+
+        setShowAlert(true);
+
+        setTimeout(() => {
+            setShowAlert(false);
+        }, 1500);
 
         await updateUser({ username: inputValue });
         setErrorMessage("");
@@ -137,6 +147,8 @@ const UserInfoSection: React.FC<UserInfoSectionProps> = ({ session, userTable })
                     />
                 </ul>
             </section>
+
+            <AlertModal show={showAlert} message="닉네임이 변경되었습니다!" />
         </>
     );
 };

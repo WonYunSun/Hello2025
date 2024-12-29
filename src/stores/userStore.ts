@@ -114,7 +114,7 @@ export const useUserStore = create<UserState>((set, get) => ({
             if (!response.ok) {
                 throw new Error("회원 탈퇴 실패");
             }
-
+            window.location.href = "/auth";
             set({ user: null, userTable: null, isLogin: false });
             document.cookie = "supabase.auth.token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;"; // 쿠키 삭제
         } catch (error: any) {
