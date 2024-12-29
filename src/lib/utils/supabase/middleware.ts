@@ -1,5 +1,3 @@
-// 필요없을 거 같은데 혹시 몰라 일단 주석처리
-
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
