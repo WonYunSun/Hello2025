@@ -15,7 +15,10 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
     title: "Hello 2025",
-    description: "2025년 맞이 모바일 연하장을 보내보세요!"
+    description: "2025년 맞이 모바일 연하장을 보내보세요!",
+    icons: {
+        icon: "/icons/icon-192x192.png"
+    }
 };
 
 export default function RootLayout({
