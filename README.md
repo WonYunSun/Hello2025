@@ -22,6 +22,21 @@
 
 # 🕹️ 프로젝트 기능
 ### 1️⃣ 회원가입 페이지
+- ✉️ 기능1: 소셜 로그인 (Google, Kakao, Github)
+  - OAuth 2.0 인증 방식을 사용하여 간편한 사용자 인증 제공
+  - 각 플랫폼에서 제공하는 OAuth Provider를 통해 로그인/회원가입 지원
+
+- ✉️ 기능2: 사용자 상태 관리 (Zustand)
+  - Zustand를 사용하여 전역 상태로 사용자 정보 및 인증 상태 관리
+  - 로그인 상태(`isLogin`)와 사용자 정보(`user`)을 전역으로 유지
+  - `supabase.auth.signOut()`을 통해 인증 세션을 해제하고, 로그아웃 기능 제공
+ 
+- ✉️ 기능3: 회원 탈퇴 기능
+  - Supabase의 Admin API를 사용하여 안전하게 사용자 계정 삭제
+  - `SERVICE_ROLE_KEY`를 활용하여 서버 환경에서만 실행되도록 설정
+
+- ✉️ 기능4: 접근 제어 (Next.js Middleware)
+  - 로그인 여부에 따른 페이지 접근 제어
 
   
 ### 2️⃣ SIGNUP
