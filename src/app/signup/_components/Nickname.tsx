@@ -66,14 +66,14 @@ const Nickname = ({ prevNickname, onNext }: NicknameProps) => {
                                 <div className="grid gap-[16px]">
                                     <CheckboxInput
                                         blueLabel="(필수)"
-                                        label="만 14세 이상이에요"
+                                        label=" 만 14세 이상이에요"
                                         checked={checkItems.isAdult}
                                         onChange={() => setCheckItems({ ...checkItems, isAdult: !checkItems.isAdult })}
                                     />
 
                                     <CheckboxInput
                                         blueLabel="(필수)"
-                                        label="이용약관 및 개인정보수집이용 동의"
+                                        label=" 이용약관 및 개인정보수집이용 동의"
                                         checked={checkItems.isAgreed}
                                         onChange={() => {
                                             setCheckItems({ ...checkItems, isAgreed: !checkItems.isAgreed });
