@@ -94,12 +94,6 @@ const LetterBox = ({ params }: Props) => {
                 {user !== null && <SmallButton icon="/icon-user.svg" to={"/settings"} />}
             </section>
 
-            {/* {!letters.user.allow_anonymous && !isOwner ? (
-                <div className="flex-grow flex items-center justify-center">
-                    <div className="text-center text-lg text-textLight">이 편지함은 비공개 편지함입니다.</div>
-                </div>
-            ) : ( */}
-
             {letters.letters.length === 0 ? (
                 <div className="flex-grow flex items-center justify-center">
                     <div className="text-center text-lg text-textLight">아직 도착한 편지가 없어요.</div>
