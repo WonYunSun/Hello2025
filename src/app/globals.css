@@ -40,18 +40,18 @@
 
 @layer utilities {
     /* 스크롤바 넓이 지정 */
-    ::-webkit-scrollbar {
+    .modalscrollbar::-webkit-scrollbar {
         width: 10px;
     }
 
     /* 스크롤바 트랙 꾸미기 */
-    ::-webkit-scrollbar-track {
+    .modalscrollbar::-webkit-scrollbar-track {
         background: transparent;
         border-radius: 5px;
     }
 
     /* 스크롤바 손잡이 꾸미기 */
-    ::-webkit-scrollbar-thumb {
+    .modalscrollbar::-webkit-scrollbar-thumb {
         background: #cccccc;
         border-radius: 5px;
         background-clip: padding-box;
@@ -59,7 +59,7 @@
     }
 
     /* 스크롤바 손잡이 호버 시 색 */
-    ::-webkit-scrollbar-thumb:hover {
+    .modalscrollbar::-webkit-scrollbar-thumb:hover {
         background: gray;
         background-clip: padding-box;
         border: 2px solid transparent;

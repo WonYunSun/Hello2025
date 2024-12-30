@@ -31,7 +31,7 @@ const TermsModal = ({ setModalOpen }: Props) => {
             }}
             className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-[1000] grid place-content-center gap-5"
         >
-            <div className="w-[450px] max-h-[600px] bg-white p-5 rounded-[10px] shadow-lg z-[1001] overflow-auto">
+            <div className="w-[450px] max-h-[600px] bg-white p-5 rounded-[10px] shadow-lg z-[1001] overflow-auto modalscrollbar">
                 <h1 className="title">Hello! 2025 이용약관</h1>
                 {TERMS.map(([key, value], i) => (
                     <div key={i}>
