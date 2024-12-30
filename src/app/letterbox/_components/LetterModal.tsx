@@ -13,9 +13,10 @@ type ModalProps = {
     onClose: () => void;
     contents: LetterType | null;
     letter_visibility: boolean | null;
+    letter_allow_anonymous: boolean | null;
 };
 
-const LetterModal = ({ isOpen, onClose, contents, letter_visibility }: ModalProps) => {
+const LetterModal = ({ isOpen, onClose, contents, letter_visibility, letter_allow_anonymous }: ModalProps) => {
     const { user } = useUserStore(); // 현재 로그인한 사용자 정보
     const params = useParams(); // URL 파라미터 가져오기
     const currentId = params?.id as string | undefined; // URL의 id 값
@@ -77,12 +78,12 @@ const LetterModal = ({ isOpen, onClose, contents, letter_visibility }: ModalProp
                 >
                     <div className="pb-5 text-[20px] font-semibold">From {contents.sendername}</div>
                     {/* 조건부 렌더링 */}
-                    {!isBeforeNewYear ? (
+                    {isBeforeNewYear ? (
                         // 1월 1일 이전인 경우
                         <div className="pt-[40%] text-center text-lg text-textLight">
                             이 편지는 1월 1일 이후에 확인할 수 있습니다.
                         </div>
-                    ) : (contents.is_private || !letter_visibility) && !isOwner ? (
+                    ) : (contents.is_private || !letter_visibility || !letter_allow_anonymous) && !isOwner ? (
                         // 비공개 편지인 경우
                         <div className="pt-[40%] text-center text-lg text-textLight">이 편지는 비공개 편지입니다.</div>
                     ) : (
