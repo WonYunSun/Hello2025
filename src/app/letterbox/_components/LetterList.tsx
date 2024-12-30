@@ -16,11 +16,12 @@ type LetterType = Database["public"]["Tables"]["letters"]["Row"];
 type LetterListProps = {
     letters: LetterType[];
     letter_visibility: boolean | null;
+    letter_allow_anonymous: boolean | null;
 };
 
 const ITEMS_PER_PAGE = 12;
 
-const LetterList = ({ letters, letter_visibility }: LetterListProps) => {
+const LetterList = ({ letters, letter_visibility, letter_allow_anonymous }: LetterListProps) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedLetter, setSelectedLetter] = useState<LetterType | null>(null);
@@ -93,6 +94,7 @@ const LetterList = ({ letters, letter_visibility }: LetterListProps) => {
                 onClose={closeModal}
                 contents={selectedLetter}
                 letter_visibility={letter_visibility}
+                letter_allow_anonymous={letter_allow_anonymous}
             />
         </div>
     );
