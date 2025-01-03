@@ -78,7 +78,7 @@ const LetterModal = ({ isOpen, onClose, contents, letter_visibility, letter_allo
                 >
                     <div className="pb-5 text-[20px] font-semibold">From {contents.sendername}</div>
                     {/* 조건부 렌더링 */}
-                    {isBeforeNewYear ? (
+                    {!isBeforeNewYear ? (
                         // 1월 1일 이전인 경우
                         <div className="pt-[40%] text-center text-lg text-textLight">
                             이 편지는 1월 1일 이후에 확인할 수 있습니다.

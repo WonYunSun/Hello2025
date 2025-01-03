@@ -25,6 +25,7 @@ const LetterList = ({ letters, letter_visibility, letter_allow_anonymous }: Lett
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedLetter, setSelectedLetter] = useState<LetterType | null>(null);
+
     const totalPage = Math.ceil(letters.length / ITEMS_PER_PAGE);
     const envelopeItems: { [key: string]: string } = {
         "red-envelope": redEnvelope,
@@ -33,6 +34,7 @@ const LetterList = ({ letters, letter_visibility, letter_allow_anonymous }: Lett
         "pink-envelope": pinkEnvelope,
         "navy-envelope": navyEnvelope
     };
+
     // 현재 페이지에 해당하는 편지 목록
     const currentData = letters.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
